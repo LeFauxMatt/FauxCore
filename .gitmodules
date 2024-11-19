@@ -1,0 +1,6 @@
+[submodule "CaseyMods"]
+	path = CaseyMods
+	url = git@github.com:spacechase0/StardewValleyMods.git
+[submodule "StardewRadialMenu"]
+	path = StardewRadialMenu
+	url = git@github.com:focustense/StardewRadialMenu.git
