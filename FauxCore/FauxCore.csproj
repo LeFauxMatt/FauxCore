@@ -47,11 +47,8 @@
     <Using Alias="SObject" Include="StardewValley.Object" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Integrations\" />
-  </ItemGroup>
-  <ItemGroup>
-    <InternalsVisibleTo Include="BetterChests"/>
-    <InternalsVisibleTo Include="IconicFramework"/>
+    <InternalsVisibleTo Include="BetterChests" />
+    <InternalsVisibleTo Include="IconicFramework" />
   </ItemGroup>
 
 </Project>

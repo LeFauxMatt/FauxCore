@@ -1,12 +1,12 @@
 namespace LeFauxMods.Core;
 
-using LeFauxMods.Core.Services;
+using LeFauxMods.Core.Utilities;
 
 internal sealed class ModEntry : Mod
 {
     public override void Entry(IModHelper helper)
     {
         // Init
-        _ = new SimpleLogging(this.Monitor);
+        _ = new Log(this.Monitor);
     }
 }

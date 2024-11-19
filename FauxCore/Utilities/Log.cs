@@ -9,12 +9,14 @@ internal sealed class Log
 
     private readonly SimpleLogging simpleLogging;
 
-    /// <summary>Initializes a new instance of the <see cref="Log" /> class.</summary>
-    /// <param name="simpleLogging">Dependency used for logging information to the console.</param>
-    public Log(SimpleLogging simpleLogging)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Log" /> class.
+    /// </summary>
+    /// <param name="monitor">Dependency used for monitoring and logging.</param>
+    public Log(IMonitor monitor)
     {
         instance = this;
-        this.simpleLogging = simpleLogging;
+        this.simpleLogging = new SimpleLogging(monitor);
     }
 
     /// <summary>Logs an alert message to the console.</summary>
