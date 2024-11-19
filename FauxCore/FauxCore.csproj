@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Name>FauxCore</Name>
@@ -34,12 +34,6 @@
       <HintPath>$(GamePath)\smapi-internal\Newtonsoft.Json.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <ProjectReference Include="$(SolutionDir)\CaseyMods\GenericModConfigMenu\GenericModConfigMenu.csproj">
-      <Private>false</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\StardewRadialMenu\RadialMenu\RadialMenu.csproj">
-      <Private>false</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <SMAPIDependency Include="spacechase0.GenericModConfigMenu" Version="1.14.0" required="false" />
@@ -54,6 +48,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Integrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="LeFauxMods.BetterChests"/>
+    <InternalsVisibleTo Include="LeFauxMods.IconicFramework"/>
   </ItemGroup>
 
 </Project>
