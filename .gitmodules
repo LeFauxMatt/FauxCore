@@ -4,3 +4,6 @@
 [submodule "StardewRadialMenu"]
 	path = StardewRadialMenu
 	url = git@github.com:focustense/StardewRadialMenu.git
+[submodule "StardewUI"]
+	path = StardewUI
+	url = git@github.com:focustense/StardewUI.git
