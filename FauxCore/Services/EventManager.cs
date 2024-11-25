@@ -22,7 +22,6 @@ internal static class EventManager
     /// of an event.
     /// </remarks>
     public static void Publish<TEventArgs>(TEventArgs eventArgs)
-        where TEventArgs : EventArgs
     {
         var eventType = typeof(TEventArgs);
         SortedList<int, List<Delegate>> handlersToInvoke;
@@ -66,7 +65,7 @@ internal static class EventManager
     /// of an event.
     /// </remarks>
     public static void Publish<TEventType, TEventArgs>(TEventArgs eventArgs)
-        where TEventArgs : EventArgs, TEventType
+        where TEventArgs : TEventType
     {
         var eventType = typeof(TEventType);
         SortedList<int, List<Delegate>> handlersToInvoke;
