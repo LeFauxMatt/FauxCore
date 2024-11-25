@@ -7,12 +7,12 @@ using System.Reflection;
 using LeFauxMods.Core.Models;
 using LeFauxMods.Core.Utilities;
 
-internal sealed class EventManager
+internal static class EventManager
 {
     private static readonly ReverseComparer<int> ReverseComparer = new();
 
     /// <summary>Gets the subscribers.</summary>
-    private Dictionary<Type, SortedList<int, List<Delegate>>> Subscribers { get; } = [];
+    private static Dictionary<Type, SortedList<int, List<Delegate>>> Subscribers { get; } = [];
 
     /// <summary>Publishes an event with the given event arguments.</summary>
     /// <typeparam name="TEventArgs">The event argument implementation.</typeparam>
@@ -21,14 +21,14 @@ internal sealed class EventManager
     /// This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
     /// of an event.
     /// </remarks>
-    public void Publish<TEventArgs>(TEventArgs eventArgs)
+    public static void Publish<TEventArgs>(TEventArgs eventArgs)
         where TEventArgs : EventArgs
     {
         var eventType = typeof(TEventArgs);
         SortedList<int, List<Delegate>> handlersToInvoke;
-        lock (this.Subscribers)
+        lock (Subscribers)
         {
-            if (!this.Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 return;
             }
@@ -65,14 +65,14 @@ internal sealed class EventManager
     /// This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
     /// of an event.
     /// </remarks>
-    public void Publish<TEventType, TEventArgs>(TEventArgs eventArgs)
+    public static void Publish<TEventType, TEventArgs>(TEventArgs eventArgs)
         where TEventArgs : EventArgs, TEventType
     {
         var eventType = typeof(TEventType);
         SortedList<int, List<Delegate>> handlersToInvoke;
-        lock (this.Subscribers)
+        lock (Subscribers)
         {
-            if (!this.Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 return;
             }
@@ -104,15 +104,15 @@ internal sealed class EventManager
     /// <summary>Subscribes to an event handler.</summary>
     /// <typeparam name="TEventArgs">The type of the event arguments.</typeparam>
     /// <param name="handler">The event handler to subscribe.</param>
-    public void Subscribe<TEventArgs>(Action<TEventArgs> handler)
+    public static void Subscribe<TEventArgs>(Action<TEventArgs> handler)
     {
         var eventType = typeof(TEventArgs);
-        lock (this.Subscribers)
+        lock (Subscribers)
         {
-            if (!this.Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 priorityHandlers = [];
-                this.Subscribers.Add(eventType, priorityHandlers);
+                Subscribers.Add(eventType, priorityHandlers);
             }
 
             var methodInfo = handler.Method;
@@ -131,12 +131,12 @@ internal sealed class EventManager
     /// <summary>Unsubscribes an event handler from an event.</summary>
     /// <param name="handler">The event handler to unsubscribe.</param>
     /// <typeparam name="TEventArgs">The type of the event arguments.</typeparam>
-    public void Unsubscribe<TEventArgs>(Action<TEventArgs> handler)
+    public static void Unsubscribe<TEventArgs>(Action<TEventArgs> handler)
     {
         var eventType = typeof(TEventArgs);
-        lock (this.Subscribers)
+        lock (Subscribers)
         {
-            if (!this.Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 return;
             }
@@ -155,7 +155,7 @@ internal sealed class EventManager
                 return;
             }
 
-            _ = this.Subscribers.Remove(eventType);
+            _ = Subscribers.Remove(eventType);
         }
     }
 }
