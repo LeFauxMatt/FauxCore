@@ -76,7 +76,7 @@ internal sealed class EventManager
                 return;
             }
 
-            handlersToInvoke = new SortedList<int, List<Delegate>>(priorityHandlers);
+            handlersToInvoke = new SortedList<int, List<Delegate>>(priorityHandlers, ReverseComparer);
         }
 
         foreach (var priorityGroup in handlersToInvoke.Values)

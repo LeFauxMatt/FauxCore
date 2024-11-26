@@ -40,8 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Using Include="JetBrains.Annotations" />
-    <Using Include="StardewValley" />
+    <Using Include="LeFauxMods.Core" />
     <Using Include="StardewModdingAPI" />
+    <Using Include="StardewValley" />
     <Using Include="System.Diagnostics.CodeAnalysis" />
     <Using Alias="Object" Include="System.Object" />
     <Using Alias="SObject" Include="StardewValley.Object" />

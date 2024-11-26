@@ -1,4 +1,4 @@
-namespace LeFauxMods.Core.Utilities;
+namespace LeFauxMods.Core;
 
 using LeFauxMods.Core.Services;
 
@@ -35,7 +35,6 @@ internal sealed class Log
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    [SuppressMessage("Naming", "CA1716", Justification = "Reviewed")]
     public static void Error(string message, params object?[]? args) => instance.simpleLogging.Error(message, args);
 
     /// <summary>Logs an info message to the console.</summary>
