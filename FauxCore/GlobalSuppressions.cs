@@ -10,3 +10,4 @@
 [assembly: SuppressMessage("StyleCop", "SA1502", Justification = "Reviewed.", Scope = "module")]
 [assembly: SuppressMessage("StyleCop", "SA1513", Justification = "Reviewed.", Scope = "module")]
 [assembly: SuppressMessage("StyleCop", "SA1633", Justification = "Reviewed.", Scope = "module")]
+[assembly: SuppressMessage("Roslynator", "RCS1161", Justification = "Reviewed", Scope = "module")]

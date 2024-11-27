@@ -21,9 +21,10 @@ internal sealed class Log
 
     /// <summary>Logs an alert message to the console.</summary>
     /// <param name="message">The message to send.</param>
+    /// <param name="hudType">The hud type to show.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public static void Alert(string message, params object?[]? args) => instance.simpleLogging.Alert(message, args);
+    public static void Alert(string message, int hudType = HUDMessage.error_type, params object?[]? args) => instance.simpleLogging.Alert(message, hudType, args);
 
     /// <summary>Logs a debug message to the console.</summary>
     /// <param name="message">The message to send.</param>

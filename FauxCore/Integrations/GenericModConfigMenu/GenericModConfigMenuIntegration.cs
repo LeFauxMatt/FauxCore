@@ -7,4 +7,7 @@ using StardewModdingAPI;
 internal sealed class GenericModConfigMenuIntegration(IModRegistry modRegistry) : ModIntegration<IGenericModConfigMenuApi>(modRegistry)
 {
     public override string UniqueId => "spacechase0.GenericModConfigMenu";
+
+    /// <inheritdoc />
+    public override ISemanticVersion Version { get; } = new SemanticVersion(1, 14, 0);
 }

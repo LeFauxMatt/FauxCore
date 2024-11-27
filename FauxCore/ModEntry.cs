@@ -8,5 +8,6 @@ internal sealed class ModEntry : Mod
     {
         // Init
         _ = new Log(this.Monitor);
+        _ = new ThemeHelper(helper);
     }
 }

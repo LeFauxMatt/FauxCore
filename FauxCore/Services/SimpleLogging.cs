@@ -3,67 +3,64 @@ namespace LeFauxMods.Core.Services;
 using System.Globalization;
 
 /// <summary>Handles logging information to the console.</summary>
-internal sealed class SimpleLogging
+/// <remarks>
+/// Initializes a new instance of the <see cref="SimpleLogging"/> class.
+/// </remarks>
+/// <param name="monitor">Dependency used for monitoring and logging.</param>
+internal sealed class SimpleLogging(IMonitor monitor)
 {
-    private readonly IMonitor monitor;
-
     private string lastMessage = string.Empty;
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SimpleLogging"/> class.
-    /// </summary>
-    /// <param name="monitor">Dependency used for monitoring and logging.</param>
-    public SimpleLogging(IMonitor monitor) => this.monitor = monitor;
 
     /// <summary>Logs an alert message to the console.</summary>
     /// <param name="message">The message to send.</param>
+    /// <param name="hudType">The hud type to show.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void Alert(string message, object?[]? args = null) => this.Raise(message, LogLevel.Alert, false, args);
+    public void Alert(string message, int hudType = HUDMessage.error_type, object?[]? args = null) => this.Raise(message, LogLevel.Alert, false, hudType, args);
 
     /// <summary>Logs a debug message to the console.</summary>
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void Debug(string message, object?[]? args = null) => this.Raise(message, LogLevel.Debug, false, args);
+    public void Debug(string message, object?[]? args = null) => this.Raise(message, LogLevel.Debug, false, 0, args);
 
     /// <summary>Logs an error message to the console.</summary>
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void Error(string message, params object?[]? args) => this.Raise(message, LogLevel.Error, false, args);
+    public void Error(string message, params object?[]? args) => this.Raise(message, LogLevel.Error, false, 0, args);
 
     /// <summary>Logs an info message to the console.</summary>
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void Info(string message, params object?[]? args) => this.Raise(message, LogLevel.Info, false, args);
+    public void Info(string message, params object?[]? args) => this.Raise(message, LogLevel.Info, false, 0, args);
 
     /// <summary>Logs a trace message to the console.</summary>
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void Trace(string message, params object?[]? args) => this.Raise(message, LogLevel.Trace, false, args);
+    public void Trace(string message, params object?[]? args) => this.Raise(message, LogLevel.Trace, false, 0, args);
 
     /// <summary>Logs a trace message to the console only once.</summary>
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void TraceOnce(string message, params object?[]? args) => this.Raise(message, LogLevel.Trace, true, args);
+    public void TraceOnce(string message, params object?[]? args) => this.Raise(message, LogLevel.Trace, true, 0, args);
 
     /// <summary>Logs a warn message to the console.</summary>
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void Warn(string message, params object?[]? args) => this.Raise(message, LogLevel.Warn, false, args);
+    public void Warn(string message, params object?[]? args) => this.Raise(message, LogLevel.Warn, false, 0, args);
 
     /// <summary>Logs a warn message to the console only once.</summary>
     /// <param name="message">The message to send.</param>
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
-    public void WarnOnce(string message, params object?[]? args) => this.Raise(message, LogLevel.Warn, true, args);
+    public void WarnOnce(string message, params object?[]? args) => this.Raise(message, LogLevel.Warn, true, 0, args);
 
-    private void Raise(string message, LogLevel level, bool once, object?[]? args = null)
+    private void Raise(string message, LogLevel level, bool once, int hudType = 0, object?[]? args = null)
     {
         if (args != null)
         {
@@ -80,11 +77,11 @@ internal sealed class SimpleLogging
 #if DEBUG
         if (once)
         {
-            this.monitor.LogOnce(message, level);
+            monitor.LogOnce(message, level);
             return;
         }
 
-        this.monitor.Log(message, level);
+        monitor.Log(message, level);
 #else
         switch (level)
         {
@@ -92,28 +89,28 @@ internal sealed class SimpleLogging
             case LogLevel.Alert:
                 if (once)
                 {
-                    this.monitor.LogOnce(message, level);
+                    monitor.LogOnce(message, level);
                     break;
                 }
 
-                this.monitor.Log(message, level);
+                monitor.Log(message, level);
                 break;
 
             default:
                 if (once)
                 {
-                    this.monitor.LogOnce(message);
+                    monitor.LogOnce(message);
                     break;
                 }
 
-                this.monitor.Log(message);
+                monitor.Log(message);
                 break;
         }
 #endif
 
-        if (level == LogLevel.Alert)
+        if (level == LogLevel.Alert || hudType != 0)
         {
-            Game1.showRedMessage(message);
+            Game1.addHUDMessage(new HUDMessage(message, hudType));
         }
     }
 }
