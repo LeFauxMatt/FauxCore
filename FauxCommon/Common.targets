@@ -32,10 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(SolutionDir)\FauxCore\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Using Include="JetBrains.Annotations" />
     <Using Include="StardewValley" />
     <Using Include="StardewModdingAPI" />
