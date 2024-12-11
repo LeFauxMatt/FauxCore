@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\FauxCommon\Common.targets"/>
+  <Import Project="..\FauxCommon\FauxCommon.projitems" Label="Shared" />
+
   <PropertyGroup>
     <Name>FauxCore</Name>
     <Description>Adds icons above or below the toolbar.</Description>
@@ -13,14 +16,6 @@
 
   <ItemGroup>
     <SMAPIDependency Include="spacechase0.GenericModConfigMenu" Version="1.14.1" required="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <InternalsVisibleTo Include="BetterChests" />
-    <InternalsVisibleTo Include="CustomBush" />
-    <InternalsVisibleTo Include="ExpandedStorage" />
-    <InternalsVisibleTo Include="GarbageDay" />
-    <InternalsVisibleTo Include="IconicFramework" />
   </ItemGroup>
 
 </Project>

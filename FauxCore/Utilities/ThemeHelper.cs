@@ -1,6 +1,8 @@
 namespace LeFauxMods.Core.Utilities;
 
-using LeFauxMods.Core.Integrations.ContentPatcher;
+using Common.Integrations.ContentPatcher;
+using Common.Services;
+using Common.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
@@ -25,7 +27,7 @@ internal sealed class ThemeHelper
         { [new Point(21, 373), new Point(26, 377), new Point(21, 381)], new Color(255, 210, 132) },
 
         // Highlight of menu button
-        { [new Point(104, 471), new Point(111, 470), new Point(117, 480)], new Color(247, 186, 0) },
+        { [new Point(104, 471), new Point(111, 470), new Point(117, 480)], new Color(247, 186, 0) }
     };
 
     private static ThemeHelper instance = null!;
@@ -36,19 +38,16 @@ internal sealed class ThemeHelper
     /// <summary>
     /// Initializes a new instance of the <see cref="ThemeHelper" /> class.
     /// </summary>
-    /// <param name="helper"></param>
     public ThemeHelper(IModHelper helper)
     {
         // Init
         instance = this;
+        this.helper = helper;
 
         // Events
         helper.Events.Content.AssetRequested += this.OnAssetRequested;
         helper.Events.Content.AssetsInvalidated += this.OnAssetsInvalidated;
-
-        var contentPatcher = new ContentPatcherIntegration(helper);
-        contentPatcher.ConditionsApiReady += this.OnConditionsApiReady;
-        this.helper = helper;
+        EventManager.Subscribe<ConditionsApiReadyEventArgs>(this.OnConditionsApiReady);
     }
 
     /// <summary>Adds a new asset to theme helper using the provided texture data and asset name.</summary>
@@ -80,7 +79,8 @@ internal sealed class ThemeHelper
         }
 
         asset.Texture ??= new Texture2D(Game1.spriteBatch.GraphicsDevice, asset.Raw.Width, asset.Raw.Height);
-        asset.Texture.SetData(asset.Raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
+        asset.Texture.SetData(
+            asset.Raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
         asset.Dirty = false;
         e.LoadFrom(() => asset.Texture, AssetLoadPriority.Exclusive);
     }
@@ -107,7 +107,7 @@ internal sealed class ThemeHelper
         }
     }
 
-    private void OnConditionsApiReady(object? sender, bool e) => this.RefreshPalette();
+    private void OnConditionsApiReady(ConditionsApiReadyEventArgs e) => this.RefreshPalette();
 
     private void RefreshPalette()
     {

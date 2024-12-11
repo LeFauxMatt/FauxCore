@@ -1,0 +1,47 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  
+  <PropertyGroup>
+    <Authors>LeFauxMatt</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <BaseManifest>new</BaseManifest>
+    <MinimumGameVersion>1.6.14</MinimumGameVersion>
+    <MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableModZip Condition="'$(Configuration)' == 'Debug'">False</EnableModZip>
+    <ModZipPath>$(SolutionDir)\releases</ModZipPath>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <Version_AppendConfiguration>false</Version_AppendConfiguration>
+  </PropertyGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
+    <PackageReference Include="Leclair.Stardew.ModManifestBuilder" Version="2.4.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+    <PackageReference Include="NetEscapades.EnumGenerators" Version="1.0.0-beta11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(GamePath)\smapi-internal\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(SolutionDir)\FauxCore\GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="JetBrains.Annotations" />
+    <Using Include="StardewValley" />
+    <Using Include="StardewModdingAPI" />
+    <Using Include="System.Diagnostics.CodeAnalysis" />
+    <Using Alias="Object" Include="System.Object" />
+    <Using Alias="SObject" Include="StardewValley.Object" />
+  </ItemGroup>
+
+</Project>

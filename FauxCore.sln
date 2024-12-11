@@ -4,12 +4,14 @@ VisualStudioVersion = 17.13.35507.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FauxCore", "FauxCore\FauxCore.csproj", "{5784D6AB-FF16-47B4-82B1-BADABCE34DCC}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FauxCommon", "FauxCommon\FauxCommon.shproj", "{966B9495-8681-44DA-9F8E-0838E5EB1A42}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		Directory.Build.props = Directory.Build.props
-		GlobalSuppressions.cs = GlobalSuppressions.cs
+		CHANGELOG.md = CHANGELOG.md
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
@@ -30,5 +32,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E1D8490-3A68-47FD-BF76-B6651813AF7C}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		FauxCommon\FauxCommon.projitems*{5784d6ab-ff16-47b4-82b1-badabce34dcc}*SharedItemsImports = 5
+		FauxCommon\FauxCommon.projitems*{966b9495-8681-44da-9f8e-0838e5eb1a42}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal
