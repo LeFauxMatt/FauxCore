@@ -1,6 +1,5 @@
 namespace LeFauxMods.Common.Integrations.ContentPatcher;
 
-using Services;
 using StardewModdingAPI.Events;
 using Utilities;
 

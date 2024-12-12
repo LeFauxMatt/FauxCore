@@ -1,13 +1,14 @@
 namespace LeFauxMods.Core.Utilities;
 
 using Common.Integrations.ContentPatcher;
-using Common.Services;
 using Common.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Models;
 using StardewModdingAPI.Events;
 
-internal sealed class ThemeHelper
+/// <inheritdoc />
+internal sealed class ThemeHelper : IThemeHelper
 {
     private static readonly Dictionary<Point[], Color> VanillaPalette = new()
     {
@@ -30,15 +31,12 @@ internal sealed class ThemeHelper
         { [new Point(104, 471), new Point(111, 470), new Point(117, 480)], new Color(247, 186, 0) }
     };
 
-    private static ThemeHelper instance = null!;
+    private static ThemeHelper? instance;
     private readonly Dictionary<IAssetName, Asset> cachedAssets = [];
     private readonly IModHelper helper;
     private readonly Dictionary<Color, Color> paletteSwap = [];
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="ThemeHelper" /> class.
-    /// </summary>
-    public ThemeHelper(IModHelper helper)
+    private ThemeHelper(IModHelper helper)
     {
         // Init
         instance = this;
@@ -47,16 +45,21 @@ internal sealed class ThemeHelper
         // Events
         helper.Events.Content.AssetRequested += this.OnAssetRequested;
         helper.Events.Content.AssetsInvalidated += this.OnAssetsInvalidated;
-        ModEvents.Subscribe<ConditionsApiReadyEventArgs>(this.OnConditionsApiReady);
+
+        var contentPatcherIntegration = new ContentPatcherIntegration(helper);
+        if (contentPatcherIntegration.IsLoaded)
+        {
+            ModEvents.Subscribe<ConditionsApiReadyEventArgs>(this.OnConditionsApiReady);
+        }
     }
 
-    /// <summary>Adds a new asset to theme helper using the provided texture data and asset name.</summary>
-    /// <param name="path">The game content path for the asset.</param>
-    /// <param name="data">The raw texture data for the asset.</param>
-    public static void AddAsset(string path, IRawTextureData data)
+    public static ThemeHelper Init(IModHelper helper) => instance ??= new ThemeHelper(helper);
+
+    /// <inheritdoc />
+    public void AddAsset(string path, IRawTextureData data)
     {
-        var assetName = instance.helper.GameContent.ParseAssetName(path);
-        if (!instance.cachedAssets.TryAdd(assetName, new Asset(data)))
+        var assetName = this.helper.GameContent.ParseAssetName(path);
+        if (!this.cachedAssets.TryAdd(assetName, new Asset(data)))
         {
             Log.Trace("Error, conflicting key {0} found in ThemeHelper. Asset not added.", assetName.Name);
             return;

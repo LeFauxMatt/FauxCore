@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Integrations.FauxCore;
+﻿namespace LeFauxMods.Core.Models;
 
-/// <summary>Api for shared functionality between mods.</summary>
-public interface IFauxCoreApi
+/// <summary>Handles palette swaps for theme compatibility.</summary>
+public interface IThemeHelper
 {
     /// <summary>Adds a new asset to theme helper using the provided texture data and asset name.</summary>
     /// <param name="path">The game content path for the asset.</param>
