@@ -9,6 +9,8 @@
     <Import_RootNamespace>LeFauxMods.Common</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\BetterChestsIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\IBetterChestsApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ConditionsApiReadyEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ContentPatcherIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\IContentPatcherApi.cs" />
