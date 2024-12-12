@@ -84,25 +84,27 @@ internal abstract class DictionaryDataModel
 
     /// <summary>Retrieves a value from the dictionary based on the provided id.</summary>
     /// <param name="id">The id of the item.</param>
+    /// <param name="defaultValue">The value to return if the key is not found.</param>
     /// <returns>The value from the dictionary, or empty if the value is not found.</returns>
-    protected string Get(string id)
+    protected string Get(string id, string? defaultValue = null)
     {
         var key = this.Prefix + id;
-        return !this.dictionaryModel.TryGetValue(key, out var value) ? string.Empty : value;
+        return !this.dictionaryModel.TryGetValue(key, out var value) ? defaultValue ?? string.Empty : value;
     }
 
     /// <summary>Retrieves a value from the cache based on the provided id and serializer.</summary>
     /// <typeparam name="TValue">The type of the value to retrieve.</typeparam>
     /// <param name="id">The id of the cached item.</param>
     /// <param name="deserializer">A function used to deserialize the value from its serialized form.</param>
+    /// <param name="defaultValue">The value to return if the key is not found.</param>
     /// <returns>The deserialized value from the cache, or null if the value is not found in the cache.</returns>
     /// <exception cref="InvalidOperationException">Thrown when the cached value is of a different type than expected.</exception>
-    protected TValue? Get<TValue>(string id, Func<string, TValue> deserializer)
+    protected TValue? Get<TValue>(string id, Func<string, TValue> deserializer, TValue? defaultValue = default)
     {
         var key = this.Prefix + id;
         if (!this.dictionaryModel.TryGetValue(key, out var value))
         {
-            return default;
+            return defaultValue;
         }
 
         if (this.cachedValues.TryGetValue(id, out var cachedValue))
