@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)services\EventManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\CommonExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\Log.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)utilities\ModEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ReverseComparer.cs" />
   </ItemGroup>
   <ItemGroup>

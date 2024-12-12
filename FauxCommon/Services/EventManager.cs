@@ -4,11 +4,11 @@ using System.Reflection;
 using Models;
 using Utilities;
 
-internal static class EventManager
+internal sealed class EventManager
 {
     private static readonly ReverseComparer<int> ReverseComparer = new();
 
-    private static readonly Dictionary<Type, SortedList<int, List<Delegate>>> Subscribers = [];
+    private readonly Dictionary<Type, SortedList<int, List<Delegate>>> subscribers = [];
 
     /// <summary>Publishes an event with the given event arguments.</summary>
     /// <typeparam name="TEventArgs">The event argument implementation.</typeparam>
@@ -17,13 +17,13 @@ internal static class EventManager
     ///     This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
     ///     of an event.
     /// </remarks>
-    public static void Publish<TEventArgs>(TEventArgs eventArgs)
+    public void Publish<TEventArgs>(TEventArgs eventArgs)
     {
         var eventType = typeof(TEventArgs);
         SortedList<int, List<Delegate>> handlersToInvoke;
-        lock (Subscribers)
+        lock (this.subscribers)
         {
-            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!this.subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 return;
             }
@@ -60,14 +60,14 @@ internal static class EventManager
     ///     This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
     ///     of an event.
     /// </remarks>
-    public static void Publish<TEventType, TEventArgs>(TEventArgs eventArgs)
+    public void Publish<TEventType, TEventArgs>(TEventArgs eventArgs)
         where TEventArgs : TEventType
     {
         var eventType = typeof(TEventType);
         SortedList<int, List<Delegate>> handlersToInvoke;
-        lock (Subscribers)
+        lock (this.subscribers)
         {
-            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!this.subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 return;
             }
@@ -99,15 +99,15 @@ internal static class EventManager
     /// <summary>Subscribes to an event handler.</summary>
     /// <typeparam name="TEventArgs">The type of the event arguments.</typeparam>
     /// <param name="handler">The event handler to subscribe.</param>
-    public static void Subscribe<TEventArgs>(Action<TEventArgs> handler)
+    public void Subscribe<TEventArgs>(Action<TEventArgs> handler)
     {
         var eventType = typeof(TEventArgs);
-        lock (Subscribers)
+        lock (this.subscribers)
         {
-            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!this.subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 priorityHandlers = [];
-                Subscribers.Add(eventType, priorityHandlers);
+                this.subscribers.Add(eventType, priorityHandlers);
             }
 
             var priorityAttribute = handler.Method.GetCustomAttribute<PriorityAttribute>();
@@ -125,12 +125,12 @@ internal static class EventManager
     /// <summary>Unsubscribes an event handler from an event.</summary>
     /// <param name="handler">The event handler to unsubscribe.</param>
     /// <typeparam name="TEventArgs">The type of the event arguments.</typeparam>
-    public static void Unsubscribe<TEventArgs>(Action<TEventArgs> handler)
+    public void Unsubscribe<TEventArgs>(Action<TEventArgs> handler)
     {
         var eventType = typeof(TEventArgs);
-        lock (Subscribers)
+        lock (this.subscribers)
         {
-            if (!Subscribers.TryGetValue(eventType, out var priorityHandlers))
+            if (!this.subscribers.TryGetValue(eventType, out var priorityHandlers))
             {
                 return;
             }
@@ -149,7 +149,7 @@ internal static class EventManager
                 return;
             }
 
-            _ = Subscribers.Remove(eventType);
+            _ = this.subscribers.Remove(eventType);
         }
     }
 }

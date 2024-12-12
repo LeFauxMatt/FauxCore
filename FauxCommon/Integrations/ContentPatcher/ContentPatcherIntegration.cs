@@ -2,6 +2,7 @@ namespace LeFauxMods.Common.Integrations.ContentPatcher;
 
 using Services;
 using StardewModdingAPI.Events;
+using Utilities;
 
 internal sealed class ContentPatcherIntegration : ModIntegration<IContentPatcherApi>
 {
@@ -36,6 +37,6 @@ internal sealed class ContentPatcherIntegration : ModIntegration<IContentPatcher
         }
 
         this.helper.Events.GameLoop.UpdateTicked -= this.OnUpdateTicked;
-        EventManager.Publish(new ConditionsApiReadyEventArgs());
+        ModEvents.Publish(new ConditionsApiReadyEventArgs());
     }
 }

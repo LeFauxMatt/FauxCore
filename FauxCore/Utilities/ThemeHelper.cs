@@ -47,7 +47,7 @@ internal sealed class ThemeHelper
         // Events
         helper.Events.Content.AssetRequested += this.OnAssetRequested;
         helper.Events.Content.AssetsInvalidated += this.OnAssetsInvalidated;
-        EventManager.Subscribe<ConditionsApiReadyEventArgs>(this.OnConditionsApiReady);
+        ModEvents.Subscribe<ConditionsApiReadyEventArgs>(this.OnConditionsApiReady);
     }
 
     /// <summary>Adds a new asset to theme helper using the provided texture data and asset name.</summary>
