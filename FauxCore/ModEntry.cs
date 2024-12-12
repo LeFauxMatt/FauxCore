@@ -1,7 +1,7 @@
 namespace LeFauxMods.Core;
 
 using Common.Integrations.ContentPatcher;
-using LeFauxMods.Common.Utilities;
+using Common.Utilities;
 using Utilities;
 
 /// <inheritdoc />

@@ -1,8 +1,5 @@
 namespace LeFauxMods.Common.Utilities;
 
-using System;
-using System.Collections.Generic;
-
 /// <inheritdoc />
 internal sealed class ReverseComparer<T> : Comparer<T>
     where T : IComparable<T>

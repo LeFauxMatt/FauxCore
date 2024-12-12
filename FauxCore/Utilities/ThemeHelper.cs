@@ -36,7 +36,7 @@ internal sealed class ThemeHelper
     private readonly Dictionary<Color, Color> paletteSwap = [];
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ThemeHelper" /> class.
+    ///     Initializes a new instance of the <see cref="ThemeHelper" /> class.
     /// </summary>
     public ThemeHelper(IModHelper helper)
     {

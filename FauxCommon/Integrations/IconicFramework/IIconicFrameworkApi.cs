@@ -1,6 +1,5 @@
 namespace LeFauxMods.Common.Integrations.IconicFramework;
 
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley.Menus;
@@ -23,21 +22,21 @@ public interface IIconicFrameworkApi : IToolbarIconsArchived
 
     /// <summary>Subscribes to an event handler.</summary>
     /// <param name="handler">The event handler to subscribe.</param>
-    void Subscribe(Action<IIconPressedEventArgs> handler);
+    public void Subscribe(Action<IIconPressedEventArgs> handler);
 
     /// <summary>Unsubscribes an event handler from an event.</summary>
     /// <param name="handler">The event handler to unsubscribe.</param>
-    void Unsubscribe(Action<IIconPressedEventArgs> handler);
+    public void Unsubscribe(Action<IIconPressedEventArgs> handler);
 }
 
 /// <summary>Represents the event arguments for a toolbar icon being pressed.</summary>
 public interface IIconPressedEventArgs
 {
     /// <summary>Gets the button that was pressed.</summary>
-    SButton Button { get; }
+    public SButton Button { get; }
 
     /// <summary>Gets the id of the icon that was pressed.</summary>
-    string Id { get; }
+    public string Id { get; }
 }
 
 #region Archived
@@ -107,7 +106,7 @@ public enum IconStyle
     Transparent,
 
     /// <summary>An icon with a button background.</summary>
-    Button,
+    Button
 }
 
 #endregion Archived

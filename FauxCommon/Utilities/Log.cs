@@ -4,11 +4,8 @@ using System.Globalization;
 
 internal sealed class Log
 {
-    private static IMonitor? monitor;
-
     private static string lastMessage = string.Empty;
-
-    public static void Init(IMonitor monitor) => Log.monitor ??= monitor;
+    private static IMonitor? monitor;
 
     /// <summary>Logs an alert message to the console.</summary>
     /// <param name="message">The message to send.</param>
@@ -35,6 +32,8 @@ internal sealed class Log
     /// <param name="args">The arguments to parse in a formatted string.</param>
     [StringFormatMethod("message")]
     public static void Info(string message, params object?[]? args) => Raise(message, LogLevel.Info, false, 0, args);
+
+    public static void Init(IMonitor monitor) => Log.monitor ??= monitor;
 
     /// <summary>Logs a trace message to the console.</summary>
     /// <param name="message">The message to send.</param>

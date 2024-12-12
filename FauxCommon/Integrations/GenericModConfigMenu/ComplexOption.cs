@@ -16,27 +16,33 @@ internal abstract class ComplexOption
 
     /// <summary>Executes a set of actions after the option is set.</summary>
     public virtual void AfterReset()
-    { }
+    {
+    }
 
     /// <summary>Executes a set of actions after the option is saved.</summary>
     public virtual void AfterSave()
-    { }
+    {
+    }
 
     /// <summary>Executes a set of actions before the menu is closed.</summary>
     public virtual void BeforeMenuClosed()
-    { }
+    {
+    }
 
     /// <summary>Executes a set of actions before the menu is opened.</summary>
     public virtual void BeforeMenuOpened()
-    { }
+    {
+    }
 
     /// <summary>Executes a set of actions before the option is reset.</summary>
     public virtual void BeforeReset()
-    { }
+    {
+    }
 
     /// <summary>Executes a set of actions before the option is saved.</summary>
     public virtual void BeforeSave()
-    { }
+    {
+    }
 
     /// <summary>Draws the menu option.</summary>
     /// <param name="spriteBatch">The sprite batch to draw to.</param>

@@ -1,8 +1,5 @@
 namespace LeFauxMods.Common.Services;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Models;
 using Utilities;
@@ -17,8 +14,8 @@ internal static class EventManager
     /// <typeparam name="TEventArgs">The event argument implementation.</typeparam>
     /// <param name="eventArgs">The event arguments to publish.</param>
     /// <remarks>
-    /// This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
-    /// of an event.
+    ///     This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
+    ///     of an event.
     /// </remarks>
     public static void Publish<TEventArgs>(TEventArgs eventArgs)
     {
@@ -60,8 +57,8 @@ internal static class EventManager
     /// <typeparam name="TEventArgs">The event argument implementation.</typeparam>
     /// <param name="eventArgs">The event arguments to publish.</param>
     /// <remarks>
-    /// This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
-    /// of an event.
+    ///     This method is used to raise an event with the provided event arguments. It can be used to notify subscribers
+    ///     of an event.
     /// </remarks>
     public static void Publish<TEventType, TEventArgs>(TEventArgs eventArgs)
         where TEventArgs : TEventType

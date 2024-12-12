@@ -1,7 +1,5 @@
 namespace LeFauxMods.Common.Integrations.GenericModConfigMenu;
 
-using StardewModdingAPI;
-
 /// <summary>Initializes a new instance of the <see cref="GenericModConfigMenuIntegration" /> class.</summary>
 /// <param name="manifest">The mod's manifest.</param>
 /// <param name="modRegistry">Dependency used for fetching metadata about loaded mods.</param>

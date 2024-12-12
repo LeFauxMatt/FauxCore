@@ -1,6 +1,5 @@
 namespace LeFauxMods.Common.Integrations.CustomBush;
 
-using System.Collections.Generic;
 using StardewValley.GameData;
 using StardewValley.TerrainFeatures;
 
@@ -21,8 +20,8 @@ public interface ICustomBushApi
     /// <summary>Tries to get the custom bush model associated with the given bush.</summary>
     /// <param name="bush">The bush.</param>
     /// <param name="customBush">
-    /// When this method returns, contains the custom bush associated with the given bush, if found;
-    /// otherwise, it contains null.
+    ///     When this method returns, contains the custom bush associated with the given bush, if found;
+    ///     otherwise, it contains null.
     /// </param>
     /// <returns><c>true</c> if the custom bush associated with the given bush is found; otherwise, <c>false</c>.</returns>
     public bool TryGetCustomBush(Bush bush, out ICustomBush? customBush);
@@ -30,8 +29,8 @@ public interface ICustomBushApi
     /// <summary>Tries to get the custom bush model associated with the given bush.</summary>
     /// <param name="bush">The bush.</param>
     /// <param name="customBush">
-    /// When this method returns, contains the custom bush associated with the given bush, if found;
-    /// otherwise, it contains null.
+    ///     When this method returns, contains the custom bush associated with the given bush, if found;
+    ///     otherwise, it contains null.
     /// </param>
     /// <param name="id">When this method returns, contains the id of the custom bush, if found; otherwise, it contains null.</param>
     /// <returns><c>true</c> if the custom bush associated with the given bush is found; otherwise, <c>false</c>.</returns>
@@ -54,10 +53,11 @@ public interface ICustomBushDrop : ISpawnItemData
     public string? Condition { get; }
 
     /// <summary>
-    /// An ID for this entry within the current list (not the item itself, which is
-    /// <see cref="P:StardewValley.GameData.GenericSpawnItemData.ItemId" />). This only needs to be unique within the current
-    /// list. For a custom entry, you should use a globally unique ID which includes your mod ID like
-    /// <c>ExampleMod.Id_ItemName</c>.
+    ///     An ID for this entry within the current list (not the item itself, which is
+    ///     <see cref="P:StardewValley.GameData.GenericSpawnItemData.ItemId" />). This only needs to be unique within the
+    ///     current
+    ///     list. For a custom entry, you should use a globally unique ID which includes your mod ID like
+    ///     <c>ExampleMod.Id_ItemName</c>.
     /// </summary>
     public string? Id { get; }
 
