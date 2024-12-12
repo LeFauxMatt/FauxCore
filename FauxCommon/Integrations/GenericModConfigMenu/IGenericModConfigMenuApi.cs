@@ -9,13 +9,6 @@ using StardewModdingAPI.Utilities;
 /// <summary>The API which lets other mods add a config UI through Generic Mod Config Menu.</summary>
 public interface IGenericModConfigMenuApi
 {
-    /*********
-     ** Methods
-     *********/
-    /****
-     ** Must be called first
-     ****/
-
     /// <summary>Add a boolean option at the current position in the form.</summary>
     /// <param name="mod">The mod's manifest.</param>
     /// <param name="getValue">Get the current value from the mod config.</param>
@@ -240,16 +233,6 @@ public interface IGenericModConfigMenuApi
     /// </remarks>
     public void Register(IManifest mod, Action reset, Action save, bool titleScreenOnly = false);
 
-    /****
-     ** Basic options
-     ****/
-    /****
-     ** Multi-page management
-     ****/
-    /****
-     ** Advanced
-     ****/
-
     /// <summary>Set whether the options registered after this point can only be edited from the title screen.</summary>
     /// <param name="mod">The mod's manifest.</param>
     /// <param name="titleScreenOnly">Whether the options can only be edited from the title screen.</param>
@@ -268,4 +251,20 @@ public interface IGenericModConfigMenuApi
     /// <summary>Remove a mod from the config UI and delete all its options and pages.</summary>
     /// <param name="mod">The mod's manifest.</param>
     public void Unregister(IManifest mod);
+    /*********
+     ** Methods
+     *********/
+    /****
+     ** Must be called first
+     ****/
+
+    /****
+     ** Basic options
+     ****/
+    /****
+     ** Multi-page management
+     ****/
+    /****
+     ** Advanced
+     ****/
 }
