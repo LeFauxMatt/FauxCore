@@ -82,6 +82,14 @@ internal abstract class DictionaryDataModel
     protected static int StringToInt(string value) =>
         !string.IsNullOrWhiteSpace(value) && int.TryParse(value, out var intValue) ? intValue : 0;
 
+    /// <summary>Deserialize a string to a list of strings.</summary>
+    /// <param name="value">The string value to parse.</param>
+    /// <returns>The list value, or an empty list if the value is not valid.</returns>
+    protected static List<string> StringToList(string value) =>
+        !string.IsNullOrWhiteSpace(value)
+            ? value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList()
+            : [];
+
     /// <summary>Retrieves a value from the dictionary based on the provided id.</summary>
     /// <param name="id">The id of the item.</param>
     /// <param name="defaultValue">The value to return if the key is not found.</param>

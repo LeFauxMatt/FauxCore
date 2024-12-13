@@ -16,6 +16,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\IContentPatcherApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\CustomBush\CustomBushIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\CustomBush\ICustomBushApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\expandedstorage\ExpandedStorageIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\expandedstorage\IExpandedStorageApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\FauxCoreIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\IFauxCoreApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\GenericModConfigMenu\ComplexOption.cs" />
@@ -40,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ReverseComparer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
