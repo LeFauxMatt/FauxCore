@@ -177,6 +177,7 @@ internal abstract class DictionaryDataModel
     ///     requested TValue.
     /// </exception>
     /// <returns>The parsed value, cached value, or default.</returns>
+    [return: NotNullIfNotNull("defaultValue")]
     protected TValue? Get<TValue>(string id, Func<string, TValue> parser, TValue? defaultValue = default)
     {
         var key = this.Prefix + id;
