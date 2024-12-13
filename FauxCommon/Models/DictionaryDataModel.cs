@@ -29,7 +29,7 @@ internal abstract class DictionaryDataModel
     /// <param name="value">The array to convert.</param>
     /// <returns>Comma-separated values or empty string.</returns>
     protected static string ArrayToString(string[]? value) =>
-        value?.Any() == true ? string.Join(',', value) : string.Empty;
+        value?.Length > 0 ? string.Join(',', value) : string.Empty;
 
     /// <summary>
     ///     Converts an array of typed values to a comma-separated string.
@@ -39,7 +39,7 @@ internal abstract class DictionaryDataModel
     /// <returns>Function that converts an array to a string.</returns>
     protected static Func<TValue[], string> ArrayToString<TValue>(Func<TValue, string> parser) =>
         value =>
-            value?.Any() == true
+            value?.Length > 0
                 ? string.Join(',', value.Select(parser))
                 : string.Empty;
 
@@ -59,7 +59,7 @@ internal abstract class DictionaryDataModel
     /// <param name="value">The dictionary to convert.</param>
     /// <returns>Comma-separated key=value pairs or empty string.</returns>
     protected static string DictToString(Dictionary<string, string>? value) =>
-        value?.Any() == true ? string.Join(',', value.Select(pair => $"{pair.Key}={pair.Value}")) : string.Empty;
+        value?.Count > 0 ? string.Join(',', value.Select(pair => $"{pair.Key}={pair.Value}")) : string.Empty;
 
     /// <summary>
     ///     Converts a generic dictionary to a key-value string format.
@@ -69,7 +69,7 @@ internal abstract class DictionaryDataModel
     /// <returns>Function that converts dictionary to string.</returns>
     protected static Func<Dictionary<string, TValue>, string> DictToString<TValue>(Func<TValue, string> parser) =>
         value =>
-            value?.Any() == true
+            value?.Count > 0
                 ? string.Join(',', value.Select(pair => $"{pair.Key}={parser(pair.Value)}"))
                 : string.Empty;
 
@@ -209,11 +209,7 @@ internal abstract class DictionaryDataModel
     /// </summary>
     /// <param name="id">The ID to store under.</param>
     /// <param name="value">The value to store.</param>
-    protected void Set(string id, string value)
-    {
-        var key = this.Prefix + id;
-        this.dictionaryModel.SetValue(key, value);
-    }
+    protected void Set(string id, string value) => this.dictionaryModel.SetValue(this.Prefix + id, value);
 
     /// <summary>
     ///     Sets and caches a typed value in the dictionary.
