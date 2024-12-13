@@ -121,7 +121,7 @@ internal abstract class DictionaryDataModel
     {
         if (string.IsNullOrWhiteSpace(value) || !uint.TryParse(value, out var intValue))
         {
-            return Color.Black;
+            return Utility.StringToColor(value) ?? Color.Black;
         }
 
         var color = Color.Black;
