@@ -23,6 +23,26 @@ internal abstract class DictionaryDataModel
     /// <returns><c>true</c> if the dictionary contains a value; otherwise, <c>false</c>.</returns>
     public bool HasValue(string id) => this.dictionaryModel.ContainsKey(this.Prefix + id);
 
+    /// <summary>
+    ///     Converts an array to a comma-separated string.
+    /// </summary>
+    /// <param name="value">The array to convert.</param>
+    /// <returns>Comma-separated values or empty string.</returns>
+    protected static string ArrayToString(string[]? value) =>
+        value?.Any() == true ? string.Join(',', value) : string.Empty;
+
+    /// <summary>
+    ///     Converts an array of typed values to a comma-separated string.
+    /// </summary>
+    /// <typeparam name="TValue">The type of values to serialize.</typeparam>
+    /// <param name="parser">Function to convert TValue to string.</param>
+    /// <returns>Function that converts an array to a string.</returns>
+    protected static Func<TValue[], string> ArrayToString<TValue>(Func<TValue, string> parser) =>
+        value =>
+            value?.Any() == true
+                ? string.Join(',', value.Select(parser))
+                : string.Empty;
+
     /// <summary>Converts a boolean to its string representation.</summary>
     /// <param name="value">The boolean value.</param>
     /// <returns>The string "true" or empty string.</returns>
@@ -45,12 +65,12 @@ internal abstract class DictionaryDataModel
     ///     Converts a generic dictionary to a key-value string format.
     /// </summary>
     /// <typeparam name="TValue">The type of values to serialize.</typeparam>
-    /// <param name="serializer">Function to convert TValue to string.</param>
+    /// <param name="parser">Function to convert TValue to string.</param>
     /// <returns>Function that converts dictionary to string.</returns>
-    protected static Func<Dictionary<string, TValue>, string> DictToString<TValue>(Func<TValue, string> serializer) =>
+    protected static Func<Dictionary<string, TValue>, string> DictToString<TValue>(Func<TValue, string> parser) =>
         value =>
             value?.Any() == true
-                ? string.Join(',', value.Select(pair => $"{pair.Key}={serializer(pair.Value)}"))
+                ? string.Join(',', value.Select(pair => $"{pair.Key}={parser(pair.Value)}"))
                 : string.Empty;
 
     /// <summary>
@@ -62,24 +82,27 @@ internal abstract class DictionaryDataModel
         value == 0 ? string.Empty : value.ToString(CultureInfo.InvariantCulture);
 
     /// <summary>
-    ///     Converts a list to a comma-separated string.
+    ///     Parses a string into an array of strings.
     /// </summary>
-    /// <param name="value">The list to convert.</param>
-    /// <returns>Comma-separated values or empty string.</returns>
-    protected static string ListToString(List<string>? value) =>
-        value?.Any() == true ? string.Join(',', value) : string.Empty;
+    /// <param name="value">The comma-separated string.</param>
+    /// <returns>Array of parsed values or empty array.</returns>
+    protected static string[] StringToArray(string value) =>
+        !string.IsNullOrWhiteSpace(value)
+            ? value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToArray()
+            : [];
 
     /// <summary>
-    ///     Converts a list of typed values to a comma-separated string.
+    ///     Parses a string into an array of typed values.
     /// </summary>
-    /// <typeparam name="TValue">The type of values to serialize.</typeparam>
-    /// <param name="serializer">Function to convert TValue to string.</param>
-    /// <returns>Function that converts lists to strings.</returns>
-    protected static Func<List<TValue>, string> ListToString<TValue>(Func<TValue, string> serializer) =>
+    /// <typeparam name="TValue">Type to parse values into.</typeparam>
+    /// <param name="parser">Function to parse strings into TValue.</param>
+    /// <returns>Function that parses strings into a typed array.</returns>
+    protected static Func<string, TValue[]> StringToArray<TValue>(Func<string, TValue> parser) =>
         value =>
-            value?.Any() == true
-                ? string.Join(',', value.Select(serializer))
-                : string.Empty;
+            !string.IsNullOrWhiteSpace(value)
+                ? value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(parser).ToArray()
+                : [];
 
     /// <summary>
     ///     Parses a string into a boolean value.
@@ -120,43 +143,20 @@ internal abstract class DictionaryDataModel
     ///     Parses a string into a dictionary of typed values.
     /// </summary>
     /// <typeparam name="TValue">The type of values to parse into.</typeparam>
-    /// <param name="deserializer">Function to convert strings to TValue.</param>
+    /// <param name="parser">Function to convert strings to TValue.</param>
     /// <returns>Function that parses strings into dictionaries.</returns>
-    protected static Func<string, Dictionary<string, TValue>> StringToDict<TValue>(Func<string, TValue> deserializer) =>
+    protected static Func<string, Dictionary<string, TValue>> StringToDict<TValue>(Func<string, TValue> parser) =>
         value =>
             !string.IsNullOrWhiteSpace(value)
                 ? value.Split(',').Select(part => part.Split('='))
-                    .ToDictionary(part => part[0], part => deserializer(part[1]))
+                    .ToDictionary(part => part[0], part => parser(part[1]))
                 : new Dictionary<string, TValue>();
 
-    /// <summary>Deserialize a string to an int.</summary>
+    /// <summary>Parses a string to an int.</summary>
     /// <param name="value">The string value to parse.</param>
     /// <returns>The integer value, or the default value if the value is not a valid integer.</returns>
     protected static int StringToInt(string value) =>
         !string.IsNullOrWhiteSpace(value) && int.TryParse(value, out var intValue) ? intValue : 0;
-
-    /// <summary>
-    ///     Parses a string into a list of strings.
-    /// </summary>
-    /// <param name="value">The comma-separated string.</param>
-    /// <returns>List of parsed values or empty list.</returns>
-    protected static List<string> StringToList(string value) =>
-        !string.IsNullOrWhiteSpace(value)
-            ? value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList()
-            : [];
-
-    /// <summary>
-    ///     Parses a string into a list of typed values.
-    /// </summary>
-    /// <typeparam name="TValue">Type to parse values into.</typeparam>
-    /// <param name="deserializer">Function to parse strings into TValue.</param>
-    /// <returns>Function that parses strings into typed lists.</returns>
-    protected static Func<string, List<TValue>> StringToList<TValue>(Func<string, TValue> deserializer) =>
-        value =>
-            !string.IsNullOrWhiteSpace(value)
-                ? value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                    .Select(deserializer).ToList()
-                : [];
 
     /// <summary>Retrieves a value from the dictionary based on the provided id.</summary>
     /// <param name="id">The id of the item.</param>
@@ -170,14 +170,14 @@ internal abstract class DictionaryDataModel
     /// </summary>
     /// <typeparam name="TValue">The type to convert the value to.</typeparam>
     /// <param name="id">The ID to look up.</param>
-    /// <param name="deserializer">Function to convert string to TValue.</param>
+    /// <param name="parser">Function to convert string to TValue.</param>
     /// <param name="defaultValue">Value to return if key not found.</param>
     /// <exception cref="InvalidOperationException">
     ///     Thrown when the cached value exists but is of the wrong type for the
     ///     requested TValue.
     /// </exception>
     /// <returns>The parsed value, cached value, or default.</returns>
-    protected TValue? Get<TValue>(string id, Func<string, TValue> deserializer, TValue? defaultValue = default)
+    protected TValue? Get<TValue>(string id, Func<string, TValue> parser, TValue? defaultValue = default)
     {
         var key = this.Prefix + id;
         if (!this.dictionaryModel.TryGetValue(key, out var value))
@@ -198,7 +198,7 @@ internal abstract class DictionaryDataModel
             }
         }
 
-        var newValue = deserializer(value);
+        var newValue = parser(value);
         this.cachedValues[id] = new CachedValue<TValue>(value, newValue);
         return newValue;
     }
@@ -220,11 +220,11 @@ internal abstract class DictionaryDataModel
     /// <typeparam name="TValue">The type of value to store.</typeparam>
     /// <param name="id">The ID to store under.</param>
     /// <param name="value">The value to store.</param>
-    /// <param name="serializer">Function to convert value to string.</param>
-    protected void Set<TValue>(string id, TValue value, Func<TValue, string> serializer)
+    /// <param name="parser">Function to convert value to string.</param>
+    protected void Set<TValue>(string id, TValue value, Func<TValue, string> parser)
     {
         var key = this.Prefix + id;
-        var stringValue = serializer(value);
+        var stringValue = parser(value);
         this.cachedValues[id] = new CachedValue<TValue>(stringValue, value);
         this.dictionaryModel.SetValue(key, stringValue);
     }
