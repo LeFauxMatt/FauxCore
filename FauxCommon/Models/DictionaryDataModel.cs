@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 /// </summary>
 internal abstract class DictionaryDataModel
 {
-    private readonly Dictionary<string, ICachedValue> cachedValues = new();
+    private readonly Dictionary<string, ICachedValue> cachedValues = [];
     private readonly IDictionaryModel dictionaryModel;
 
     /// <summary>Initializes a new instance of the <see cref="DictionaryDataModel" /> class.</summary>
@@ -88,7 +88,7 @@ internal abstract class DictionaryDataModel
     /// <returns>Array of parsed values or empty array.</returns>
     protected static string[] StringToArray(string value) =>
         !string.IsNullOrWhiteSpace(value)
-            ? value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToArray()
+            ? [.. value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)]
             : [];
 
     /// <summary>
@@ -100,8 +100,11 @@ internal abstract class DictionaryDataModel
     protected static Func<string, TValue[]> StringToArray<TValue>(Func<string, TValue> parser) =>
         value =>
             !string.IsNullOrWhiteSpace(value)
-                ? value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                    .Select(parser).ToArray()
+                ?
+                [
+                    .. value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                        .Select(parser)
+                ]
                 : [];
 
     /// <summary>
@@ -137,7 +140,7 @@ internal abstract class DictionaryDataModel
     protected static Dictionary<string, string> StringToDict(string value) =>
         !string.IsNullOrWhiteSpace(value)
             ? value.Split(',').Select(part => part.Split('=')).ToDictionary(part => part[0], part => part[1])
-            : new Dictionary<string, string>();
+            : [];
 
     /// <summary>
     ///     Parses a string into a dictionary of typed values.
@@ -150,7 +153,7 @@ internal abstract class DictionaryDataModel
             !string.IsNullOrWhiteSpace(value)
                 ? value.Split(',').Select(part => part.Split('='))
                     .ToDictionary(part => part[0], part => parser(part[1]))
-                : new Dictionary<string, TValue>();
+                : [];
 
     /// <summary>Parses a string to an int.</summary>
     /// <param name="value">The string value to parse.</param>
