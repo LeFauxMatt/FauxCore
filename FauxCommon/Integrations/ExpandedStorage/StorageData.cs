@@ -97,7 +97,8 @@ internal sealed class StorageData(IDictionaryModel dictionaryModel) : Dictionary
     /// <inheritdoc />
     protected override string Prefix => "furyx639.ExpandedStorage/";
 
-    private static string AnimationToString(Animation value) => value.ToStringFast();
+    private static string AnimationToString(Animation value) =>
+        value is not Animation.None ? value.ToStringFast() : string.Empty;
 
     private static Animation StringToAnimation(string value) =>
         !AnimationExtensions.TryParse(value, out var animation) ? default : animation;

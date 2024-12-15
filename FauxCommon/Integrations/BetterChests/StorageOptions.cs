@@ -234,13 +234,17 @@ internal sealed class StorageOptions(IDictionaryModel dictionaryModel)
     /// <inheritdoc />
     protected override string Prefix => "furyx639.BetterChests/";
 
-    private static string ChestMenuOptionToString(ChestMenuOption value) => value.ToStringFast();
+    private static string ChestMenuOptionToString(ChestMenuOption value) =>
+        value is not ChestMenuOption.Default ? value.ToStringFast() : string.Empty;
 
-    private static string FeatureOptionToString(FeatureOption value) => value.ToStringFast();
+    private static string FeatureOptionToString(FeatureOption value) =>
+        value is not FeatureOption.Default ? value.ToStringFast() : string.Empty;
 
-    private static string RangeOptionToString(RangeOption value) => value.ToStringFast();
+    private static string RangeOptionToString(RangeOption value) =>
+        value is not RangeOption.Default ? value.ToStringFast() : string.Empty;
 
-    private static string StashPriorityToString(StashPriority value) => value.ToStringFast();
+    private static string StashPriorityToString(StashPriority value) =>
+        value is not StashPriority.Default ? value.ToStringFast() : string.Empty;
 
     private static ChestMenuOption StringToChestMenuOption(string value) =>
         ChestMenuOptionExtensions.TryParse(value, out var chestMenuOption) ? chestMenuOption : ChestMenuOption.Default;
