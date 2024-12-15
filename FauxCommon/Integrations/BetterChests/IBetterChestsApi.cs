@@ -1,5 +1,7 @@
 namespace LeFauxMods.Common.Integrations.BetterChests;
 
+using NetEscapades.EnumGenerators;
+
 #pragma warning disable
 
 /// <summary>Mod API for Better Chests.</summary>
@@ -114,6 +116,7 @@ public interface IStorageOptions
 }
 
 /// <summary>Indicates at what range a feature will be enabled.</summary>
+[EnumExtensions]
 public enum RangeOption
 {
     /// <summary>Range is inherited from a parent config.</summary>
@@ -133,6 +136,7 @@ public enum RangeOption
 }
 
 /// <summary>Indicates if a feature is enabled, disabled, or will inherit from a parent config.</summary>
+[EnumExtensions]
 public enum FeatureOption
 {
     /// <summary>Option is inherited from a parent config.</summary>
@@ -146,6 +150,7 @@ public enum FeatureOption
 }
 
 /// <summary>The possible values for Chest capacity.</summary>
+[EnumExtensions]
 public enum ChestMenuOption
 {
     /// <summary>Capacity is inherited by a parent config.</summary>
@@ -165,6 +170,7 @@ public enum ChestMenuOption
 }
 
 /// <summary>The possible values for Stash to Chest Priority.</summary>
+[EnumExtensions]
 public enum StashPriority
 {
     /// <summary>Represents the default priority.</summary>

@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\BetterChestsIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\IBetterChestsApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\betterchests\StorageOptions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ConditionsApiReadyEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ContentPatcherIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\IContentPatcherApi.cs" />
@@ -18,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\CustomBush\ICustomBushApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)integrations\expandedstorage\ExpandedStorageIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)integrations\expandedstorage\IExpandedStorageApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\expandedstorage\StorageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\FauxCoreIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\IFauxCoreApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\GenericModConfigMenu\ComplexOption.cs" />
