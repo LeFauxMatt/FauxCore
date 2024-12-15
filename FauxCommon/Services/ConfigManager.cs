@@ -31,11 +31,43 @@ internal abstract class ConfigManager<TConfig>
         helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
     }
 
+    /// <summary>Gets the default config options.</summary>
+    public virtual TConfig Default => new();
+
+    /// <summary>Gets the existing config options.</summary>
+    public virtual TConfig? Existing
+    {
+        get
+        {
+            // Try to load an existing config file
+            try
+            {
+                return this.helper.ReadConfig<TConfig>();
+            }
+            catch
+            {
+                // Could not read config file from the folder
+            }
+
+            // Try to restore a backup config file
+            try
+            {
+                return this.helper.Data.ReadGlobalData<TConfig>("config") ?? throw new InvalidOperationException();
+            }
+            catch
+            {
+                // Could not read config file from the global data
+            }
+
+            return null;
+        }
+    }
+
     /// <summary>Gets the generic mod config menu integration.</summary>
     protected static GenericModConfigMenuIntegration GMCM => genericModConfigMenuIntegration!;
 
     /// <summary>Gets the config options.</summary>
-    protected TConfig Config => this.config ??= this.LoadConfig();
+    protected TConfig Config => this.config ??= this.Existing ?? this.Default;
 
     /// <summary>Perform initialization routine.</summary>
     public void Init()
@@ -50,39 +82,10 @@ internal abstract class ConfigManager<TConfig>
         this.SetupMenu();
     }
 
-    public virtual TConfig LoadConfig()
-    {
-        // Try to load an existing config file
-        try
-        {
-            return this.helper.ReadConfig<TConfig>();
-        }
-        catch
-        {
-            // Could not read config file from the folder
-        }
-
-        // Try to restore a backup config file
-        try
-        {
-            return this.helper.Data.ReadGlobalData<TConfig>("config") ?? throw new InvalidOperationException();
-        }
-        catch
-        {
-            // Could not read config file from the global data
-        }
-
-        return this.NewConfig();
-    }
-
-    /// <summary>Gets the default config options.</summary>
-    /// <returns>Returns an instance of TConfig with default options applied.</returns>
-    public virtual TConfig NewConfig() => new();
-
     /// <summary>Resets the configuration by reassigning to <see cref="TConfig" />.</summary>
     public void Reset()
     {
-        this.config = this.NewConfig();
+        this.config = this.Default;
         ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
     }
 
