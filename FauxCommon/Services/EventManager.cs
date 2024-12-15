@@ -4,6 +4,7 @@ using System.Reflection;
 using Models;
 using Utilities;
 
+/// <summary>Managed event subscriptions and publishing.</summary>
 internal sealed class EventManager
 {
     private static readonly ReverseComparer<int> ReverseComparer = new();
