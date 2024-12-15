@@ -20,6 +20,7 @@ internal abstract class ConfigManager<TConfig>
     protected ConfigManager(IModHelper helper, IManifest manifest)
     {
         this.helper = helper;
+        this.Manifest = manifest;
         genericModConfigMenuIntegration ??= new GenericModConfigMenuIntegration(manifest, helper.ModRegistry);
         var contentPatcherIntegration = new ContentPatcherIntegration(helper);
         if (contentPatcherIntegration.IsLoaded)
@@ -68,6 +69,9 @@ internal abstract class ConfigManager<TConfig>
 
     /// <summary>Gets the config options.</summary>
     protected TConfig Config => this.config ??= this.Existing ?? this.Default;
+
+    /// <summary>Gets the mod's manifest.</summary>
+    protected IManifest Manifest { get; }
 
     /// <summary>Perform initialization routine.</summary>
     public void Init()
