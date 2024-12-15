@@ -1,6 +1,7 @@
 namespace LeFauxMods.Common.Services;
 
 using Integrations.ContentPatcher;
+using Integrations.GenericModConfigMenu;
 using Models;
 using StardewModdingAPI.Events;
 using Utilities;
@@ -15,9 +16,10 @@ internal abstract class ConfigManager<TConfig>
     private TConfig? config;
     private bool initialized;
 
-    protected ConfigManager(IModHelper helper)
+    protected ConfigManager(IModHelper helper, IManifest manifest)
     {
         this.helper = helper;
+        this.GMCM = new GenericModConfigMenuIntegration(manifest, helper.ModRegistry);
         var contentPatcherIntegration = new ContentPatcherIntegration(helper);
         if (contentPatcherIntegration.IsLoaded)
         {
@@ -31,6 +33,9 @@ internal abstract class ConfigManager<TConfig>
     /// <summary>Gets the config options.</summary>
     protected TConfig Config => this.config ??= this.LoadConfig();
 
+    /// <summary>Gets the generic mod config menu integration.</summary>
+    protected GenericModConfigMenuIntegration GMCM { get; }
+
     /// <summary>Perform initialization routine.</summary>
     public void Init()
     {
@@ -41,6 +46,7 @@ internal abstract class ConfigManager<TConfig>
 
         this.initialized = true;
         ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
+        this.SetupMenu();
     }
 
     public virtual TConfig LoadConfig()
@@ -87,6 +93,10 @@ internal abstract class ConfigManager<TConfig>
         this.helper.Data.WriteGlobalData("config", newConfig);
         this.config = newConfig;
         ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
+    }
+
+    protected virtual void SetupMenu()
+    {
     }
 
     private void OnConditionsApiReady(ConditionsApiReadyEventArgs e) => this.Init();
