@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)utilities\Log.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ModEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ReverseComparer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)utilities\ThemeHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\" />

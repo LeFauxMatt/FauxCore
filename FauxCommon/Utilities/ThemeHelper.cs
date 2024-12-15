@@ -1,14 +1,11 @@
-namespace LeFauxMods.Core.Utilities;
+namespace LeFauxMods.Common.Utilities;
 
-using Common.Integrations.ContentPatcher;
-using Common.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Models;
 using StardewModdingAPI.Events;
 
-/// <inheritdoc />
-internal sealed class ThemeHelper : IThemeHelper
+/// <summary>Handles palette swaps for theme compatibility.</summary>
+internal sealed class ThemeHelper
 {
     private static readonly Dictionary<Point[], Color> VanillaPalette = new()
     {
@@ -32,88 +29,46 @@ internal sealed class ThemeHelper : IThemeHelper
     };
 
     private static ThemeHelper? instance;
-    private readonly Dictionary<IAssetName, Asset> cachedAssets = [];
+
+    private readonly Dictionary<IAssetName, CachedAsset> cachedAssets = [];
     private readonly IModHelper helper;
     private readonly Dictionary<Color, Color> paletteSwap = [];
 
     private ThemeHelper(IModHelper helper)
     {
         // Init
-        instance = this;
         this.helper = helper;
 
         // Events
+        helper.Events.Content.AssetReady += this.OnAssetReady;
         helper.Events.Content.AssetRequested += this.OnAssetRequested;
         helper.Events.Content.AssetsInvalidated += this.OnAssetsInvalidated;
-
-        var contentPatcherIntegration = new ContentPatcherIntegration(helper);
-        if (contentPatcherIntegration.IsLoaded)
-        {
-            ModEvents.Subscribe<ConditionsApiReadyEventArgs>(this.OnConditionsApiReady);
-        }
     }
 
     public static ThemeHelper Init(IModHelper helper) => instance ??= new ThemeHelper(helper);
 
-    /// <inheritdoc />
+    /// <summary>Adds a new asset to theme helper using the provided texture data and asset name.</summary>
+    /// <param name="path">The game content path for the asset.</param>
+    /// <param name="data">The raw texture data for the asset.</param>
     public void AddAsset(string path, IRawTextureData data)
     {
         var assetName = this.helper.GameContent.ParseAssetName(path);
-        if (!this.cachedAssets.TryAdd(assetName, new Asset(data)))
+        if (!this.cachedAssets.TryAdd(assetName, new CachedAsset(data)))
         {
-            Log.Trace("Error, conflicting key {0} found in ThemeHelper. Asset not added.", assetName.Name);
+            Log.TraceOnce("Error, conflicting key {0} found in ThemeHelper. Asset not added.", path);
             return;
         }
 
-        Log.Trace("Adding asset to theme helper: {0}", path);
+        Log.TraceOnce("Adding asset to theme helper: {0}", path);
     }
 
-    private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
+    private void OnAssetReady(object? sender, AssetReadyEventArgs e)
     {
-        if (!this.cachedAssets.TryGetValue(e.NameWithoutLocale, out var asset))
+        if (!e.NameWithoutLocale.IsEquivalentTo("LooseSprites/Cursors"))
         {
             return;
         }
 
-        if (asset.Texture is not null && !asset.Dirty)
-        {
-            e.LoadFrom(() => asset.Texture, AssetLoadPriority.Exclusive);
-            return;
-        }
-
-        asset.Texture ??= new Texture2D(Game1.spriteBatch.GraphicsDevice, asset.Raw.Width, asset.Raw.Height);
-        asset.Texture.SetData(
-            asset.Raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
-        asset.Dirty = false;
-        e.LoadFrom(() => asset.Texture, AssetLoadPriority.Exclusive);
-    }
-
-    private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
-    {
-        if (e.NamesWithoutLocale.Any(assetName => assetName.IsEquivalentTo("LooseSprites/Cursors")))
-        {
-            this.RefreshPalette();
-        }
-
-        foreach (var assetName in e.NamesWithoutLocale)
-        {
-            if (assetName.IsEquivalentTo("LooseSprites/Cursors"))
-            {
-                this.RefreshPalette();
-                continue;
-            }
-
-            if (this.cachedAssets.TryGetValue(assetName, out var asset))
-            {
-                asset.Dirty = true;
-            }
-        }
-    }
-
-    private void OnConditionsApiReady(ConditionsApiReadyEventArgs e) => this.RefreshPalette();
-
-    private void RefreshPalette()
-    {
         var data = new Color[Game1.mouseCursors.Width * Game1.mouseCursors.Height];
         Game1.mouseCursors.GetData(data);
 
@@ -139,11 +94,40 @@ internal sealed class ThemeHelper : IThemeHelper
             this.paletteSwap[key] = value;
         }
 
-        foreach (var assetName in this.cachedAssets.Keys)
+        foreach (var (assetName, _) in this.cachedAssets)
         {
-            _ = this.helper.GameContent.InvalidateCache(assetName);
+            this.helper.GameContent.InvalidateCache(assetName);
         }
     }
 
-    private record struct Asset(IRawTextureData Raw, Texture2D? Texture = null, bool Dirty = true);
+    private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
+    {
+        if (!this.cachedAssets.TryGetValue(e.NameWithoutLocale, out var asset))
+        {
+            return;
+        }
+
+        if (asset.Texture is null || asset.Dirty)
+        {
+            asset.Dirty = false;
+            asset.Texture ??= new Texture2D(Game1.spriteBatch.GraphicsDevice, asset.Raw.Width, asset.Raw.Height);
+            asset.Texture.SetData(
+                asset.Raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
+        }
+
+        e.LoadFrom(() => asset.Texture, AssetLoadPriority.Exclusive);
+    }
+
+    private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
+    {
+        foreach (var assetName in e.NamesWithoutLocale)
+        {
+            if (this.cachedAssets.TryGetValue(assetName, out var cachedAsset))
+            {
+                cachedAsset.Dirty = true;
+            }
+        }
+    }
+
+    private record struct CachedAsset(IRawTextureData Raw, Texture2D? Texture = null, bool Dirty = true);
 }
