@@ -11,6 +11,7 @@ using Utilities;
 internal abstract class ConfigManager<TConfig>
     where TConfig : class, new()
 {
+    private static GenericModConfigMenuIntegration? genericModConfigMenuIntegration;
     private readonly IModHelper helper;
 
     private TConfig? config;
@@ -19,7 +20,7 @@ internal abstract class ConfigManager<TConfig>
     protected ConfigManager(IModHelper helper, IManifest manifest)
     {
         this.helper = helper;
-        this.GMCM = new GenericModConfigMenuIntegration(manifest, helper.ModRegistry);
+        genericModConfigMenuIntegration ??= new GenericModConfigMenuIntegration(manifest, helper.ModRegistry);
         var contentPatcherIntegration = new ContentPatcherIntegration(helper);
         if (contentPatcherIntegration.IsLoaded)
         {
@@ -30,11 +31,11 @@ internal abstract class ConfigManager<TConfig>
         helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
     }
 
+    /// <summary>Gets the generic mod config menu integration.</summary>
+    protected static GenericModConfigMenuIntegration GMCM => genericModConfigMenuIntegration!;
+
     /// <summary>Gets the config options.</summary>
     protected TConfig Config => this.config ??= this.LoadConfig();
-
-    /// <summary>Gets the generic mod config menu integration.</summary>
-    protected GenericModConfigMenuIntegration GMCM { get; }
 
     /// <summary>Perform initialization routine.</summary>
     public void Init()
