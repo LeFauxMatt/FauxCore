@@ -32,11 +32,17 @@ internal abstract class ConfigManager<TConfig>
         helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
     }
 
+    /// <summary>Gets the generic mod config menu integration.</summary>
+    protected static GenericModConfigMenuIntegration GMCM => genericModConfigMenuIntegration!;
+
+    /// <summary>Gets the config options.</summary>
+    protected TConfig Config => this.config ??= this.Existing ?? this.Default;
+
     /// <summary>Gets the default config options.</summary>
-    public virtual TConfig Default => new();
+    protected virtual TConfig Default => new();
 
     /// <summary>Gets the existing config options.</summary>
-    public virtual TConfig? Existing
+    protected virtual TConfig? Existing
     {
         get
         {
@@ -64,30 +70,11 @@ internal abstract class ConfigManager<TConfig>
         }
     }
 
-    /// <summary>Gets the generic mod config menu integration.</summary>
-    protected static GenericModConfigMenuIntegration GMCM => genericModConfigMenuIntegration!;
-
-    /// <summary>Gets the config options.</summary>
-    protected TConfig Config => this.config ??= this.Existing ?? this.Default;
-
     /// <summary>Gets the mod's manifest.</summary>
     protected IManifest Manifest { get; }
 
-    /// <summary>Perform initialization routine.</summary>
-    public void Init()
-    {
-        if (this.initialized)
-        {
-            return;
-        }
-
-        this.initialized = true;
-        ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
-        this.SetupMenu();
-    }
-
     /// <summary>Resets the configuration by reassigning to <see cref="TConfig" />.</summary>
-    public void Reset()
+    protected void Reset()
     {
         this.config = this.Default;
         ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
@@ -95,7 +82,7 @@ internal abstract class ConfigManager<TConfig>
 
     /// <summary>Saves the provided config.</summary>
     /// <param name="newConfig">The config object to be saved.</param>
-    public void Save(TConfig newConfig)
+    protected void Save(TConfig newConfig)
     {
         this.helper.WriteConfig(newConfig);
         this.helper.Data.WriteGlobalData("config", newConfig);
@@ -105,6 +92,18 @@ internal abstract class ConfigManager<TConfig>
 
     protected virtual void SetupMenu()
     {
+    }
+
+    private void Init()
+    {
+        if (this.initialized)
+        {
+            return;
+        }
+
+        this.initialized = true;
+        ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
+        this.SetupMenu();
     }
 
     private void OnConditionsApiReady(ConditionsApiReadyEventArgs e) => this.Init();
