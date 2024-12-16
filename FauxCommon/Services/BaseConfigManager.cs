@@ -2,6 +2,7 @@ namespace LeFauxMods.Common.Services;
 
 using Integrations.ContentPatcher;
 using Integrations.GenericModConfigMenu;
+using Interface;
 using Models;
 using StardewModdingAPI.Events;
 using Utilities;
@@ -9,7 +10,7 @@ using Utilities;
 /// <summary>Managed saving and loading config files.</summary>
 /// <typeparam name="TConfig">The mod configuration type.</typeparam>
 internal abstract class BaseConfigManager<TConfig>
-    where TConfig : class, new()
+    where TConfig : class, IBaseConfig, new()
 {
     private static GenericModConfigMenuIntegration? genericModConfigMenuIntegration;
     private readonly IModHelper helper;
@@ -86,7 +87,7 @@ internal abstract class BaseConfigManager<TConfig>
     {
         this.helper.WriteConfig(newConfig);
         this.helper.Data.WriteGlobalData("config", newConfig);
-        this.config = newConfig;
+        newConfig.CopyTo(this.Config);
         ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
     }
 
