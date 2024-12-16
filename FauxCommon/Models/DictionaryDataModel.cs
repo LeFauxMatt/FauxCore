@@ -1,27 +1,25 @@
 namespace LeFauxMods.Common.Models;
 
 using System.Globalization;
+using Interface;
 using Microsoft.Xna.Framework;
 
 /// <summary>
 ///     Base class for storing and retrieving typed values backed by a string dictionary.
 /// </summary>
-internal abstract class DictionaryDataModel
+/// <param name="dictionaryModel">The underlying dictionary storage.</param>
+internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
 {
     private readonly Dictionary<string, ICachedValue> cachedValues = [];
-    private readonly IDictionaryModel dictionaryModel;
 
     /// <summary>Initializes a new instance of the <see cref="DictionaryDataModel" /> class.</summary>
-    /// <param name="dictionaryModel">The underlying dictionary storage.</param>
-    protected DictionaryDataModel(IDictionaryModel dictionaryModel) => this.dictionaryModel = dictionaryModel;
-
     /// <summary>Gets the prefix added to all dictionary keys.</summary>
     protected abstract string Prefix { get; }
 
     /// <summary>Checks if a value exists for the specified id.</summary>
     /// <param name="id">The id of the item.</param>
     /// <returns><c>true</c> if the dictionary contains a value; otherwise, <c>false</c>.</returns>
-    public bool HasValue(string id) => this.dictionaryModel.ContainsKey(this.Prefix + id);
+    public bool HasValue(string id) => dictionaryModel.ContainsKey(this.Prefix + id);
 
     /// <summary>
     ///     Converts an array to a comma-separated string.
@@ -166,7 +164,7 @@ internal abstract class DictionaryDataModel
     /// <param name="defaultValue">The value to return if the key is not found.</param>
     /// <returns>The value from the dictionary, or empty if the value is not found.</returns>
     protected string Get(string id, string? defaultValue = null) =>
-        !this.dictionaryModel.TryGetValue(this.Prefix + id, out var value) ? defaultValue ?? string.Empty : value;
+        !dictionaryModel.TryGetValue(this.Prefix + id, out var value) ? defaultValue ?? string.Empty : value;
 
     /// <summary>
     ///     Retrieves and caches a typed value from the dictionary.
@@ -180,11 +178,11 @@ internal abstract class DictionaryDataModel
     ///     requested TValue.
     /// </exception>
     /// <returns>The parsed value, cached value, or default.</returns>
-    [return: NotNullIfNotNull("defaultValue")]
+    [return: NotNullIfNotNull(nameof(defaultValue))]
     protected TValue? Get<TValue>(string id, Func<string, TValue> parser, TValue? defaultValue = default)
     {
         var key = this.Prefix + id;
-        if (!this.dictionaryModel.TryGetValue(key, out var value))
+        if (!dictionaryModel.TryGetValue(key, out var value))
         {
             return defaultValue;
         }
@@ -212,7 +210,7 @@ internal abstract class DictionaryDataModel
     /// </summary>
     /// <param name="id">The ID to store under.</param>
     /// <param name="value">The value to store.</param>
-    protected void Set(string id, string value) => this.dictionaryModel.SetValue(this.Prefix + id, value);
+    protected void Set(string id, string value) => dictionaryModel.SetValue(this.Prefix + id, value);
 
     /// <summary>
     ///     Sets and caches a typed value in the dictionary.
@@ -226,26 +224,20 @@ internal abstract class DictionaryDataModel
         var key = this.Prefix + id;
         var stringValue = parser(value);
         this.cachedValues[id] = new CachedValue<TValue>(stringValue, value);
-        this.dictionaryModel.SetValue(key, stringValue);
+        dictionaryModel.SetValue(key, stringValue);
     }
 
-    /// <inheritdoc />
-    private readonly struct CachedValue<T> : ICachedValue
+    /// <summary>Initializes a new instance of the <see cref="CachedValue{T}" /> struct.</summary>
+    /// <typeparam name="T">The type of the cached value.</typeparam>
+    /// <param name="originalValue">The original value.</param>
+    /// <param name="cachedValue">The cached value.</param>
+    private readonly struct CachedValue<T>(string originalValue, T cachedValue) : ICachedValue
     {
-        /// <summary>Initializes a new instance of the <see cref="CachedValue{T}" /> struct.</summary>
-        /// <param name="originalValue">The original value.</param>
-        /// <param name="cachedValue">The cached value.</param>
-        public CachedValue(string originalValue, T cachedValue)
-        {
-            this.OriginalValue = originalValue;
-            this.Value = cachedValue;
-        }
-
         /// <inheritdoc />
-        public string OriginalValue { get; }
+        public string OriginalValue { get; } = originalValue;
 
         /// <summary>Gets the cached value.</summary>
-        public T Value { get; }
+        public T Value { get; } = cachedValue;
     }
 
     /// <summary>Represents a cached value.</summary>

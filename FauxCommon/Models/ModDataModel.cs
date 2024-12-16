@@ -1,32 +1,28 @@
 namespace LeFauxMods.Common.Models;
 
+using Interface;
 using StardewValley.Mods;
 
 /// <inheritdoc />
-internal sealed class ModDataModel : IDictionaryModel
+/// <param name="modData">The mod data dictionary.</param>
+internal sealed class ModDataModel(ModDataDictionary modData) : IDictionaryModel
 {
-    private readonly ModDataDictionary modData;
-
-    /// <summary>Initializes a new instance of the <see cref="ModDataModel" /> class.</summary>
-    /// <param name="modData">The mod data dictionary.</param>
-    public ModDataModel(ModDataDictionary modData) => this.modData = modData;
-
     /// <inheritdoc />
-    public bool ContainsKey(string key) => this.modData.ContainsKey(key);
+    public bool ContainsKey(string key) => modData.ContainsKey(key);
 
     /// <inheritdoc />
     public void SetValue(string key, string value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            this.modData.Remove(key);
+            _ = modData.Remove(key);
             return;
         }
 
-        this.modData[key] = value;
+        modData[key] = value;
     }
 
     /// <inheritdoc />
     public bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
-        this.modData.TryGetValue(key, out value);
+        modData.TryGetValue(key, out value);
 }

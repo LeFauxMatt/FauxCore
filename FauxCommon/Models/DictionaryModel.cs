@@ -1,15 +1,13 @@
 namespace LeFauxMods.Common.Models;
 
+using Interface;
+
 /// <inheritdoc />
-internal sealed class DictionaryModel : IDictionaryModel
+/// <param name="getData">Get the custom field data.</param>
+internal sealed class DictionaryModel(Func<Dictionary<string, string>?> getData) : IDictionaryModel
 {
-    private readonly Func<Dictionary<string, string>?> getData;
-
     /// <summary>Initializes a new instance of the <see cref="DictionaryModel" /> class.</summary>
-    /// <param name="getData">Get the custom field data.</param>
-    public DictionaryModel(Func<Dictionary<string, string>?> getData) => this.getData = getData;
-
-    private Dictionary<string, string>? Data => this.getData();
+    private Dictionary<string, string>? Data => getData();
 
     /// <inheritdoc />
     public bool ContainsKey(string key) => this.Data?.ContainsKey(key) == true;
@@ -24,7 +22,7 @@ internal sealed class DictionaryModel : IDictionaryModel
 
         if (string.IsNullOrWhiteSpace(value))
         {
-            this.Data.Remove(key);
+            _ = this.Data.Remove(key);
             return;
         }
 

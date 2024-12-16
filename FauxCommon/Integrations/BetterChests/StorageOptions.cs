@@ -1,5 +1,6 @@
 namespace LeFauxMods.Common.Integrations.BetterChests;
 
+using Interface;
 using Models;
 
 /// <summary>Initializes a new instance of the <see cref="StorageOptions" /> class.</summary>

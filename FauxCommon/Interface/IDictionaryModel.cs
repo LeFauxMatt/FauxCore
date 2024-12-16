@@ -1,4 +1,4 @@
-namespace LeFauxMods.Common.Models;
+namespace LeFauxMods.Common.Interface;
 
 /// <summary>Represents modeled data stored as a dictionary of string key value pairs.</summary>
 internal interface IDictionaryModel

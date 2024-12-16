@@ -1,5 +1,6 @@
 namespace LeFauxMods.Common.Integrations.ExpandedStorage;
 
+using Interface;
 using Microsoft.Xna.Framework;
 using Models;
 

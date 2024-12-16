@@ -65,9 +65,9 @@ internal static class CommonExtensions
         {
             try
             {
-                handler.DynamicInvoke(source, null);
+                _ = handler.DynamicInvoke(source, null);
             }
-            catch (Exception)
+            catch
             {
                 // ignored
             }
@@ -93,7 +93,7 @@ internal static class CommonExtensions
             {
                 handler(source, param);
             }
-            catch (Exception)
+            catch
             {
                 // ignored
             }

@@ -96,7 +96,7 @@ internal sealed class ThemeHelper
 
         foreach (var (assetName, _) in this.cachedAssets)
         {
-            this.helper.GameContent.InvalidateCache(assetName);
+            _ = this.helper.GameContent.InvalidateCache(assetName);
         }
     }
 

@@ -32,10 +32,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\RadialMenu\RadialMenuIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\IStardewUIApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\StardewUiIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)interface\IConfigWithLogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ConfigChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\DictionaryDataModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\DictionaryModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)models\IDictionaryModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interface\IDictionaryModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)models\LogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ModDataModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\PriorityAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)services\ConfigManager.cs" />
@@ -49,6 +51,7 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Interface\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
   </ItemGroup>
