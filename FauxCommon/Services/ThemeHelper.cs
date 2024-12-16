@@ -1,4 +1,4 @@
-namespace LeFauxMods.Common.Utilities;
+namespace LeFauxMods.Common.Services;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
