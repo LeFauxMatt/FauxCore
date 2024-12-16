@@ -3,11 +3,27 @@ namespace LeFauxMods.Common.Models;
 using Interface;
 
 /// <inheritdoc />
-/// <param name="getData">Get the custom field data.</param>
-internal sealed class DictionaryModel(Func<Dictionary<string, string>?> getData) : IDictionaryModel
+internal sealed class DictionaryModel : IDictionaryModel
 {
+    private readonly Func<Dictionary<string, string>?> getData;
+
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="DictionaryModel" /> class.
+    /// </summary>
+    /// <param name="getter">Get the source data.</param>
+    public DictionaryModel(Func<Dictionary<string, string>?>? getter = null)
+    {
+        if (getter is null)
+        {
+            var newData = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            getter = () => newData;
+        }
+
+        this.getData = getter;
+    }
+
     /// <summary>Initializes a new instance of the <see cref="DictionaryModel" /> class.</summary>
-    private Dictionary<string, string>? Data => getData();
+    private Dictionary<string, string>? Data => this.getData();
 
     /// <inheritdoc />
     public bool ContainsKey(string key) => this.Data?.ContainsKey(key) == true;
