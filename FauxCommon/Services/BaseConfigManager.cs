@@ -8,7 +8,7 @@ using Utilities;
 
 /// <summary>Managed saving and loading config files.</summary>
 /// <typeparam name="TConfig">The mod configuration type.</typeparam>
-internal abstract class ConfigManager<TConfig>
+internal abstract class BaseConfigManager<TConfig>
     where TConfig : class, new()
 {
     private static GenericModConfigMenuIntegration? genericModConfigMenuIntegration;
@@ -17,7 +17,7 @@ internal abstract class ConfigManager<TConfig>
     private TConfig? config;
     private bool initialized;
 
-    protected ConfigManager(IModHelper helper, IManifest manifest)
+    protected BaseConfigManager(IModHelper helper, IManifest manifest)
     {
         this.helper = helper;
         this.Manifest = manifest;
