@@ -6,7 +6,8 @@ using Models;
 
 /// <summary>Initializes a new instance of the <see cref="StorageData" /> class.</summary>
 /// <param name="dictionaryModel">The backing dictionary.</param>
-internal sealed class StorageData(IDictionaryModel dictionaryModel) : DictionaryDataModel(dictionaryModel)
+internal sealed class StorageData(IDictionaryModel? dictionaryModel = null)
+    : DictionaryDataModel(dictionaryModel ?? new DictionaryModel())
 {
     /// <summary>Gets or sets the lid opening animation style.</summary>
     public Animation Animation

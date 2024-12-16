@@ -5,8 +5,8 @@ using Models;
 
 /// <summary>Initializes a new instance of the <see cref="StorageOptions" /> class.</summary>
 /// <param name="dictionaryModel">The backing dictionary.</param>
-internal sealed class StorageOptions(IDictionaryModel dictionaryModel)
-    : DictionaryDataModel(dictionaryModel), IStorageOptions
+internal sealed class StorageOptions(IDictionaryModel? dictionaryModel = null)
+    : DictionaryDataModel(dictionaryModel ?? new DictionaryModel()), IStorageOptions
 {
     /// <inheritdoc />
     public RangeOption AccessChest
