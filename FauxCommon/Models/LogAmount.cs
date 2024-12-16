@@ -6,11 +6,8 @@ using NetEscapades.EnumGenerators;
 [EnumExtensions]
 public enum LogAmount
 {
-    /// <summary>No debugging information will be logged to the console.</summary>
-    None = 0,
-
     /// <summary>Less debugging information will be logged to the console.</summary>
-    Less = 1,
+    Less = 0,
 
     /// <summary>More debugging information will be logged to the console.</summary>
     More = 2
