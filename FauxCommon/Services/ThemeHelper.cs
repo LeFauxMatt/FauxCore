@@ -3,6 +3,7 @@ namespace LeFauxMods.Common.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
+using Utilities;
 
 /// <summary>Handles palette swaps for theme compatibility.</summary>
 internal sealed class ThemeHelper
