@@ -32,7 +32,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\RadialMenu\RadialMenuIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\IStardewUIApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\StardewUiIntegration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)interface\IBaseConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)interface\IConfigWithLogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ConfigChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\DictionaryDataModel.cs" />
@@ -41,7 +40,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)models\LogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ModDataModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\PriorityAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)services\BaseConfigManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)services\ConfigManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)services\EventManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\CommonExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\Log.cs" />
