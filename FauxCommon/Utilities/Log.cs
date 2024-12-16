@@ -95,7 +95,7 @@ internal sealed class Log
         // Reduced logging in release mode
         if (level is not (LogLevel.Error or LogLevel.Alert) && this.config?.LogAmount is not Models.LogAmount.More)
         {
-            level = LogLevel.Trace;
+            return;
         }
 #endif
 
