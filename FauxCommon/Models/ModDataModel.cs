@@ -23,6 +23,5 @@ internal sealed class ModDataModel(ModDataDictionary modData) : IDictionaryModel
     }
 
     /// <inheritdoc />
-    public bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
-        modData.TryGetValue(key, out value);
+    public bool TryGetValue(string key, [NotNullWhen(true)] out string? value) => modData.TryGetValue(key, out value);
 }

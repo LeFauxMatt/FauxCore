@@ -1,3 +1,4 @@
+root = true
 # Version: 5.0.0 (Using https://semver.org/)
 # Updated: 2023-09-19
 # See https://github.com/RehanSaeed/EditorConfig/releases for release notes.
@@ -9,7 +10,6 @@
 ##########################################
 
 # This file is the top-most EditorConfig file
-root = true
 
 # All Files
 [*]
@@ -17,11 +17,151 @@ charset = utf-8
 indent_style = space
 indent_size = 4
 tab_width = 4
-insert_final_newline = true
 trim_trailing_whitespace = true
 
 # Resharper Properties
-resharper_use_symbol_alias_highlighting = none
+resharper_apply_auto_detected_rules = false
+resharper_csharp_insert_final_newline = true
+resharper_csharp_wrap_arguments_style = chop_if_long
+resharper_csharp_wrap_extends_list_style = chop_if_long
+resharper_csharp_wrap_parameters_style = chop_if_long
+resharper_keep_existing_arrangement = false
+resharper_keep_existing_declaration_block_arrangement = false
+resharper_keep_existing_declaration_parens_arrangement = false
+resharper_keep_existing_embedded_arrangement = false
+resharper_keep_existing_embedded_block_arrangement = false
+resharper_keep_existing_enum_arrangement = false
+resharper_keep_existing_expr_member_arrangement = false
+resharper_keep_existing_initializer_arrangement = false
+resharper_keep_existing_invocation_parens_arrangement = false
+resharper_keep_existing_linebreaks = false
+resharper_keep_existing_list_patterns_arrangement = false
+resharper_keep_existing_primary_constructor_declaration_parens_arrangement = false
+resharper_keep_existing_property_patterns_arrangement = false
+resharper_keep_existing_switch_expression_arrangement = false
+resharper_max_array_initializer_elements_on_line = 4
+resharper_max_enum_members_on_line = 1
+resharper_max_formal_parameters_on_line = 4
+resharper_max_initializer_elements_on_line = 1
+resharper_max_invocation_arguments_on_line = 4
+resharper_max_primary_constructor_parameters_on_line = 4
+resharper_place_type_constraints_on_same_line = false
+resharper_wrap_after_declaration_lpar = true
+resharper_wrap_after_invocation_lpar = true
+resharper_wrap_array_initializer_style = chop_if_long
+resharper_wrap_chained_binary_expressions = chop_if_long
+resharper_wrap_chained_binary_patterns = chop_if_long
+resharper_wrap_chained_method_calls = chop_if_long
+resharper_wrap_list_pattern = chop_if_long
+
+# Microsoft .NET properties
+csharp_preferred_modifier_order = public, private, protected, internal, file, new, static, abstract, virtual, sealed, readonly, override, extern, unsafe, volatile, async, required:suggestion
+csharp_preserve_single_line_blocks = true
+csharp_style_prefer_utf8_string_literals = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+dotnet_naming_rule.private_constants_rule.import_to_resharper = True
+dotnet_naming_rule.private_constants_rule.resharper_description = Constant fields (private)
+dotnet_naming_rule.private_constants_rule.resharper_guid = 236f7aa5-7b06-43ca-bf2a-9b31bfcff09a
+dotnet_naming_rule.private_constants_rule.severity = warning
+dotnet_naming_rule.private_constants_rule.style = upper_camel_case_style
+dotnet_naming_rule.private_constants_rule.symbols = private_constants_symbols
+dotnet_naming_rule.private_instance_fields_rule.import_to_resharper = True
+dotnet_naming_rule.private_instance_fields_rule.resharper_description = Instance fields (private)
+dotnet_naming_rule.private_instance_fields_rule.resharper_exclusive_prefixes_suffixes = true
+dotnet_naming_rule.private_instance_fields_rule.resharper_guid = 4a98fdf6-7d98-4f5a-afeb-ea44ad98c70c
+dotnet_naming_rule.private_instance_fields_rule.severity = warning
+dotnet_naming_rule.private_instance_fields_rule.style = lower_camel_case_style
+dotnet_naming_rule.private_instance_fields_rule.symbols = private_instance_fields_symbols
+dotnet_naming_rule.private_instance_fields_rule_1.import_to_resharper = True
+dotnet_naming_rule.private_instance_fields_rule_1.resharper_description = Instance fields (private)
+dotnet_naming_rule.private_instance_fields_rule_1.resharper_exclusive_prefixes_suffixes = true
+dotnet_naming_rule.private_instance_fields_rule_1.resharper_guid = 4a98fdf6-7d98-4f5a-afeb-ea44ad98c70c
+dotnet_naming_rule.private_instance_fields_rule_1.severity = warning
+dotnet_naming_rule.private_instance_fields_rule_1.style = lower_camel_case_style
+dotnet_naming_rule.private_instance_fields_rule_1.symbols = private_instance_fields_symbols_1
+dotnet_naming_rule.private_instance_fields_rule_2.import_to_resharper = True
+dotnet_naming_rule.private_instance_fields_rule_2.resharper_description = Instance fields (private)
+dotnet_naming_rule.private_instance_fields_rule_2.resharper_exclusive_prefixes_suffixes = true
+dotnet_naming_rule.private_instance_fields_rule_2.resharper_guid = 4a98fdf6-7d98-4f5a-afeb-ea44ad98c70c
+dotnet_naming_rule.private_instance_fields_rule_2.severity = warning
+dotnet_naming_rule.private_instance_fields_rule_2.style = lower_camel_case_style
+dotnet_naming_rule.private_instance_fields_rule_2.symbols = private_instance_fields_symbols_2
+dotnet_naming_rule.private_instance_fields_rule_3.import_to_resharper = True
+dotnet_naming_rule.private_instance_fields_rule_3.resharper_description = Instance fields (private)
+dotnet_naming_rule.private_instance_fields_rule_3.resharper_exclusive_prefixes_suffixes = true
+dotnet_naming_rule.private_instance_fields_rule_3.resharper_guid = 4a98fdf6-7d98-4f5a-afeb-ea44ad98c70c
+dotnet_naming_rule.private_instance_fields_rule_3.severity = warning
+dotnet_naming_rule.private_instance_fields_rule_3.style = lower_camel_case_style
+dotnet_naming_rule.private_instance_fields_rule_3.symbols = private_instance_fields_symbols_3
+dotnet_naming_rule.private_static_fields_rule.import_to_resharper = True
+dotnet_naming_rule.private_static_fields_rule.resharper_description = Static fields (private)
+dotnet_naming_rule.private_static_fields_rule.resharper_exclusive_prefixes_suffixes = true
+dotnet_naming_rule.private_static_fields_rule.resharper_guid = f9fce829-e6f4-4cb2-80f1-5497c44f51df
+dotnet_naming_rule.private_static_fields_rule.severity = warning
+dotnet_naming_rule.private_static_fields_rule.style = lower_camel_case_style
+dotnet_naming_rule.private_static_fields_rule.symbols = private_static_fields_symbols
+dotnet_naming_rule.private_static_readonly_rule.import_to_resharper = True
+dotnet_naming_rule.private_static_readonly_rule.resharper_description = Static readonly fields (private)
+dotnet_naming_rule.private_static_readonly_rule.resharper_guid = 15b5b1f1-457c-4ca6-b278-5615aedc07d3
+dotnet_naming_rule.private_static_readonly_rule.severity = warning
+dotnet_naming_rule.private_static_readonly_rule.style = upper_camel_case_style
+dotnet_naming_rule.private_static_readonly_rule.symbols = private_static_readonly_symbols
+dotnet_naming_style.lower_camel_case_style.capitalization = camel_case
+dotnet_naming_style.upper_camel_case_style.capitalization = pascal_case
+dotnet_naming_symbols.private_constants_symbols.applicable_accessibilities = private
+dotnet_naming_symbols.private_constants_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_constants_symbols.required_modifiers = const
+dotnet_naming_symbols.private_constants_symbols.resharper_applicable_kinds = constant_field
+dotnet_naming_symbols.private_constants_symbols.resharper_required_modifiers = any
+dotnet_naming_symbols.private_instance_fields_symbols.applicable_accessibilities = private
+dotnet_naming_symbols.private_instance_fields_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_instance_fields_symbols.resharper_applicable_kinds = field,readonly_field
+dotnet_naming_symbols.private_instance_fields_symbols.resharper_required_modifiers = instance
+dotnet_naming_symbols.private_instance_fields_symbols_1.applicable_accessibilities = private
+dotnet_naming_symbols.private_instance_fields_symbols_1.applicable_kinds = field
+dotnet_naming_symbols.private_instance_fields_symbols_1.resharper_applicable_kinds = field,readonly_field
+dotnet_naming_symbols.private_instance_fields_symbols_1.resharper_required_modifiers = instance
+dotnet_naming_symbols.private_instance_fields_symbols_2.applicable_accessibilities = private
+dotnet_naming_symbols.private_instance_fields_symbols_2.applicable_kinds = field
+dotnet_naming_symbols.private_instance_fields_symbols_2.resharper_applicable_kinds = field,readonly_field
+dotnet_naming_symbols.private_instance_fields_symbols_2.resharper_required_modifiers = instance
+dotnet_naming_symbols.private_instance_fields_symbols_3.applicable_accessibilities = private
+dotnet_naming_symbols.private_instance_fields_symbols_3.applicable_kinds = field
+dotnet_naming_symbols.private_instance_fields_symbols_3.resharper_applicable_kinds = field,readonly_field
+dotnet_naming_symbols.private_instance_fields_symbols_3.resharper_required_modifiers = instance
+dotnet_naming_symbols.private_static_fields_symbols.applicable_accessibilities = private
+dotnet_naming_symbols.private_static_fields_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_static_fields_symbols.required_modifiers = static
+dotnet_naming_symbols.private_static_fields_symbols.resharper_applicable_kinds = field
+dotnet_naming_symbols.private_static_fields_symbols.resharper_required_modifiers = static
+dotnet_naming_symbols.private_static_readonly_symbols.applicable_accessibilities = private
+dotnet_naming_symbols.private_static_readonly_symbols.applicable_kinds = field
+dotnet_naming_symbols.private_static_readonly_symbols.required_modifiers = readonly,static
+dotnet_naming_symbols.private_static_readonly_symbols.resharper_applicable_kinds = readonly_field
+dotnet_naming_symbols.private_static_readonly_symbols.resharper_required_modifiers = static
+dotnet_style_parentheses_in_arithmetic_binary_operators = never_if_unnecessary:none
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:none
+dotnet_style_parentheses_in_relational_binary_operators = never_if_unnecessary:none
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
+dotnet_style_predefined_type_for_member_access = true:suggestion
+dotnet_style_qualification_for_event = true:suggestion
+dotnet_style_qualification_for_field = true:suggestion
+dotnet_style_qualification_for_method = true:suggestion
+dotnet_style_qualification_for_property = true:suggestion
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggestion
+
+# ReSharper inspection severities
+resharper_arrange_redundant_parentheses_highlighting = hint
+resharper_arrange_this_qualifier_highlighting = hint
+resharper_arrange_type_member_modifiers_highlighting = hint
+resharper_arrange_type_modifiers_highlighting = hint
+resharper_built_in_type_reference_style_for_member_access_highlighting = hint
+resharper_built_in_type_reference_style_highlighting = hint
+resharper_suggest_var_or_type_built_in_types_highlighting = hint
+resharper_suggest_var_or_type_elsewhere_highlighting = hint
+resharper_suggest_var_or_type_simple_types_highlighting = hint
 
 ##########################################
 # File Extension Settings
@@ -73,9 +213,9 @@ indent_style = tab
 ##########################################
 
 # Note that you must have the relevant Windows language pack installed on your machine for this to work.
-spelling_languages = en-GB            # NEW
+spelling_languages = en-GB # NEW
 spelling_error_severity = information # NEW
-spelling_checkable_types =            # NEW
+spelling_checkable_types =  # NEW
 
 ##########################################
 # Default .NET Code Style Severities
@@ -86,6 +226,7 @@ spelling_checkable_types =            # NEW
 
 # Default Severity for all .NET Code Style rules below
 dotnet_analyzer_diagnostic.severity = warning
+dotnet_diagnostic.ide0055.severity = none
 
 ##########################################
 # Language Rules - .NET
@@ -110,14 +251,14 @@ dotnet_style_prefer_inferred_tuple_names = true
 dotnet_style_prefer_inferred_anonymous_type_member_names = true
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true
 dotnet_style_prefer_conditional_expression_over_assignment = false
-dotnet_diagnostic.IDE0045.severity = suggestion
+dotnet_diagnostic.ide0045.severity = suggestion
 dotnet_style_prefer_conditional_expression_over_return = false
-dotnet_diagnostic.IDE0046.severity = suggestion
+dotnet_diagnostic.ide0046.severity = suggestion
 dotnet_style_prefer_compound_assignment = true
 dotnet_style_prefer_simplified_interpolation = true
 dotnet_style_prefer_simplified_boolean_expressions = true
 dotnet_style_namespace_match_folder = true
-dotnet_diagnostic.IDE0130.severity = suggestion
+dotnet_diagnostic.ide0130.severity = suggestion
 dotnet_style_prefer_foreach_explicit_cast_in_source = when_strongly_typed
 
 # Field preferences
@@ -161,7 +302,7 @@ csharp_using_directive_placement = inside_namespace
 # Code-block preferences
 csharp_prefer_braces = true
 csharp_prefer_simple_using_statement = true
-dotnet_diagnostic.IDE0063.severity = suggestion
+dotnet_diagnostic.ide0063.severity = suggestion
 csharp_style_namespace_declarations = file_scoped
 csharp_style_prefer_method_group_conversion = true # NEW
 csharp_style_prefer_top_level_statements = true # NEW
@@ -178,9 +319,9 @@ csharp_style_expression_bodied_local_functions = true
 
 # Expression-level preferences
 csharp_style_unused_value_expression_statement_preference = discard_variable
-dotnet_diagnostic.IDE0058.severity = suggestion
+dotnet_diagnostic.ide0058.severity = suggestion
 csharp_style_unused_value_assignment_preference = discard_variable
-dotnet_diagnostic.IDE0059.severity = suggestion
+dotnet_diagnostic.ide0059.severity = suggestion
 csharp_style_throw_expression = true
 csharp_style_inlined_variable_declaration = true
 csharp_prefer_simple_default_expression = true
@@ -321,11 +462,11 @@ dotnet_naming_style.prefix_interface_with_i_style.required_prefix = I
 dotnet_naming_style.prefix_type_parameters_with_t_style.capitalization = pascal_case
 dotnet_naming_style.prefix_type_parameters_with_t_style.required_prefix = T
 # disallowed_style - Anything that has this style applied is marked as disallowed
-dotnet_naming_style.disallowed_style.capitalization  = pascal_case
+dotnet_naming_style.disallowed_style.capitalization = pascal_case
 dotnet_naming_style.disallowed_style.required_prefix = ____RULE_VIOLATION____
 dotnet_naming_style.disallowed_style.required_suffix = ____RULE_VIOLATION____
 # internal_error_style - This style should never occur... if it does, it indicates a bug in file or in the parser using the file
-dotnet_naming_style.internal_error_style.capitalization  = pascal_case
+dotnet_naming_style.internal_error_style.capitalization = pascal_case
 dotnet_naming_style.internal_error_style.required_prefix = ____INTERNAL_ERROR____
 dotnet_naming_style.internal_error_style.required_suffix = ____INTERNAL_ERROR____
 
@@ -338,28 +479,28 @@ dotnet_naming_style.internal_error_style.required_suffix = ____INTERNAL_ERROR___
 # All public/protected/protected_internal constant fields must be PascalCase
 # https://learn.microsoft.com/dotnet/standard/design-guidelines/field
 dotnet_naming_symbols.public_protected_constant_fields_group.applicable_accessibilities = public, protected, protected_internal
-dotnet_naming_symbols.public_protected_constant_fields_group.required_modifiers         = const
-dotnet_naming_symbols.public_protected_constant_fields_group.applicable_kinds           = field
-dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.symbols    = public_protected_constant_fields_group
-dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.style      = pascal_case_style
-dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.severity   = warning
+dotnet_naming_symbols.public_protected_constant_fields_group.required_modifiers = const
+dotnet_naming_symbols.public_protected_constant_fields_group.applicable_kinds = field
+dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.symbols = public_protected_constant_fields_group
+dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.style = pascal_case_style
+dotnet_naming_rule.public_protected_constant_fields_must_be_pascal_case_rule.severity = warning
 
 # All public/protected/protected_internal static readonly fields must be PascalCase
 # https://learn.microsoft.com/dotnet/standard/design-guidelines/field
 dotnet_naming_symbols.public_protected_static_readonly_fields_group.applicable_accessibilities = public, protected, protected_internal
-dotnet_naming_symbols.public_protected_static_readonly_fields_group.required_modifiers         = static, readonly
-dotnet_naming_symbols.public_protected_static_readonly_fields_group.applicable_kinds           = field
-dotnet_naming_rule.public_protected_static_readonly_fields_must_be_pascal_case_rule.symbols    = public_protected_static_readonly_fields_group
-dotnet_naming_rule.public_protected_static_readonly_fields_must_be_pascal_case_rule.style      = pascal_case_style
-dotnet_naming_rule.public_protected_static_readonly_fields_must_be_pascal_case_rule.severity   = warning
+dotnet_naming_symbols.public_protected_static_readonly_fields_group.required_modifiers = static, readonly
+dotnet_naming_symbols.public_protected_static_readonly_fields_group.applicable_kinds = field
+dotnet_naming_rule.public_protected_static_readonly_fields_must_be_pascal_case_rule.symbols = public_protected_static_readonly_fields_group
+dotnet_naming_rule.public_protected_static_readonly_fields_must_be_pascal_case_rule.style = pascal_case_style
+dotnet_naming_rule.public_protected_static_readonly_fields_must_be_pascal_case_rule.severity = warning
 
 # No other public/protected/protected_internal fields are allowed
 # https://learn.microsoft.com/dotnet/standard/design-guidelines/field
 dotnet_naming_symbols.other_public_protected_fields_group.applicable_accessibilities = public, protected, protected_internal
-dotnet_naming_symbols.other_public_protected_fields_group.applicable_kinds           = field
-dotnet_naming_rule.other_public_protected_fields_disallowed_rule.symbols             = other_public_protected_fields_group
-dotnet_naming_rule.other_public_protected_fields_disallowed_rule.style               = disallowed_style
-dotnet_naming_rule.other_public_protected_fields_disallowed_rule.severity            = error
+dotnet_naming_symbols.other_public_protected_fields_group.applicable_kinds = field
+dotnet_naming_rule.other_public_protected_fields_disallowed_rule.symbols = other_public_protected_fields_group
+dotnet_naming_rule.other_public_protected_fields_disallowed_rule.style = disallowed_style
+dotnet_naming_rule.other_public_protected_fields_disallowed_rule.severity = error
 
 ##########################################
 # StyleCop Field Naming Rules
@@ -371,52 +512,52 @@ dotnet_naming_rule.other_public_protected_fields_disallowed_rule.severity       
 # All constant fields must be PascalCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1303.md
 dotnet_naming_symbols.stylecop_constant_fields_group.applicable_accessibilities = public, internal, protected_internal, protected, private_protected, private
-dotnet_naming_symbols.stylecop_constant_fields_group.required_modifiers         = const
-dotnet_naming_symbols.stylecop_constant_fields_group.applicable_kinds           = field
-dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.symbols    = stylecop_constant_fields_group
-dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.style      = pascal_case_style
-dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.severity   = warning
+dotnet_naming_symbols.stylecop_constant_fields_group.required_modifiers = const
+dotnet_naming_symbols.stylecop_constant_fields_group.applicable_kinds = field
+dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.symbols = stylecop_constant_fields_group
+dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.style = pascal_case_style
+dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.severity = warning
 
 # All static readonly fields must be PascalCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1311.md
 dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_accessibilities = public, internal, protected_internal, protected, private_protected, private
-dotnet_naming_symbols.stylecop_static_readonly_fields_group.required_modifiers         = static, readonly
-dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_kinds           = field
-dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.symbols    = stylecop_static_readonly_fields_group
-dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.style      = pascal_case_style
-dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.severity   = warning
+dotnet_naming_symbols.stylecop_static_readonly_fields_group.required_modifiers = static, readonly
+dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_kinds = field
+dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.symbols = stylecop_static_readonly_fields_group
+dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.style = pascal_case_style
+dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.severity = warning
 
 # No non-private instance fields are allowed
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1401.md
 dotnet_naming_symbols.stylecop_fields_must_be_private_group.applicable_accessibilities = public, internal, protected_internal, protected, private_protected
-dotnet_naming_symbols.stylecop_fields_must_be_private_group.applicable_kinds           = field
-dotnet_naming_rule.stylecop_instance_fields_must_be_private_rule.symbols               = stylecop_fields_must_be_private_group
-dotnet_naming_rule.stylecop_instance_fields_must_be_private_rule.style                 = disallowed_style
-dotnet_naming_rule.stylecop_instance_fields_must_be_private_rule.severity              = error
+dotnet_naming_symbols.stylecop_fields_must_be_private_group.applicable_kinds = field
+dotnet_naming_rule.stylecop_instance_fields_must_be_private_rule.symbols = stylecop_fields_must_be_private_group
+dotnet_naming_rule.stylecop_instance_fields_must_be_private_rule.style = disallowed_style
+dotnet_naming_rule.stylecop_instance_fields_must_be_private_rule.severity = error
 
 # Private fields must be camelCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1306.md
 dotnet_naming_symbols.stylecop_private_fields_group.applicable_accessibilities = private
-dotnet_naming_symbols.stylecop_private_fields_group.applicable_kinds           = field
-dotnet_naming_rule.stylecop_private_fields_must_be_camel_case_rule.symbols     = stylecop_private_fields_group
-dotnet_naming_rule.stylecop_private_fields_must_be_camel_case_rule.style       = camel_case_style
-dotnet_naming_rule.stylecop_private_fields_must_be_camel_case_rule.severity    = warning
+dotnet_naming_symbols.stylecop_private_fields_group.applicable_kinds = field
+dotnet_naming_rule.stylecop_private_fields_must_be_camel_case_rule.symbols = stylecop_private_fields_group
+dotnet_naming_rule.stylecop_private_fields_must_be_camel_case_rule.style = camel_case_style
+dotnet_naming_rule.stylecop_private_fields_must_be_camel_case_rule.severity = warning
 
 # Local variables must be camelCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1312.md
 dotnet_naming_symbols.stylecop_local_fields_group.applicable_accessibilities = local
-dotnet_naming_symbols.stylecop_local_fields_group.applicable_kinds           = local
-dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.symbols     = stylecop_local_fields_group
-dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.style       = camel_case_style
-dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.severity    = silent
+dotnet_naming_symbols.stylecop_local_fields_group.applicable_kinds = local
+dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.symbols = stylecop_local_fields_group
+dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.style = camel_case_style
+dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.severity = silent
 
 # This rule should never fire.  However, it's included for at least two purposes:
 # First, it helps to understand, reason about, and root-case certain types of issues, such as bugs in .editorconfig parsers.
 # Second, it helps to raise immediate awareness if a new field type is added (as occurred recently in C#).
 dotnet_naming_symbols.sanity_check_uncovered_field_case_group.applicable_accessibilities = *
-dotnet_naming_symbols.sanity_check_uncovered_field_case_group.applicable_kinds           = field
-dotnet_naming_rule.sanity_check_uncovered_field_case_rule.symbols  = sanity_check_uncovered_field_case_group
-dotnet_naming_rule.sanity_check_uncovered_field_case_rule.style    = internal_error_style
+dotnet_naming_symbols.sanity_check_uncovered_field_case_group.applicable_kinds = field
+dotnet_naming_rule.sanity_check_uncovered_field_case_rule.symbols = sanity_check_uncovered_field_case_group
+dotnet_naming_rule.sanity_check_uncovered_field_case_rule.style = internal_error_style
 dotnet_naming_rule.sanity_check_uncovered_field_case_rule.severity = error
 
 
@@ -436,30 +577,30 @@ dotnet_naming_rule.sanity_check_uncovered_field_case_rule.severity = error
 # - Constructors, Properties, Events, Methods
 #   https://learn.microsoft.com/dotnet/standard/design-guidelines/names-of-type-members
 dotnet_naming_symbols.element_group.applicable_kinds = namespace, class, enum, struct, delegate, event, method, property
-dotnet_naming_rule.element_rule.symbols              = element_group
-dotnet_naming_rule.element_rule.style                = pascal_case_style
-dotnet_naming_rule.element_rule.severity             = warning
+dotnet_naming_rule.element_rule.symbols = element_group
+dotnet_naming_rule.element_rule.style = pascal_case_style
+dotnet_naming_rule.element_rule.severity = warning
 
 # Interfaces use PascalCase and are prefixed with uppercase 'I'
 # https://learn.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
 dotnet_naming_symbols.interface_group.applicable_kinds = interface
-dotnet_naming_rule.interface_rule.symbols              = interface_group
-dotnet_naming_rule.interface_rule.style                = prefix_interface_with_i_style
-dotnet_naming_rule.interface_rule.severity             = warning
+dotnet_naming_rule.interface_rule.symbols = interface_group
+dotnet_naming_rule.interface_rule.style = prefix_interface_with_i_style
+dotnet_naming_rule.interface_rule.severity = warning
 
 # Generics Type Parameters use PascalCase and are prefixed with uppercase 'T'
 # https://learn.microsoft.com/dotnet/standard/design-guidelines/names-of-classes-structs-and-interfaces
 dotnet_naming_symbols.type_parameter_group.applicable_kinds = type_parameter
-dotnet_naming_rule.type_parameter_rule.symbols              = type_parameter_group
-dotnet_naming_rule.type_parameter_rule.style                = prefix_type_parameters_with_t_style
-dotnet_naming_rule.type_parameter_rule.severity             = warning
+dotnet_naming_rule.type_parameter_rule.symbols = type_parameter_group
+dotnet_naming_rule.type_parameter_rule.style = prefix_type_parameters_with_t_style
+dotnet_naming_rule.type_parameter_rule.severity = warning
 
 # Function parameters use camelCase
 # https://learn.microsoft.com/dotnet/standard/design-guidelines/naming-parameters
 dotnet_naming_symbols.parameters_group.applicable_kinds = parameter
-dotnet_naming_rule.parameters_rule.symbols              = parameters_group
-dotnet_naming_rule.parameters_rule.style                = camel_case_style
-dotnet_naming_rule.parameters_rule.severity             = warning
+dotnet_naming_rule.parameters_rule.symbols = parameters_group
+dotnet_naming_rule.parameters_rule.style = camel_case_style
+dotnet_naming_rule.parameters_rule.severity = warning
 
 ##########################################
 # License
@@ -495,3 +636,13 @@ dotnet_naming_rule.parameters_rule.severity             = warning
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 # OTHER DEALINGS IN THE SOFTWARE.
 ##########################################
+
+[*.{appxmanifest,axml,build,config,csproj,dbml,discomap,dtd,jsproj,lsproj,njsproj,nuspec,proj,props,resw,resx,StyleCop,targets,tasks,vbproj,xml,xsd}]
+indent_style = tab
+indent_size = tab
+tab_width = 4
+
+[*.{asax,ascx,aspx,axaml,cs,cshtml,htm,html,master,paml,razor,skin,vb,xaml,xamlx,xoml}]
+indent_style = space
+indent_size = 4
+tab_width = 4

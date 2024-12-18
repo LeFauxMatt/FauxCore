@@ -210,8 +210,7 @@ internal static class ViewEngineExtensions
     /// </param>
     public static void EnableHotReloadingWithSourceSync(
         this IViewEngine viewEngine,
-        [CallerFilePath] string? callerFilePath = null
-    ) =>
+        [CallerFilePath] string? callerFilePath = null) =>
         viewEngine.EnableHotReloading(FindProjectDirectory(callerFilePath));
 
     private static string? FindProjectDirectory(string? sourceFilePath)

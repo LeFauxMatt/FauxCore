@@ -36,10 +36,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <param name="parser">Function to convert TValue to string.</param>
     /// <returns>Function that converts an array to a string.</returns>
     protected static Func<TValue[], string> ArrayToString<TValue>(Func<TValue, string> parser) =>
-        value =>
-            value?.Length > 0
-                ? string.Join(',', value.Select(parser))
-                : string.Empty;
+        value => value?.Length > 0 ? string.Join(',', value.Select(parser)) : string.Empty;
 
     /// <summary>Converts a boolean to its string representation.</summary>
     /// <param name="value">The boolean value.</param>
@@ -66,10 +63,9 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <param name="parser">Function to convert TValue to string.</param>
     /// <returns>Function that converts dictionary to string.</returns>
     protected static Func<Dictionary<string, TValue>, string> DictToString<TValue>(Func<TValue, string> parser) =>
-        value =>
-            value?.Count > 0
-                ? string.Join(',', value.Select(pair => $"{pair.Key}={parser(pair.Value)}"))
-                : string.Empty;
+        value => value?.Count > 0
+            ? string.Join(',', value.Select(pair => $"{pair.Key}={parser(pair.Value)}"))
+            : string.Empty;
 
     /// <summary>
     ///     Converts an integer to its string representation.
@@ -96,14 +92,13 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <param name="parser">Function to parse strings into TValue.</param>
     /// <returns>Function that parses strings into a typed array.</returns>
     protected static Func<string, TValue[]> StringToArray<TValue>(Func<string, TValue> parser) =>
-        value =>
-            !string.IsNullOrWhiteSpace(value)
-                ?
-                [
-                    .. value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                        .Select(parser)
-                ]
-                : [];
+        value => !string.IsNullOrWhiteSpace(value)
+            ?
+            [
+                .. value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Select(parser)
+            ]
+            : [];
 
     /// <summary>
     ///     Parses a string into a boolean value.
@@ -147,11 +142,9 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <param name="parser">Function to convert strings to TValue.</param>
     /// <returns>Function that parses strings into dictionaries.</returns>
     protected static Func<string, Dictionary<string, TValue>> StringToDict<TValue>(Func<string, TValue> parser) =>
-        value =>
-            !string.IsNullOrWhiteSpace(value)
-                ? value.Split(',').Select(part => part.Split('='))
-                    .ToDictionary(part => part[0], part => parser(part[1]))
-                : [];
+        value => !string.IsNullOrWhiteSpace(value)
+            ? value.Split(',').Select(part => part.Split('=')).ToDictionary(part => part[0], part => parser(part[1]))
+            : [];
 
     /// <summary>Parses a string to an int.</summary>
     /// <param name="value">The string value to parse.</param>

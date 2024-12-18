@@ -70,14 +70,14 @@ internal sealed class ThemeHelper
             return;
         }
 
-        var data = new Color[Game1.mouseCursors.Width * Game1.mouseCursors.Height];
-        Game1.mouseCursors.GetData(data);
+        var cursors = Game1.mouseCursors ?? this.helper.GameContent.Load<Texture2D>("LooseSprites/Cursors");
+        var data = new Color[cursors.Width * cursors.Height];
+        cursors.GetData(data);
 
         var newPalette = new Dictionary<Color, Color>();
         foreach (var (points, color) in VanillaPalette)
         {
-            newPalette[color] = points
-                .Select(point => data[point.X + (point.Y * Game1.mouseCursors.Width)])
+            newPalette[color] = points.Select(point => data[point.X + (point.Y * cursors.Width)])
                 .GroupBy(sample => sample)
                 .OrderByDescending(group => group.Count())
                 .First()
