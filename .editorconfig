@@ -21,6 +21,7 @@ trim_trailing_whitespace = true
 
 # Resharper Properties
 resharper_apply_auto_detected_rules = false
+resharper_built_in_type_reference_style = use_keyword
 resharper_csharp_insert_final_newline = true
 resharper_csharp_wrap_extends_list_style = chop_if_long
 resharper_keep_existing_arrangement = false
@@ -41,6 +42,7 @@ resharper_max_enum_members_on_line = 1
 resharper_max_initializer_elements_on_line = 1
 resharper_place_type_constraints_on_same_line = false
 resharper_qualified_using_at_nested_scope = true
+resharper_use_symbol_alias = true
 
 # Microsoft .NET properties
 csharp_new_line_before_members_in_object_initializers = false
