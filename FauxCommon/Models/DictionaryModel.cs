@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Models;
+using LeFauxMods.Common.Interface;
 
-using Interface;
+namespace LeFauxMods.Common.Models;
 
 /// <inheritdoc />
 internal sealed class DictionaryModel : IDictionaryModel

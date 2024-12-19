@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Integrations.GenericModConfigMenu;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+namespace LeFauxMods.Common.Integrations.GenericModConfigMenu;
 
 internal abstract class ComplexOption
 {

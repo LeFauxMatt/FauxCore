@@ -1,8 +1,8 @@
-namespace LeFauxMods.Common.Models;
-
 using System.Globalization;
-using Interface;
+using LeFauxMods.Common.Interface;
 using Microsoft.Xna.Framework;
+
+namespace LeFauxMods.Common.Models;
 
 /// <summary>
 ///     Base class for storing and retrieving typed values backed by a string dictionary.

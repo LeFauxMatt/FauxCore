@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Integrations.RadialMenu;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+
+namespace LeFauxMods.Common.Integrations.RadialMenu;
 
 #pragma warning disable
 

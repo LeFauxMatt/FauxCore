@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Integrations.BetterChests;
-
 using NetEscapades.EnumGenerators;
+
+namespace LeFauxMods.Common.Integrations.BetterChests;
 
 #pragma warning disable
 

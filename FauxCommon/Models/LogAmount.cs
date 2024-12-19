@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Models;
-
 using NetEscapades.EnumGenerators;
+
+namespace LeFauxMods.Common.Models;
 
 /// <summary>The amount of debugging information that will be logged to the console.</summary>
 [EnumExtensions]

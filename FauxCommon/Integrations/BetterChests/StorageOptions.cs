@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Integrations.BetterChests;
+using LeFauxMods.Common.Interface;
+using LeFauxMods.Common.Models;
 
-using Interface;
-using Models;
+namespace LeFauxMods.Common.Integrations.BetterChests;
 
 /// <summary>Initializes a new instance of the <see cref="StorageOptions" /> class.</summary>
 /// <param name="dictionaryModel">The backing dictionary.</param>

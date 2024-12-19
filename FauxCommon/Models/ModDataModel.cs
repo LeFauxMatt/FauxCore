@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Models;
-
-using Interface;
+using LeFauxMods.Common.Interface;
 using StardewValley.Mods;
+
+namespace LeFauxMods.Common.Models;
 
 /// <inheritdoc />
 /// <param name="modData">The mod data dictionary.</param>

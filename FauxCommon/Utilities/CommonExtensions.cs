@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Utilities;
-
 using StardewValley.Mods;
+
+namespace LeFauxMods.Common.Utilities;
 
 /// <summary>Common extension methods.</summary>
 internal static class CommonExtensions

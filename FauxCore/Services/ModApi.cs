@@ -1,6 +1,6 @@
-﻿namespace LeFauxMods.Core.Services;
+﻿using LeFauxMods.Common.Integrations.FauxCore;
 
-using Common.Integrations.FauxCore;
+namespace LeFauxMods.Core.Services;
 
 /// <inheritdoc />
 public sealed class ModApi(IModInfo mod) : IFauxCoreApi

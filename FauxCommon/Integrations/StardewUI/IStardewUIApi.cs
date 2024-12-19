@@ -1,9 +1,9 @@
-namespace LeFauxMods.Common.Integrations.StardewUI;
-
 using System.Runtime.CompilerServices;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley.Menus;
+
+namespace LeFauxMods.Common.Integrations.StardewUI;
 
 #pragma warning disable
 

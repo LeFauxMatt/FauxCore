@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Integrations.ExpandedStorage;
-
 using NetEscapades.EnumGenerators;
+
+namespace LeFauxMods.Common.Integrations.ExpandedStorage;
 
 #pragma warning disable
 

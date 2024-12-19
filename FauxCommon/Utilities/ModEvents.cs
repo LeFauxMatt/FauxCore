@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Utilities;
+using LeFauxMods.Common.Services;
 
-using Services;
+namespace LeFauxMods.Common.Utilities;
 
 internal static class ModEvents
 {

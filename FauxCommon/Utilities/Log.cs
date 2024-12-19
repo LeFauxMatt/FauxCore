@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Utilities;
-
 using System.Globalization;
-using Interface;
+using LeFauxMods.Common.Interface;
+
+namespace LeFauxMods.Common.Utilities;
 
 internal sealed class Log
 {

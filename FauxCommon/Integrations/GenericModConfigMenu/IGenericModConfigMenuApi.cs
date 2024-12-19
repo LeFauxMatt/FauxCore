@@ -1,8 +1,8 @@
-namespace LeFauxMods.Common.Integrations.GenericModConfigMenu;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Utilities;
+
+namespace LeFauxMods.Common.Integrations.GenericModConfigMenu;
 
 #pragma warning disable
 

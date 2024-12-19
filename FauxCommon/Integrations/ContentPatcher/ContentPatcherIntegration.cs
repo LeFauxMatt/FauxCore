@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Integrations.ContentPatcher;
-
+using LeFauxMods.Common.Utilities;
 using StardewModdingAPI.Events;
-using Utilities;
+
+namespace LeFauxMods.Common.Integrations.ContentPatcher;
 
 internal sealed class ContentPatcherIntegration : ModIntegration<IContentPatcherApi>
 {

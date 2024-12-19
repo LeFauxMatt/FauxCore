@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Services;
+using LeFauxMods.Common.Models;
+using LeFauxMods.Common.Utilities;
 
-using Models;
-using Utilities;
+namespace LeFauxMods.Common.Services;
 
 /// <summary>Manages saving and loading config files.</summary>
 /// <typeparam name="TConfig">The mod configuration type.</typeparam>

@@ -1,8 +1,8 @@
-namespace LeFauxMods.Common.Services;
-
 using System.Reflection;
-using Models;
-using Utilities;
+using LeFauxMods.Common.Models;
+using LeFauxMods.Common.Utilities;
+
+namespace LeFauxMods.Common.Services;
 
 /// <summary>Managed event subscriptions and publishing.</summary>
 internal sealed class EventManager

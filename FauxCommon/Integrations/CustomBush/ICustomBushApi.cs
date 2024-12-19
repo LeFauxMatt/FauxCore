@@ -1,7 +1,7 @@
-namespace LeFauxMods.Common.Integrations.CustomBush;
-
 using StardewValley.GameData;
 using StardewValley.TerrainFeatures;
+
+namespace LeFauxMods.Common.Integrations.CustomBush;
 
 #pragma warning disable
 

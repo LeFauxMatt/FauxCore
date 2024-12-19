@@ -1,8 +1,8 @@
-namespace LeFauxMods.Common.Integrations.ExpandedStorage;
-
-using Interface;
+using LeFauxMods.Common.Interface;
+using LeFauxMods.Common.Models;
 using Microsoft.Xna.Framework;
-using Models;
+
+namespace LeFauxMods.Common.Integrations.ExpandedStorage;
 
 /// <summary>Initializes a new instance of the <see cref="StorageData" /> class.</summary>
 /// <param name="dictionaryModel">The backing dictionary.</param>

@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Interface;
+using LeFauxMods.Common.Models;
 
-using Models;
+namespace LeFauxMods.Common.Interface;
 
 /// <summary>Represents a configuration with a log amount.</summary>
 internal interface IConfigWithLogAmount

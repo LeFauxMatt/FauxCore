@@ -1,6 +1,6 @@
-namespace LeFauxMods.Common.Integrations.IconicFramework;
-
 using Microsoft.Xna.Framework;
+
+namespace LeFauxMods.Common.Integrations.IconicFramework;
 
 #pragma warning disable
 

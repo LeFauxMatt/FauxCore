@@ -1,7 +1,7 @@
-namespace LeFauxMods.Core;
+using LeFauxMods.Common.Utilities;
+using LeFauxMods.Core.Services;
 
-using Common.Utilities;
-using Services;
+namespace LeFauxMods.Core;
 
 /// <inheritdoc />
 internal sealed class ModEntry : Mod
