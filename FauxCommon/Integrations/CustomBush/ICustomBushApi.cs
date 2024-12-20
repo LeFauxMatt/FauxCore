@@ -32,6 +32,16 @@ public interface ICustomBushApi : ICustomBushApiObsolete
     /// <param name="drops">When this method returns, contains the items produced by the custom bush.</param>
     /// <returns><c>true</c> if the drops associated with the given id is found; otherwise, <c>false</c>.</returns>
     public bool TryGetDrops(string id, [NotNullWhen(true)] out IList<ICustomBushDrop>? drops);
+
+    /// <summary>Tries to get the cached mod data for the given bush.</summary>
+    /// <param name="bush">The bush.</param>
+    /// <param name="itemId">The cached id of the item to be produced.</param>
+    /// <param name="itemQuality">The cached quality of the item to be produced.</param>
+    /// <param name="itemStack">The cached stack size of the item to be produced.</param>
+    /// <param name="condition">The cached condition that determines how long the item can be collected for.</param>
+    /// <returns><c>true</c> if there is valid cached data for the given bush; otherwise, <c>false</c></returns>
+    public bool TryGetModData(Bush bush, [NotNullWhen(true)] out string? itemId, out int itemQuality, out int itemStack,
+        out string? condition);
 }
 
 /// <summary>Obsolete API Methods for Custom Bush.</summary>
