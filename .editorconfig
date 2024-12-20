@@ -42,6 +42,7 @@ resharper_max_enum_members_on_line = 1
 resharper_max_initializer_elements_on_line = 1
 resharper_place_type_constraints_on_same_line = false
 resharper_qualified_using_at_nested_scope = true
+resharper_separate_local_functions_with_jump_statement_highlighting = none
 resharper_use_symbol_alias = true
 
 # Microsoft .NET properties

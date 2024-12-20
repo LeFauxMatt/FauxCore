@@ -4,8 +4,8 @@ namespace LeFauxMods.Common.Integrations.IconicFramework;
 
 #pragma warning disable
 
-/// <summary>Public api to add icons above or below the toolbar.</summary>
-public interface IIconicFrameworkApi : IToolbarIconsArchived
+/// <summary>Mod API for Iconic Framework.</summary>
+public interface IIconicFrameworkApi : IIconicFrameworkApiObsolete
 {
     /// <summary>Adds an icon.</summary>
     /// <param name="id">A unique identifier for the icon.</param>
@@ -43,7 +43,8 @@ public interface IIconPressedEventArgs
     public string Id { get; }
 }
 
-public interface IToolbarIconsArchived
+/// <summary>Obsolete API methods for Iconic Framework.</summary>
+public interface IIconicFrameworkApiObsolete
 {
     /// <summary>Event triggered when any toolbar icon is pressed.</summary>
     [Obsolete("Use Subscribe(Action<IIconPressedEventArgs>) and Unsubscribe(Action<IIconPressedEventArgs>) instead.")]

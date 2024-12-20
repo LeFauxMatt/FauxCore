@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\BetterChestsIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\IBetterChestsApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)integrations\betterchests\StorageOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\BetterChests\StorageOptions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ConditionsApiReadyEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ContentPatcherIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\IContentPatcherApi.cs" />
