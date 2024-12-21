@@ -31,7 +31,8 @@ internal sealed class ThemeHelper
 
     private static ThemeHelper? instance;
 
-    private readonly Dictionary<IAssetName, CachedAsset> cachedAssets = [];
+    private readonly Dictionary<IAssetName, IRawTextureData> cachedRaw = [];
+    private readonly Dictionary<IAssetName, Texture2D> cachedTextures = [];
     private readonly IModHelper helper;
     private readonly Dictionary<Color, Color> paletteSwap = [];
 
@@ -54,7 +55,7 @@ internal sealed class ThemeHelper
     public void AddAsset(string path, IRawTextureData data)
     {
         var assetName = this.helper.GameContent.ParseAssetName(path);
-        if (!this.cachedAssets.TryAdd(assetName, new CachedAsset(data)))
+        if (!this.cachedRaw.TryAdd(assetName, data))
         {
             Log.TraceOnce("Error, conflicting key {0} found in ThemeHelper. Asset not added.", path);
             return;
@@ -95,7 +96,7 @@ internal sealed class ThemeHelper
             this.paletteSwap[key] = value;
         }
 
-        foreach (var (assetName, _) in this.cachedAssets)
+        foreach (var (assetName, _) in this.cachedTextures)
         {
             _ = this.helper.GameContent.InvalidateCache(assetName);
         }
@@ -103,32 +104,31 @@ internal sealed class ThemeHelper
 
     private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
     {
-        if (!this.cachedAssets.TryGetValue(e.NameWithoutLocale, out var asset))
+        if (this.cachedTextures.TryGetValue(e.NameWithoutLocale, out var texture) && !texture.IsDisposed)
+        {
+            e.LoadFrom(() => texture, AssetLoadPriority.Exclusive);
+            return;
+        }
+
+        if (!this.cachedRaw.TryGetValue(e.NameWithoutLocale, out var raw))
         {
             return;
         }
 
-        if (asset.Texture is null || asset.Dirty)
-        {
-            asset.Dirty = false;
-            asset.Texture ??= new Texture2D(Game1.spriteBatch.GraphicsDevice, asset.Raw.Width, asset.Raw.Height);
-            asset.Texture.SetData(
-                asset.Raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
-        }
-
-        e.LoadFrom(() => asset.Texture, AssetLoadPriority.Exclusive);
+        texture = new Texture2D(Game1.spriteBatch.GraphicsDevice, raw.Width, raw.Height);
+        texture.SetData(raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
+        this.cachedTextures[e.NameWithoutLocale] = texture;
+        e.LoadFrom(() => texture, AssetLoadPriority.Exclusive);
     }
 
     private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
     {
         foreach (var assetName in e.NamesWithoutLocale)
         {
-            if (this.cachedAssets.TryGetValue(assetName, out var cachedAsset))
+            if (this.cachedTextures.TryGetValue(assetName, out var texture))
             {
-                cachedAsset.Dirty = true;
+                texture.Dispose();
             }
         }
     }
-
-    private record struct CachedAsset(IRawTextureData Raw, Texture2D? Texture = null, bool Dirty = true);
 }
