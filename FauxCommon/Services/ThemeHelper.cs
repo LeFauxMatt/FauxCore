@@ -64,6 +64,24 @@ internal sealed class ThemeHelper
         Log.TraceOnce("Adding asset to theme helper: {0}", path);
     }
 
+    private Texture2D GetOrCreateTexture(IAssetName assetName)
+    {
+        if (this.cachedTextures.TryGetValue(assetName, out var texture) && !texture.IsDisposed)
+        {
+            return texture;
+        }
+
+        if (!this.cachedRaw.TryGetValue(assetName, out var raw))
+        {
+            throw new InvalidOperationException($"Raw texture data for asset '{assetName}' not found.");
+        }
+
+        texture = new Texture2D(Game1.spriteBatch.GraphicsDevice, raw.Width, raw.Height);
+        texture.SetData(raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
+        this.cachedTextures[assetName] = texture;
+        return texture;
+    }
+
     private void OnAssetReady(object? sender, AssetReadyEventArgs e)
     {
         if (!e.NameWithoutLocale.IsEquivalentTo("LooseSprites/Cursors"))
@@ -104,31 +122,22 @@ internal sealed class ThemeHelper
 
     private void OnAssetRequested(object? sender, AssetRequestedEventArgs e)
     {
-        if (this.cachedTextures.TryGetValue(e.NameWithoutLocale, out var texture) && !texture.IsDisposed)
+        if (this.cachedRaw.ContainsKey(e.NameWithoutLocale))
         {
-            e.LoadFrom(() => texture, AssetLoadPriority.Exclusive);
-            return;
+            e.LoadFrom(() => this.GetOrCreateTexture(e.NameWithoutLocale), AssetLoadPriority.Exclusive);
         }
-
-        if (!this.cachedRaw.TryGetValue(e.NameWithoutLocale, out var raw))
-        {
-            return;
-        }
-
-        texture = new Texture2D(Game1.spriteBatch.GraphicsDevice, raw.Width, raw.Height);
-        texture.SetData(raw.Data.Select(color => this.paletteSwap.GetValueOrDefault(color, color)).ToArray());
-        this.cachedTextures[e.NameWithoutLocale] = texture;
-        e.LoadFrom(() => texture, AssetLoadPriority.Exclusive);
     }
 
     private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
     {
         foreach (var assetName in e.NamesWithoutLocale)
         {
-            if (this.cachedTextures.TryGetValue(assetName, out var texture))
+            if (!this.cachedTextures.TryGetValue(assetName, out var texture))
             {
-                texture.Dispose();
+                continue;
             }
+
+            this.cachedTextures.Remove(assetName);
         }
     }
 }

@@ -40,7 +40,11 @@ public interface ICustomBushApi : ICustomBushApiObsolete
     /// <param name="itemStack">The cached stack size of the item to be produced.</param>
     /// <param name="condition">The cached condition that determines how long the item can be collected for.</param>
     /// <returns><c>true</c> if there is valid cached data for the given bush; otherwise, <c>false</c></returns>
-    public bool TryGetModData(Bush bush, [NotNullWhen(true)] out string? itemId, out int itemQuality, out int itemStack,
+    public bool TryGetModData(
+        Bush bush,
+        [NotNullWhen(true)] out string? itemId,
+        out int itemQuality,
+        out int itemStack,
         out string? condition);
 }
 
@@ -71,7 +75,9 @@ public interface ICustomBushApiObsolete
     /// <param name="id">When this method returns, contains the id of the custom bush, if found; otherwise, it contains null.</param>
     /// <returns><c>true</c> if the custom bush associated with the given bush is found; otherwise, <c>false</c>.</returns>
     [Obsolete("Use TryGetBush(Bush bush, out ICustomBush? customBush, out string? id) instead.")]
-    public bool TryGetCustomBush(Bush bush, [NotNullWhen(true)] out ICustomBushDataOld? customBush,
+    public bool TryGetCustomBush(
+        Bush bush,
+        [NotNullWhen(true)] out ICustomBushDataOld? customBush,
         [NotNullWhen(true)] out string? id);
 }
 
