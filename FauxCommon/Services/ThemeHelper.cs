@@ -1,7 +1,9 @@
+using System.Collections.Immutable;
 using LeFauxMods.Common.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI.Events;
+using StardewValley.Extensions;
 
 namespace LeFauxMods.Common.Services;
 
@@ -114,7 +116,7 @@ internal sealed class ThemeHelper
             this.paletteSwap[key] = value;
         }
 
-        foreach (var (assetName, _) in this.cachedTextures)
+        foreach (var assetName in this.cachedTextures.Keys.ToImmutableList())
         {
             _ = this.helper.GameContent.InvalidateCache(assetName);
         }
@@ -128,16 +130,7 @@ internal sealed class ThemeHelper
         }
     }
 
-    private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e)
-    {
-        foreach (var assetName in e.NamesWithoutLocale)
-        {
-            if (!this.cachedTextures.TryGetValue(assetName, out var texture))
-            {
-                continue;
-            }
-
-            this.cachedTextures.Remove(assetName);
-        }
-    }
+    private void OnAssetsInvalidated(object? sender, AssetsInvalidatedEventArgs e) =>
+        this.cachedTextures.RemoveWhere(kvp =>
+            e.NamesWithoutLocale.Any(assetName => assetName.IsEquivalentTo(kvp.Key)));
 }
