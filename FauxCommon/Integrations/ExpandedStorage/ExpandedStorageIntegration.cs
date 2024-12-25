@@ -9,5 +9,5 @@ internal sealed class ExpandedStorageIntegration(IModRegistry modRegistry)
     public override string UniqueId => "furyx639.ExpandedStorage";
 
     /// <inheritdoc />
-    public override ISemanticVersion Version { get; } = new SemanticVersion(3, 0, 0);
+    public override ISemanticVersion Version { get; } = new SemanticVersion(3, 2, 0);
 }
