@@ -12,6 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\BetterChestsIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\BetterChests\IBetterChestsApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)integrations\BetterChests\StorageOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\colorfulchests\ColorfulChestsIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\colorfulchests\IColorfulChestsApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ConditionsApiReadyEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\ContentPatcherIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ContentPatcher\IContentPatcherApi.cs" />
@@ -50,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Integrations\ColorfulChests\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Interface\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
