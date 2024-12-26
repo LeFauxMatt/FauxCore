@@ -1,6 +1,7 @@
 using LeFauxMods.Common.Interface;
 using LeFauxMods.Common.Models;
 using Microsoft.Xna.Framework;
+using StardewValley.Objects;
 
 namespace LeFauxMods.Common.Integrations.ExpandedStorage;
 
@@ -89,6 +90,13 @@ internal sealed class StorageData(IDictionaryModel? dictionaryModel = null)
         set => this.Set(nameof(this.PlayerColor), value, BoolToString);
     }
 
+    /// <summary>Gets or sets the special chest type.</summary>
+    public Chest.SpecialChestTypes SpecialChestType
+    {
+        get => this.Get(nameof(this.SpecialChestType), StringToSpecialChestType);
+        set => this.Set(nameof(this.SpecialChestType), value, SpecialChestTypeToString);
+    }
+
     /// <summary>Gets or sets a color to apply to the tinted layer.</summary>
     public Color[] TintOverride
     {
@@ -102,6 +110,14 @@ internal sealed class StorageData(IDictionaryModel? dictionaryModel = null)
     private static string AnimationToString(Animation value) =>
         value is not Animation.None ? value.ToStringFast() : string.Empty;
 
+    private static string SpecialChestTypeToString(Chest.SpecialChestTypes value) =>
+        value is not Chest.SpecialChestTypes.None ? value.ToString() : string.Empty;
+
     private static Animation StringToAnimation(string value) =>
         !AnimationExtensions.TryParse(value, out var animation) ? default : animation;
+
+    private static Chest.SpecialChestTypes StringToSpecialChestType(string value) =>
+        !Enum.TryParse(value, out Chest.SpecialChestTypes specialChestType)
+            ? Chest.SpecialChestTypes.None
+            : specialChestType;
 }

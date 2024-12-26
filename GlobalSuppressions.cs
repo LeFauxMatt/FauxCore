@@ -5,3 +5,5 @@
 
 [assembly: SuppressMessage("Naming", "CA1711", Justification = "Reviewed.", Scope = "module")]
 [assembly: SuppressMessage("Roslynator", "RCS1161", Justification = "Reviewed", Scope = "module")]
+[assembly: SuppressMessage("Style", "IDE1006", Justification = "Reviewed", Scope = "module")]
+[assembly: SuppressMessage("CodeQuality", "IDE0079", Justification = "Reviewed", Scope = "module")]
