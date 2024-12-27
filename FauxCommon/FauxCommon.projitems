@@ -24,6 +24,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)integrations\expandedstorage\StorageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\FauxCoreIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\IFauxCoreApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\findanything\FindAnythingIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)integrations\findanything\IFindAnythingApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\GenericModConfigMenu\ComplexOption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\GenericModConfigMenu\GenericModConfigMenuIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\GenericModConfigMenu\IGenericModConfigMenuApi.cs" />
@@ -53,6 +55,7 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\" />
     <Folder Include="$(MSBuildThisFileDirectory)Integrations\ColorfulChests\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Integrations\FindAnything\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Interface\" />
     <Folder Include="$(MSBuildThisFileDirectory)Services\" />
