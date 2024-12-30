@@ -5,7 +5,7 @@ internal static class CommonHelper
 {
     private const string AlphaNumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    public static string GetTemporaryId(string prefix)
+    public static string GetUniqueId(string prefix)
     {
         var id = prefix + RandomString();
         while (Game1.player.team.globalInventories.ContainsKey(id)
