@@ -1,4 +1,5 @@
 using StardewValley.Mods;
+using StardewValley.Objects;
 
 namespace LeFauxMods.Common.Utilities;
 
@@ -105,6 +106,24 @@ internal static class CommonExtensions
     /// <typeparam name="T">The list type.</typeparam>
     /// <returns>Returns a shuffled list.</returns>
     public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) => source.Shuffle(new Random());
+
+    public static void ToGlobalInventory(this Chest chest, string id)
+    {
+        var globalInventory = Game1.player.team.GetOrCreateGlobalInventory(id);
+        globalInventory.OverwriteWith(chest.GetItemsForPlayer());
+        chest.GlobalInventoryId = id;
+        chest.Items.Clear();
+    }
+
+    public static void ToLocalInventory(this Chest chest)
+    {
+        var id = chest.GlobalInventoryId;
+        var globalInventory = Game1.player.team.GetOrCreateGlobalInventory(id);
+        chest.GlobalInventoryId = null;
+        chest.Items.OverwriteWith(globalInventory);
+        Game1.player.team.globalInventories.Remove(id);
+        Game1.player.team.globalInventoryMutexes.Remove(id);
+    }
 
     private static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)
     {
