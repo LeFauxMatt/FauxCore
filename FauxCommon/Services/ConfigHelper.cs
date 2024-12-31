@@ -8,7 +8,7 @@ namespace LeFauxMods.Common.Services;
 /// <typeparam name="TConfig">The mod configuration type.</typeparam>
 /// <param name="helper">Dependency for events, input, and content.</param>
 internal sealed class ConfigHelper<TConfig>(IModHelper helper)
-    where TConfig : class, IConfigWithCopyTo<TConfig>, new()
+    where TConfig : class, IModConfig<TConfig>, new()
 {
     private TConfig? config;
     private TConfig? temp;
@@ -45,6 +45,7 @@ internal sealed class ConfigHelper<TConfig>(IModHelper helper)
             // Generate a new config file
             this.config ??= new TConfig();
             ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.config));
+            Log.Info("Config Initialized\n" + this.config.GetSummary());
             return this.config;
         }
     }
@@ -76,5 +77,6 @@ internal sealed class ConfigHelper<TConfig>(IModHelper helper)
         helper.WriteConfig(this.Config);
         helper.Data.WriteGlobalData("config", this.Config);
         ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
+        Log.Info("Config Saved\n" + this.Config.GetSummary());
     }
 }
