@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using StardewValley.Menus;
 
-namespace LeFauxMods.Common.Integrations.StardewUI;
+namespace LeFauxMods.Common.Integrations.StardewUi;
 
 #pragma warning disable
 

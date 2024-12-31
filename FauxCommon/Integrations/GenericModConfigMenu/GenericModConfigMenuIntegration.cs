@@ -3,11 +3,16 @@ namespace LeFauxMods.Common.Integrations.GenericModConfigMenu;
 /// <summary>Initializes a new instance of the <see cref="GenericModConfigMenuIntegration" /> class.</summary>
 /// <param name="manifest">The mod's manifest.</param>
 /// <param name="modRegistry">Dependency used for fetching metadata about loaded mods.</param>
-internal sealed class GenericModConfigMenuIntegration(IManifest manifest, IModRegistry modRegistry)
-    : ModIntegration<IGenericModConfigMenuApi>(modRegistry)
+/// <param name="required">Determines if the mod is required.</param>
+internal sealed class GenericModConfigMenuIntegration(
+    IManifest manifest,
+    IModRegistry modRegistry,
+    bool required = false)
+    : ModIntegration<IGenericModConfigMenuApi>(modRegistry, required)
 {
     private bool isRegistered;
 
+    /// <inheritdoc />
     public override string UniqueId => "spacechase0.GenericModConfigMenu";
 
     /// <inheritdoc />

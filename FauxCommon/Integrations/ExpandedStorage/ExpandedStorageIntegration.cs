@@ -2,8 +2,9 @@ namespace LeFauxMods.Common.Integrations.ExpandedStorage;
 
 /// <summary>Initializes a new instance of the <see cref="ExpandedStorageIntegration" /> class.</summary>
 /// <param name="modRegistry">Dependency used for fetching metadata about loaded mods.</param>
-internal sealed class ExpandedStorageIntegration(IModRegistry modRegistry)
-    : ModIntegration<IExpandedStorageApi>(modRegistry)
+/// <param name="required">Determines if the mod is required.</param>
+internal sealed class ExpandedStorageIntegration(IModRegistry modRegistry, bool required = false)
+    : ModIntegration<IExpandedStorageApi>(modRegistry, required)
 {
     /// <inheritdoc />
     public override string UniqueId => "furyx639.ExpandedStorage";

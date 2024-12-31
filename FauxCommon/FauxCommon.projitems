@@ -34,8 +34,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ModIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\RadialMenu\IRadialMenuApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\RadialMenu\RadialMenuIntegration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\IStardewUIApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\StardewUiIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUi\IStardewUiApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUi\StardewUiIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)interface\IConfigWithCopyTo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)interface\IConfigWithLogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ConfigChangedEventArgs.cs" />

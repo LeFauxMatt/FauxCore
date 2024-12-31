@@ -2,7 +2,9 @@ namespace LeFauxMods.Common.Integrations.CustomBush;
 
 /// <summary>Initializes a new instance of the <see cref="CustomBushIntegration" /> class.</summary>
 /// <param name="modRegistry">Dependency used for fetching metadata about loaded mods.</param>
-internal sealed class CustomBushIntegration(IModRegistry modRegistry) : ModIntegration<ICustomBushApi>(modRegistry)
+/// <param name="required">Determines if the mod is required.</param>
+internal sealed class CustomBushIntegration(IModRegistry modRegistry, bool required = false)
+    : ModIntegration<ICustomBushApi>(modRegistry, required)
 {
     /// <inheritdoc />
     public override string UniqueId => "furyx639.CustomBush";

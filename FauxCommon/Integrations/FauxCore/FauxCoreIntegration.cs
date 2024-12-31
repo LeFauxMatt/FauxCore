@@ -2,7 +2,9 @@
 
 /// <summary>Initializes a new instance of the <see cref="FauxCoreIntegration" /> class.</summary>
 /// <param name="modRegistry">Dependency used for fetching metadata about loaded mods.</param>
-internal sealed class FauxCoreIntegration(IModRegistry modRegistry) : ModIntegration<IFauxCoreApi>(modRegistry)
+/// <param name="required">Determines if the mod is required.</param>
+internal sealed class FauxCoreIntegration(IModRegistry modRegistry, bool required = false)
+    : ModIntegration<IFauxCoreApi>(modRegistry, required)
 {
     /// <inheritdoc />
     public override string UniqueId => "furyx639.FauxCore";

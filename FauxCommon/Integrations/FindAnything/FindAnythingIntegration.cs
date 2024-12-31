@@ -2,8 +2,9 @@ namespace LeFauxMods.Common.Integrations.FindAnything;
 
 /// <summary>Initializes a new instance of the <see cref="FindAnythingIntegration" /> class.</summary>
 /// <param name="modRegistry">Dependency used for fetching metadata about loaded mods.</param>
-internal sealed class FindAnythingIntegration(IModRegistry modRegistry)
-    : ModIntegration<IFindAnythingApi>(modRegistry)
+/// <param name="required">Determines if the mod is required.</param>
+internal sealed class FindAnythingIntegration(IModRegistry modRegistry, bool required = false)
+    : ModIntegration<IFindAnythingApi>(modRegistry, required)
 {
     /// <inheritdoc />
     public override string UniqueId => "furyx639.FindAnything";
