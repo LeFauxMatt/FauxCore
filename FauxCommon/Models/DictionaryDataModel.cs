@@ -12,6 +12,13 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
 {
     private readonly Dictionary<string, ICachedValue> cachedValues = [];
 
+    /// <summary>Represents a cached value.</summary>
+    private interface ICachedValue
+    {
+        /// <summary>Gets the original value.</summary>
+        public string OriginalValue { get; }
+    }
+
     /// <summary>Initializes a new instance of the <see cref="DictionaryDataModel" /> class.</summary>
     /// <summary>Gets the prefix added to all dictionary keys.</summary>
     protected abstract string Prefix { get; }
@@ -231,12 +238,5 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
 
         /// <summary>Gets the cached value.</summary>
         public T Value { get; } = cachedValue;
-    }
-
-    /// <summary>Represents a cached value.</summary>
-    private interface ICachedValue
-    {
-        /// <summary>Gets the original value.</summary>
-        public string OriginalValue { get; }
     }
 }
