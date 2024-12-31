@@ -36,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\RadialMenu\RadialMenuIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\IStardewUIApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUI\StardewUiIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)interface\IConfigWithCopyTo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)interface\IConfigWithLogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ConfigChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\DictionaryDataModel.cs" />
