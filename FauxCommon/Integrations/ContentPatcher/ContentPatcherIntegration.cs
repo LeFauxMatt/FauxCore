@@ -9,7 +9,9 @@ internal sealed class ContentPatcherIntegration : ModIntegration<IContentPatcher
     private int countDown = 10;
 
     /// <summary>Initializes a new instance of the <see cref="ContentPatcherIntegration" /> class.</summary>
-    public ContentPatcherIntegration(IModHelper helper) : base(helper.ModRegistry)
+    /// <param name="helper">Dependency for events, input, and content.</param>
+    /// <param name="required">Determines if the mod is required.</param>
+    public ContentPatcherIntegration(IModHelper helper, bool required = false) : base(helper.ModRegistry, required)
     {
         this.helper = helper;
         helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
