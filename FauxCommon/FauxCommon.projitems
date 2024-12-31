@@ -53,6 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ModEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ReverseComparer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ThemeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)utilities\SharedConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\" />
