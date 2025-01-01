@@ -9,6 +9,9 @@ internal sealed class StorageOptions(IDictionaryModel? dictionaryModel = null)
     : DictionaryDataModel(dictionaryModel ?? new DictionaryModel()), IStorageOptions
 {
     /// <inheritdoc />
+    protected override string Prefix => "furyx639.BetterChests/";
+
+    /// <inheritdoc />
     public RangeOption AccessChest
     {
         get => this.Get(nameof(this.AccessChest), StringToRangeOption);
@@ -231,9 +234,6 @@ internal sealed class StorageOptions(IDictionaryModel? dictionaryModel = null)
         get => this.Get(nameof(this.StorageName));
         set => this.Set(nameof(this.StorageName), value);
     }
-
-    /// <inheritdoc />
-    protected override string Prefix => "furyx639.BetterChests/";
 
     private static string ChestMenuOptionToString(ChestMenuOption value) =>
         value is not ChestMenuOption.Default ? value.ToStringFast() : string.Empty;
