@@ -17,7 +17,7 @@ internal abstract class ModIntegration<T>
         this.ModRegistry = modRegistry;
         this.modApi = new Lazy<T?>(() => this.ModRegistry.GetApi<T>(this.UniqueId));
 
-        if (this.Version is not null && this.ModInfo?.Manifest.Version.IsOlderThan(this.Version) == false)
+        if (this.Version is not null && this.ModInfo?.Manifest.Version.IsOlderThan(this.Version) == true)
         {
             Log.Warn("Please update {0} to version {1} to enable compatibility.",
                 this.ModInfo.Manifest.Name,
