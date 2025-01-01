@@ -314,4 +314,5 @@
 	
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=GMCM/@EntryIndexedValue">GMCM</s:String>
 <s:Boolean x:Key="/Default/UserDictionary/Words/=GMCM/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=Junimo/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Junimo/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=keybind/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
