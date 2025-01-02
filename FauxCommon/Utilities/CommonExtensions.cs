@@ -1,3 +1,4 @@
+using StardewValley.Inventories;
 using StardewValley.Mods;
 using StardewValley.Objects;
 
@@ -6,6 +7,61 @@ namespace LeFauxMods.Common.Utilities;
 /// <summary>Common extension methods.</summary>
 internal static class CommonExtensions
 {
+    public static bool TryAddBackup(this Inventory inventory, Chest chest, string prefix)
+    {
+        if (!chest.TryGetBackup(prefix, out var backup) ||
+            inventory.OfType<Chest>().Any(existing =>
+                existing.GlobalInventoryId.Equals(backup.GlobalInventoryId, StringComparison.OrdinalIgnoreCase)))
+        {
+            return false;
+        }
+
+        inventory.Add(backup);
+        return true;
+    }
+
+    public static void SyncBackup(this Inventory inventory, Chest chest)
+    {
+        if (!inventory.TryGetBackup(chest, out var backup))
+        {
+            return;
+        }
+
+        backup.CopyFieldsFrom(chest);
+        backup.fridge.Value = chest.fridge.Value;
+        backup.playerChoiceColor.Value = chest.playerChoiceColor.Value;
+        backup.SpecialChestType = chest.SpecialChestType;
+        backup.Tint = chest.Tint;
+    }
+
+    public static bool TryGetBackup(this Inventory inventory, Chest chest, [NotNullWhen(true)] out Chest? backup)
+    {
+        backup = inventory.OfType<Chest>().FirstOrDefault(existing =>
+            existing.GlobalInventoryId.Equals(chest.GlobalInventoryId, StringComparison.OrdinalIgnoreCase));
+
+        return backup is not null;
+    }
+
+    public static bool TryGetBackup(this Chest chest, string prefix, [NotNullWhen(true)] out Chest? backup)
+    {
+        if (string.IsNullOrWhiteSpace(chest.GlobalInventoryId))
+        {
+            chest.ToGlobalInventory(CommonHelper.GetUniqueId(prefix));
+        }
+
+        backup = new Chest(chest.playerChest.Value, chest.ItemId)
+        {
+            GlobalInventoryId = chest.GlobalInventoryId,
+            fridge = { Value = chest.fridge.Value },
+            playerChoiceColor = { Value = chest.playerChoiceColor.Value },
+            SpecialChestType = chest.SpecialChestType,
+            Tint = chest.Tint
+        };
+
+        backup.CopyFieldsFrom(chest);
+        return true;
+    }
+
     /// <summary>Tries to parse the specified string value as a boolean and returns the result.</summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="defaultValue">The default value to return if the value cannot be parsed as a boolean.</param>
@@ -121,8 +177,8 @@ internal static class CommonExtensions
         var globalInventory = Game1.player.team.GetOrCreateGlobalInventory(id);
         chest.GlobalInventoryId = null;
         chest.Items.OverwriteWith(globalInventory);
-        Game1.player.team.globalInventories.Remove(id);
-        Game1.player.team.globalInventoryMutexes.Remove(id);
+        _ = Game1.player.team.globalInventories.Remove(id);
+        _ = Game1.player.team.globalInventoryMutexes.Remove(id);
     }
 
     private static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)

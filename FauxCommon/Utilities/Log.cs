@@ -15,10 +15,10 @@ internal sealed class Log
 
     private string lastMessage = string.Empty;
 
-    private Log(IMonitor m, IConfigWithLogAmount? c)
+    private Log(IMonitor monitor, IConfigWithLogAmount? config)
     {
-        this.monitor = m;
-        this.config = c;
+        this.monitor = monitor;
+        this.config = config;
     }
 
     /// <summary>Logs an alert message to the console.</summary>
@@ -266,7 +266,7 @@ internal sealed class Log
 
 #if RELEASE
         // Reduced logging in release mode
-        if (level is not (LogLevel.Error or LogLevel.Alert) && this.config?.LogAmount is not LogAmount.More)
+        if (level is not (LogLevel.Error or LogLevel.Alert or LogLevel.Info) && this.config?.LogAmount is not LogAmount.More)
         {
             return;
         }
@@ -280,7 +280,7 @@ internal sealed class Log
 
         this.monitor.Log(message, level);
 
-        if (level == LogLevel.Alert || hudType != 0)
+        if (this.config?.LogAmount is LogAmount.More && (level == LogLevel.Alert || hudType != 0))
         {
             Game1.addHUDMessage(new HUDMessage(message, hudType));
         }
