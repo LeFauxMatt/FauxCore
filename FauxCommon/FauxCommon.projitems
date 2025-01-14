@@ -38,6 +38,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUi\StardewUiIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)interface\IModConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)interface\IConfigWithLogAmount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)models\CommandReceivedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ConfigChangedEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\DictionaryDataModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\DictionaryModel.cs" />
@@ -45,10 +46,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)models\LogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\ModDataModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)models\PriorityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CommandArgument.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)services\ConfigHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)services\EventManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CommandHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\CommonExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)utilities\CommonHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\CommonHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\Log.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ModEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)utilities\ReverseComparer.cs" />
@@ -61,7 +64,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Integrations\FindAnything\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Interface\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Services\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
   </ItemGroup>
   <ItemGroup>
