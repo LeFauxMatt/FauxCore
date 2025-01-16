@@ -266,7 +266,8 @@ internal sealed class Log
 
 #if RELEASE
         // Reduced logging in release mode
-        if (level is not (LogLevel.Error or LogLevel.Alert or LogLevel.Info) && this.config?.LogAmount is not LogAmount.More)
+        if (level is not (LogLevel.Error or LogLevel.Alert or LogLevel.Info) &&
+            this.config?.LogAmount is not LogAmount.More)
         {
             return;
         }
