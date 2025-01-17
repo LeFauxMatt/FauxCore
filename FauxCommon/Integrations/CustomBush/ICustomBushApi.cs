@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework.Graphics;
 using StardewValley.GameData;
 using StardewValley.TerrainFeatures;
 
@@ -14,8 +15,13 @@ public interface ICustomBushApi : ICustomBushApiObsolete
 
     /// <summary>Determines if the given Bush instance is a custom bush.</summary>
     /// <param name="bush">The bush instance to check.</param>
-    /// <returns><c>true</c> if the bush is a custom bush, otherwise false.</returns>
+    /// <returns><c>true</c> if the bush is a custom bush.</returns>
     public bool IsCustomBush(Bush bush);
+
+    /// <summary>Determines if the given Bush instance is a custom bush and in season.</summary>
+    /// <param name="bush">The bush instance to check.</param>
+    /// <returns><c>true</c> if the bush is a custom bush and in season.</returns>
+    public bool IsInSeason(Bush bush);
 
     /// <summary>Tries to get the custom bush model associated with the given bush.</summary>
     /// <param name="bush">The bush.</param>
@@ -24,14 +30,25 @@ public interface ICustomBushApi : ICustomBushApiObsolete
     ///     otherwise, it contains null.
     /// </param>
     /// <param name="id">When this method returns, contains the id of the custom bush, if found; otherwise, it contains null.</param>
-    /// <returns><c>true</c> if the custom bush associated with the given bush is found; otherwise, <c>false</c>.</returns>
-    public bool TryGetBush(Bush bush, [NotNullWhen(true)] out ICustomBushData? customBush, out string? id);
+    /// <returns><c>true</c> if the custom bush associated with the given bush is found.</returns>
+    public bool TryGetBush(Bush bush, [NotNullWhen(true)] out ICustomBushData? customBush,
+        [NotNullWhen(true)] out string? id);
 
     /// <summary>Tries to get the custom bush drop associated with the given bush id.</summary>
     /// <param name="id">The id of the bush.</param>
     /// <param name="drops">When this method returns, contains the items produced by the custom bush.</param>
-    /// <returns><c>true</c> if the drops associated with the given id is found; otherwise, <c>false</c>.</returns>
+    /// <returns><c>true</c> if the drops associated with the given id is found.</returns>
     public bool TryGetDrops(string id, [NotNullWhen(true)] out IList<ICustomBushDrop>? drops);
+
+    /// <summary>Tries to get the shake off item.</summary>
+    /// <param name="bush">The bush.</param>
+    /// <param name="item">The shake off item.</param>
+    /// <param name="reduce">A method to remove the item from the custom bush if it is taken.</param>
+    /// <returns>Returns <c>true</c> if the custom bush currently has an item to collect.</returns>
+    public bool TryGetShakeOffItem(
+        Bush bush,
+        [NotNullWhen(true)] out Item? item,
+        [NotNullWhen(true)] out Action? reduce);
 
     /// <summary>Tries to get the cached mod data for the given bush.</summary>
     /// <param name="bush">The bush.</param>
@@ -39,13 +56,19 @@ public interface ICustomBushApi : ICustomBushApiObsolete
     /// <param name="itemQuality">The cached quality of the item to be produced.</param>
     /// <param name="itemStack">The cached stack size of the item to be produced.</param>
     /// <param name="condition">The cached condition that determines how long the item can be collected for.</param>
-    /// <returns><c>true</c> if there is valid cached data for the given bush; otherwise, <c>false</c></returns>
+    /// <returns><c>true</c> if there is valid cached data for the given bush.</returns>
     public bool TryGetModData(
         Bush bush,
         [NotNullWhen(true)] out string? itemId,
         out int itemQuality,
         out int itemStack,
         out string? condition);
+
+    /// <summary>Tries to get the currently relevant texture for the given bush.</summary>
+    /// <param name="bush">The bush.</param>
+    /// <param name="texture">The bush's texture.</param>
+    /// <returns><c>true</c> if a custom bush is associated with the given bush and a texture is found.</returns>
+    public bool TryGetTexture(Bush bush, [NotNullWhen(true)] out Texture2D? texture);
 }
 
 /// <summary>Obsolete API Methods for Custom Bush.</summary>
