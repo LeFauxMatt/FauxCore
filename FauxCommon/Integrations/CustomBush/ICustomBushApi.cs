@@ -43,12 +43,8 @@ public interface ICustomBushApi : ICustomBushApiObsolete
     /// <summary>Tries to get the shake off item.</summary>
     /// <param name="bush">The bush.</param>
     /// <param name="item">The shake off item.</param>
-    /// <param name="reduce">A method to remove the item from the custom bush if it is taken.</param>
     /// <returns>Returns <c>true</c> if the custom bush currently has an item to collect.</returns>
-    public bool TryGetShakeOffItem(
-        Bush bush,
-        [NotNullWhen(true)] out Item? item,
-        [NotNullWhen(true)] out Action? reduce);
+    public bool TryGetShakeOffItem(Bush bush, [NotNullWhen(true)] out Item? item);
 
     /// <summary>Tries to get the cached mod data for the given bush.</summary>
     /// <param name="bush">The bush.</param>
