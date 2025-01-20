@@ -1,5 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/CodeInspection/Highlighting/AnalysisEnabled/@EntryValue">SOLUTION</s:String>
+	
 	
 	
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=AnnotateCanBeNullParameter/@EntryIndexedValue">WARNING</s:String>
@@ -310,16 +310,17 @@
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=UsingStatementResourceInitializationExpression/@EntryIndexedValue">WARNING</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=WithExpressionInsteadOfInitializer/@EntryIndexedValue">WARNING</s:String>
 	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=WrongIndentSize/@EntryIndexedValue">WARNING</s:String>
-	<s:Boolean x:Key="/Default/CodeInspection/Highlighting/RunLongAnalysisInSwa/@EntryValue">False</s:Boolean>
+	
 	
 	<s:Boolean x:Key="/Default/CodeInspection/Highlighting/SuggestBaseTypeForParameter/SuggestBaseTypeForParameter_AvoidMemberVirtualization/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/ALIGN_MULTILINE_BINARY_EXPRESSIONS_CHAIN/@EntryValue">False</s:Boolean>
-	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/ALIGN_MULTILINE_STATEMENT_CONDITIONS/@EntryValue">False</s:Boolean>
-	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/INDENT_PREPROCESSOR_REGION/@EntryValue">NO_INDENT</s:String>
-	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/OUTDENT_STATEMENT_LABELS/@EntryValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/STICK_COMMENT/@EntryValue">False</s:Boolean>
-	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
-  &lt;TypePattern DisplayName="StyleCop Classes, Interfaces, &amp;amp; Structs" Priority="150" RemoveRegions="All"&gt;&#xD;
+	
+	
+	
+	
+	
+	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;?xml version="1.0" encoding="utf-16"?&gt;&#xD;
+&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
+  &lt;TypePattern DisplayName="StyleCop Classes, Interfaces, &amp;amp; Structs" RemoveRegions="All"&gt;&#xD;
     &lt;TypePattern.Match&gt;&#xD;
       &lt;Or&gt;&#xD;
         &lt;Kind Is="Class" /&gt;&#xD;
@@ -332,7 +333,7 @@
         &lt;Kind Is="Constant" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -342,7 +343,7 @@
         &lt;Kind Is="Field" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -352,7 +353,7 @@
         &lt;Kind Is="Constructor" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -374,7 +375,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" /&gt;&#xD;
+        &lt;Access /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -384,7 +385,7 @@
         &lt;Kind Is="Destructor" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -403,7 +404,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" /&gt;&#xD;
+        &lt;Access /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -413,7 +414,7 @@
         &lt;Kind Is="Delegate" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -423,7 +424,7 @@
         &lt;Kind Is="Event" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -433,7 +434,7 @@
         &lt;Kind Is="Enum" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -443,7 +444,7 @@
         &lt;Kind Is="Interface" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -453,7 +454,7 @@
         &lt;Kind Is="Property" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -463,7 +464,7 @@
         &lt;Kind Is="Indexer" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -480,7 +481,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" /&gt;&#xD;
+        &lt;Access /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -492,7 +493,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -507,7 +508,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" /&gt;&#xD;
+        &lt;Access /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -517,7 +518,7 @@
         &lt;Kind Is="Struct" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -527,7 +528,7 @@
         &lt;Kind Is="Class" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -536,13 +537,14 @@
 &lt;/Patterns&gt;</s:String>
 	
 	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/Abbreviations/=GMCM/@EntryIndexedValue">GMCM</s:String>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpPlaceEmbeddedOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>
+	
+	
+	
 	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002EMemberReordering_002EMigrations_002ECSharpFileLayoutPatternRemoveIsAttributeUpgrade/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
+	
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Craftable/@EntryIndexedValue">True</s:Boolean>
 	
 <s:Boolean x:Key="/Default/UserDictionary/Words/=GMCM/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=Junimo/@EntryIndexedValue">True</s:Boolean>
+	
 	
 	</wpf:ResourceDictionary>
