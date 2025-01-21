@@ -15,6 +15,12 @@ public interface IColorfulChestsApi
     /// <summary>Removes a method for replacing the color palette for a given chest.</summary>
     /// <param name="handler">The handler.</param>
     public void RemoveHandler(PaletteHandler handler);
+
+    /// <summary>Gets the chest color from the selection.</summary>
+    /// <param name="chest">The chest.</param>
+    /// <param name="selection">The selection.</param>
+    /// <returns>Returns the color.</returns>
+    public Color GetColorFromSelection(Chest chest, int selection);
 }
 
 /// <summary>Represents a handler for adding a custom color palette for a chest.</summary>
