@@ -10,5 +10,5 @@ internal sealed class ColorfulChestsIntegration(IModRegistry modRegistry, bool r
     public override string UniqueId => "furyx639.ColorfulChests";
 
     /// <inheritdoc />
-    public override ISemanticVersion Version { get; } = new SemanticVersion(1, 0, 1);
+    public override ISemanticVersion Version { get; } = new SemanticVersion(1, 1, 0);
 }
