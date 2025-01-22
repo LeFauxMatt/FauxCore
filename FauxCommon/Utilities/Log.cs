@@ -271,6 +271,11 @@ internal sealed class Log
         {
             return;
         }
+#else
+        if (level is LogLevel.Trace)
+        {
+            level = LogLevel.Info;
+        }
 #endif
 
         if (once)
