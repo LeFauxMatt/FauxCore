@@ -7,7 +7,7 @@ namespace LeFauxMods.Common.Integrations.CustomBush;
 #pragma warning disable
 
 /// <summary>Mod API for Custom Bush.</summary>
-public interface ICustomBushApi : ICustomBushApiObsolete
+public interface ICustomBushApi
 {
     /// <summary>Retrieves all the custom bush data.</summary>
     /// <returns>Each object represents an instance of the <see cref="ICustomBushData" /> model.</returns>
@@ -33,12 +33,6 @@ public interface ICustomBushApi : ICustomBushApiObsolete
     /// <returns><c>true</c> if the custom bush associated with the given bush is found.</returns>
     public bool TryGetBush(Bush bush, [NotNullWhen(true)] out ICustomBushData? customBush,
         [NotNullWhen(true)] out string? id);
-
-    /// <summary>Tries to get the custom bush drop associated with the given bush id.</summary>
-    /// <param name="id">The id of the bush.</param>
-    /// <param name="drops">When this method returns, contains the items produced by the custom bush.</param>
-    /// <returns><c>true</c> if the drops associated with the given id is found.</returns>
-    public bool TryGetDrops(string id, [NotNullWhen(true)] out IList<ICustomBushDrop>? drops);
 
     /// <summary>Tries to get the shake off item.</summary>
     /// <param name="bush">The bush.</param>
@@ -67,40 +61,49 @@ public interface ICustomBushApi : ICustomBushApiObsolete
     public bool TryGetTexture(Bush bush, [NotNullWhen(true)] out Texture2D? texture);
 }
 
-/// <summary>Obsolete API Methods for Custom Bush.</summary>
-public interface ICustomBushApiObsolete
+/// <summary>Model used for custom bushes.</summary>
+public interface ICustomBushData
 {
-    /// <summary>Retrieves all the custom bush data.</summary>
-    /// <returns>Each object represents an instance of the <see cref="ICustomBushDataOld" /> model.</returns>
-    [Obsolete("Use IEnumerable<ICustomBush> GetAllBushes() instead.")]
-    public IEnumerable<(string Id, ICustomBushDataOld Data)> GetData();
+    /// <summary>Gets the age needed to produce.</summary>
+    public int AgeToProduce { get; }
 
-    /// <summary>Tries to get the custom bush model associated with the given bush.</summary>
-    /// <param name="bush">The bush.</param>
-    /// <param name="customBush">
-    ///     When this method returns, contains the custom bush associated with the given bush, if found;
-    ///     otherwise, it contains null.
-    /// </param>
-    /// <returns><c>true</c> if the custom bush associated with the given bush is found; otherwise, <c>false</c>.</returns>
-    [Obsolete("Use TryGetBush(Bush bush, out ICustomBush? customBush, out string? id) instead.")]
-    public bool TryGetCustomBush(Bush bush, [NotNullWhen(true)] out ICustomBushDataOld? customBush);
+    public BushType BushType { get; set; }
 
-    /// <summary>Tries to get the custom bush model associated with the given bush.</summary>
-    /// <param name="bush">The bush.</param>
-    /// <param name="customBush">
-    ///     When this method returns, contains the custom bush associated with the given bush, if found;
-    ///     otherwise, it contains null.
-    /// </param>
-    /// <param name="id">When this method returns, contains the id of the custom bush, if found; otherwise, it contains null.</param>
-    /// <returns><c>true</c> if the custom bush associated with the given bush is found; otherwise, <c>false</c>.</returns>
-    [Obsolete("Use TryGetBush(Bush bush, out ICustomBush? customBush, out string? id) instead.")]
-    public bool TryGetCustomBush(
-        Bush bush,
-        [NotNullWhen(true)] out ICustomBushDataOld? customBush,
-        [NotNullWhen(true)] out string? id);
+    /// <summary>Gets a list of conditions where any have to match for the bush to produce items.</summary>
+    public List<string> ConditionsToProduce { get; }
+
+    /// <summary>Gets the day of month to begin producing.</summary>
+    public int DayToBeginProducing { get; }
+
+    /// <summary>Gets the description of the bush.</summary>
+    public string Description { get; }
+
+    /// <summary>Gets the display name of the bush.</summary>
+    public string DisplayName { get; }
+
+    /// <summary>Gets a unique identifier for the custom bush.</summary>
+    public string Id { get; }
+
+    /// <summary>Gets the default texture used when planted indoors.</summary>
+    public string IndoorTexture { get; }
+
+    /// <summary>Gets or sets the items produced by this custom bush.</summary>
+    public List<ICustomBushDrop> ItemsProduced { get; set; }
+
+    /// <summary>Gets the rules which override the locations that custom bushes can be planted in.</summary>
+    public List<PlantableRule> PlantableLocationRules { get; }
+
+    /// <summary>Gets the season in which this bush will produce its drops.</summary>
+    public List<Season> Seasons { get; }
+
+    /// <summary>Gets the texture of the tea bush.</summary>
+    public string Texture { get; }
+
+    /// <summary>Gets the row index for the custom bush's sprites.</summary>
+    public int TextureSpriteRow { get; }
 }
 
-/// <summary>Model used for drops from custom bushes.</summary>
+/// <inheritdoc />
 public interface ICustomBushDrop : ISpawnItemData
 {
     /// <summary>Gets the probability that the item will be produced.</summary>
@@ -120,45 +123,26 @@ public interface ICustomBushDrop : ISpawnItemData
 
     /// <summary>Gets the specific season when the item can be produced.</summary>
     public Season? Season { get; }
+
+    /// <summary>Gets or sets an offset to the texture sprite which the item is produced.</summary>
+    public int SpriteOffset { get; set; }
 }
 
-/// <summary>Model used for custom bushes.</summary>
-public interface ICustomBushData : ICustomBushDataOld
+/// <summary>Represents the bush sizes.</summary>
+public enum BushType
 {
-    /// <summary>Gets a list of conditions where any have to match for the bush to produce items.</summary>
-    public List<string> ConditionsToProduce { get; }
+    /// <summary>Small bush</summary>
+    Small = Bush.smallBush,
 
-    /// <summary>Gets a unique identifier for the custom bush.</summary>
-    public string Id { get; }
-}
+    /// <summary>Medium bush</summary>
+    Medium = Bush.mediumBush,
 
-/// <summary>Model used for custom bushes.</summary>
-public interface ICustomBushDataOld
-{
-    /// <summary>Gets the age needed to produce.</summary>
-    public int AgeToProduce { get; }
+    /// <summary>Large bush</summary>
+    Large = Bush.largeBush,
 
-    /// <summary>Gets the day of month to begin producing.</summary>
-    public int DayToBeginProducing { get; }
+    /// <summary>Tea bush</summary>
+    Tea = Bush.greenTeaBush,
 
-    /// <summary>Gets the description of the bush.</summary>
-    public string Description { get; }
-
-    /// <summary>Gets the display name of the bush.</summary>
-    public string DisplayName { get; }
-
-    /// <summary>Gets the default texture used when planted indoors.</summary>
-    public string IndoorTexture { get; }
-
-    /// <summary>Gets the rules which override the locations that custom bushes can be planted in.</summary>
-    public List<PlantableRule> PlantableLocationRules { get; }
-
-    /// <summary>Gets the season in which this bush will produce its drops.</summary>
-    public List<Season> Seasons { get; }
-
-    /// <summary>Gets the texture of the tea bush.</summary>
-    public string Texture { get; }
-
-    /// <summary>Gets the row index for the custom bush's sprites.</summary>
-    public int TextureSpriteRow { get; }
+    /// <summary>Walnut bush</summary>
+    Walnut = Bush.walnutBush
 }
