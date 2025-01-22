@@ -67,8 +67,6 @@ public interface ICustomBushData
     /// <summary>Gets the age needed to produce.</summary>
     public int AgeToProduce { get; }
 
-    public BushType BushType { get; set; }
-
     /// <summary>Gets a list of conditions where any have to match for the bush to produce items.</summary>
     public List<string> ConditionsToProduce { get; }
 
@@ -87,9 +85,6 @@ public interface ICustomBushData
     /// <summary>Gets the default texture used when planted indoors.</summary>
     public string IndoorTexture { get; }
 
-    /// <summary>Gets or sets the items produced by this custom bush.</summary>
-    public List<ICustomBushDrop> ItemsProduced { get; set; }
-
     /// <summary>Gets the rules which override the locations that custom bushes can be planted in.</summary>
     public List<PlantableRule> PlantableLocationRules { get; }
 
@@ -101,6 +96,11 @@ public interface ICustomBushData
 
     /// <summary>Gets the row index for the custom bush's sprites.</summary>
     public int TextureSpriteRow { get; }
+
+    public BushType BushType { get; set; }
+
+    /// <summary>Gets or sets the items produced by this custom bush.</summary>
+    public List<ICustomBushDrop> ItemsProduced { get; set; }
 }
 
 /// <inheritdoc />
