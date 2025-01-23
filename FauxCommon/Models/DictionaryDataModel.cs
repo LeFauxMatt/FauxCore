@@ -25,7 +25,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
 
     /// <summary>Checks if a value exists for the specified id.</summary>
     /// <param name="id">The id of the item.</param>
-    /// <returns><c>true</c> if the dictionary contains a value; otherwise, <c>false</c>.</returns>
+    /// <returns>True if the dictionary contains a value; otherwise, false.</returns>
     public bool HasValue(string id) => dictionaryModel.ContainsKey(this.Prefix + id);
 
     /// <summary>

@@ -10,5 +10,5 @@ internal sealed class CustomBushIntegration(IModRegistry modRegistry, bool requi
     public override string UniqueId => "furyx639.CustomBush";
 
     /// <inheritdoc />
-    public override ISemanticVersion Version { get; } = new SemanticVersion(1, 5, 0);
+    public override ISemanticVersion Version { get; } = new SemanticVersion(2, 0, 0, "beta.1");
 }

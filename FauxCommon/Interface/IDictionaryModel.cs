@@ -16,6 +16,6 @@ internal interface IDictionaryModel
     /// <summary>Tries to get the data associated with the specified key.</summary>
     /// <param name="key">The key to search for.</param>
     /// <param name="value">When this method returns, contains the value associated with the specified key; otherwise, null.</param>
-    /// <returns><c>true</c> if the key was found; otherwise, <c>false</c>.</returns>
+    /// <returns>True if the key was found; otherwise, false.</returns>
     public bool TryGetValue(string key, [NotNullWhen(true)] out string? value);
 }

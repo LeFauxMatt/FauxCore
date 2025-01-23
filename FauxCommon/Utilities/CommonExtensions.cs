@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using StardewValley.Inventories;
 using StardewValley.Mods;
 using StardewValley.Objects;
@@ -7,6 +9,20 @@ namespace LeFauxMods.Common.Utilities;
 /// <summary>Common extension methods.</summary>
 internal static class CommonExtensions
 {
+    public static TValue GetOrAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> getValue)
+        where TKey : notnull
+    {
+        ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, key, out var exists);
+        if (exists)
+        {
+            return val!;
+        }
+
+        var value = getValue();
+        val = value;
+        return value;
+    }
+
     public static bool TryAddBackup(this Inventory inventory, Chest chest, string prefix)
     {
         if (!chest.TryGetBackup(prefix, out var backup) ||
@@ -17,6 +33,19 @@ internal static class CommonExtensions
         }
 
         inventory.Add(backup);
+        return true;
+    }
+
+    public static bool TryUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> getValue)
+        where TKey : notnull
+    {
+        ref var val = ref CollectionsMarshal.GetValueRefOrNullRef(dict, key);
+        if (Unsafe.IsNullRef(ref val))
+        {
+            return false;
+        }
+
+        val = getValue();
         return true;
     }
 
