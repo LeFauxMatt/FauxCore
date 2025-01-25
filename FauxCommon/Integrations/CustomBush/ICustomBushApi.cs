@@ -34,6 +34,9 @@ public interface ICustomBush
     /// <summary>Gets the condition pertaining to the bush's current season.</summary>
     public string? Condition { get; }
 
+    /// <summary>Gets the bush data.</summary>
+    public ICustomBushData Data { get; }
+
     /// <summary>Gets the custom bush's id.</summary>
     public string Id { get; }
 
@@ -45,6 +48,9 @@ public interface ICustomBush
 
     /// <summary>Gets an offset to the bush sprite.</summary>
     public int SpriteOffset { get; }
+
+    /// <summary>Gets the current bush stage.</summary>
+    public ICustomBushStage Stage { get; }
 
     /// <summary>Gets the number of counted days in the stage.</summary>
     public int StageCounter { get; }
@@ -90,11 +96,22 @@ public interface ICustomBushData
 
     /// <summary>Gets all the growth stages.</summary>
     public ICustomBushStages Stages { get; }
+
+    /// <summary>Try to get the age to mature.</summary>
+    /// <returns>The age in which <see cref="ConditionsToProduce" /> will return true; otherwise, 0.</returns>
+    public int GetAgeToMature();
+
+    /// <summary>Try to get the seasons.</summary>
+    /// <returns>The seasons in which <see cref="ConditionsToProduce" /> will return true.</returns>
+    public List<Season> GetSeasons();
 }
 
 /// <inheritdoc />
 public interface ICustomBushStages : IDictionary<string, ICustomBushStage>
 {
+    /// <summary>Try to get sequential stages starting from an initial stage.</summary>
+    /// <returns>Stages that go from initial to last without any repeated elements.</returns>
+    public IEnumerable<(ICustomBushStage Stage, string Id, int Counter)> GetSequentialStages();
 }
 
 /// <summary>Represents a stage that a custom bush can change into.</summary>
@@ -125,6 +142,10 @@ public interface ICustomBushStage
 /// <inheritdoc />
 public interface ICustomBushProgressRules : IList<ICustomBushProgressRule>
 {
+    /// <summary>Try to get the minimum stage counter for any condition with the given stage id.</summary>
+    /// <param name="id">The stage id, or any.</param>
+    /// <returns>Returns the stage counter or -1 if the stage id cannot be reached.</returns>
+    public int GetCounterTo(string? id);
 }
 
 /// <summary>Represents rules for a custom bush to progress into a different stage.</summary>
@@ -141,6 +162,10 @@ public interface ICustomBushProgressRule
 
     /// <summary>Gets the stage that the bush should grow to.</summary>
     public string StageId { get; }
+
+    /// <summary>Get the stage counter condition for this rule.</summary>
+    /// <returns>Returns the stage counter.</returns>
+    public int GetStageCounter();
 }
 
 /// <inheritdoc />
@@ -162,6 +187,14 @@ public interface ICustomBushDrop : ISpawnItemData
 
     /// <summary>Gets an offset to the bush sprite when this item is produced.</summary>
     public int SpriteOffset { get; }
+
+    /// <summary>Try to get the chance for the drop based on its condition.</summary>
+    /// <returns>Returns the chance of the drop being produced.</returns>
+    public float GetChance();
+
+    /// <summary>Try to get the earliest day for the drop based on its condition.</summary>
+    /// <returns>Returns the first day of the drop being produced.</returns>
+    public int GetDay();
 }
 
 /// <summary>Represents the bush types.</summary>
