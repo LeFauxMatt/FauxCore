@@ -7,10 +7,22 @@ namespace LeFauxMods.Common.Models;
 /// <summary>
 ///     Base class for storing and retrieving typed values backed by a string dictionary.
 /// </summary>
-/// <param name="dictionaryModel">The underlying dictionary storage.</param>
-internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
+internal abstract class DictionaryDataModel
 {
     private readonly Dictionary<string, ICachedValue> cachedValues = [];
+    private readonly IDictionaryModel dictionaryModel;
+
+    /// <summary>Initializes a new instance of the <see cref="DictionaryDataModel" /> class.</summary>
+    /// <param name="dictionaryModel">The underlying dictionary storage.</param>
+    protected DictionaryDataModel(IDictionaryModel dictionaryModel) =>
+        this.dictionaryModel = dictionaryModel;
+
+    /// <inheritdoc />
+    /// <param name="entity">The entity having mod data.</param>
+    protected DictionaryDataModel(IHaveModData entity)
+        : this(new ModDataModel(entity))
+    {
+    }
 
     /// <summary>Represents a cached value.</summary>
     private interface ICachedValue
@@ -26,7 +38,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <summary>Checks if a value exists for the specified id.</summary>
     /// <param name="id">The id of the item.</param>
     /// <returns>True if the dictionary contains a value; otherwise, false.</returns>
-    public bool HasValue(string id) => dictionaryModel.ContainsKey(this.Prefix + id);
+    public bool HasValue(string id) => this.dictionaryModel.ContainsKey(this.Prefix + id);
 
     /// <summary>
     ///     Converts an array to a comma-separated string.
@@ -139,7 +151,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <returns>Dictionary of parsed values or empty dictionary.</returns>
     protected static Dictionary<string, string> StringToDict(string value) =>
         !string.IsNullOrWhiteSpace(value)
-            ? value.Split(',').Select(part => part.Split('=')).ToDictionary(part => part[0], part => part[1])
+            ? value.Split(',').Select(static part => part.Split('=')).ToDictionary(part => part[0], part => part[1])
             : [];
 
     /// <summary>
@@ -150,7 +162,8 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <returns>Function that parses strings into dictionaries.</returns>
     protected static Func<string, Dictionary<string, TValue>> StringToDict<TValue>(Func<string, TValue> parser) =>
         value => !string.IsNullOrWhiteSpace(value)
-            ? value.Split(',').Select(part => part.Split('=')).ToDictionary(part => part[0], part => parser(part[1]))
+            ? value.Split(',').Select(static part => part.Split('='))
+                .ToDictionary(part => part[0], part => parser(part[1]))
             : [];
 
     /// <summary>Parses a string to an int.</summary>
@@ -164,7 +177,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// <param name="defaultValue">The value to return if the key is not found.</param>
     /// <returns>The value from the dictionary, or empty if the value is not found.</returns>
     protected string Get(string id, string? defaultValue = null) =>
-        !dictionaryModel.TryGetValue(this.Prefix + id, out var value) ? defaultValue ?? string.Empty : value;
+        !this.dictionaryModel.TryGetValue(this.Prefix + id, out var value) ? defaultValue ?? string.Empty : value;
 
     /// <summary>
     ///     Retrieves and caches a typed value from the dictionary.
@@ -182,7 +195,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     protected TValue? Get<TValue>(string id, Func<string, TValue> parser, TValue? defaultValue = default)
     {
         var key = this.Prefix + id;
-        if (!dictionaryModel.TryGetValue(key, out var value))
+        if (!this.dictionaryModel.TryGetValue(key, out var value))
         {
             return defaultValue;
         }
@@ -210,7 +223,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
     /// </summary>
     /// <param name="id">The ID to store under.</param>
     /// <param name="value">The value to store.</param>
-    protected void Set(string id, string value) => dictionaryModel.SetValue(this.Prefix + id, value);
+    protected void Set(string id, string value) => this.dictionaryModel.SetValue(this.Prefix + id, value);
 
     /// <summary>
     ///     Sets and caches a typed value in the dictionary.
@@ -224,7 +237,7 @@ internal abstract class DictionaryDataModel(IDictionaryModel dictionaryModel)
         var key = this.Prefix + id;
         var stringValue = parser(value);
         this.cachedValues[id] = new CachedValue<TValue>(stringValue, value);
-        dictionaryModel.SetValue(key, stringValue);
+        this.dictionaryModel.SetValue(key, stringValue);
     }
 
     /// <summary>Initializes a new instance of the <see cref="CachedValue{T}" /> struct.</summary>

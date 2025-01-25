@@ -9,88 +9,6 @@ namespace LeFauxMods.Common.Utilities;
 /// <summary>Common extension methods.</summary>
 internal static class CommonExtensions
 {
-    public static TValue GetOrAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> getValue)
-        where TKey : notnull
-    {
-        ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, key, out var exists);
-        if (exists)
-        {
-            return val!;
-        }
-
-        var value = getValue();
-        val = value;
-        return value;
-    }
-
-    public static bool TryAddBackup(this Inventory inventory, Chest chest, string prefix)
-    {
-        if (!chest.TryGetBackup(prefix, out var backup) ||
-            inventory.OfType<Chest>().Any(existing =>
-                existing.GlobalInventoryId.Equals(backup.GlobalInventoryId, StringComparison.OrdinalIgnoreCase)))
-        {
-            return false;
-        }
-
-        inventory.Add(backup);
-        return true;
-    }
-
-    public static bool TryUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> getValue)
-        where TKey : notnull
-    {
-        ref var val = ref CollectionsMarshal.GetValueRefOrNullRef(dict, key);
-        if (Unsafe.IsNullRef(ref val))
-        {
-            return false;
-        }
-
-        val = getValue();
-        return true;
-    }
-
-    public static void SyncBackup(this Inventory inventory, Chest chest)
-    {
-        if (!inventory.TryGetBackup(chest, out var backup))
-        {
-            return;
-        }
-
-        backup.CopyFieldsFrom(chest);
-        backup.fridge.Value = chest.fridge.Value;
-        backup.playerChoiceColor.Value = chest.playerChoiceColor.Value;
-        backup.SpecialChestType = chest.SpecialChestType;
-        backup.Tint = chest.Tint;
-    }
-
-    public static bool TryGetBackup(this Inventory inventory, Chest chest, [NotNullWhen(true)] out Chest? backup)
-    {
-        backup = inventory.OfType<Chest>().FirstOrDefault(existing =>
-            existing.GlobalInventoryId.Equals(chest.GlobalInventoryId, StringComparison.OrdinalIgnoreCase));
-
-        return backup is not null;
-    }
-
-    public static bool TryGetBackup(this Chest chest, string prefix, [NotNullWhen(true)] out Chest? backup)
-    {
-        if (string.IsNullOrWhiteSpace(chest.GlobalInventoryId))
-        {
-            chest.ToGlobalInventory(CommonHelper.GetUniqueId(prefix));
-        }
-
-        backup = new Chest(chest.playerChest.Value, chest.ItemId)
-        {
-            GlobalInventoryId = chest.GlobalInventoryId,
-            fridge = { Value = chest.fridge.Value },
-            playerChoiceColor = { Value = chest.playerChoiceColor.Value },
-            SpecialChestType = chest.SpecialChestType,
-            Tint = chest.Tint
-        };
-
-        backup.CopyFieldsFrom(chest);
-        return true;
-    }
-
     /// <summary>Tries to parse the specified string value as a boolean and returns the result.</summary>
     /// <param name="value">The string value to parse.</param>
     /// <param name="defaultValue">The default value to return if the value cannot be parsed as a boolean.</param>
@@ -136,6 +54,31 @@ internal static class CommonExtensions
     /// <returns>The integer value associated with the key, or the default value.</returns>
     public static int GetInt(this IDictionary<string, string> dictionary, string key, int defaultValue = 0) =>
         dictionary.TryGetValue(key, out var value) ? value.GetInt(defaultValue) : defaultValue;
+
+    public static string GetOrAdd(this ModDataDictionary dict, string key, string value)
+    {
+        if (dict.TryGetValue(key, out var val))
+        {
+            return val;
+        }
+
+        dict.Add(key, value);
+        return value;
+    }
+
+    public static TValue GetOrAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> getValue)
+        where TKey : notnull
+    {
+        ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, key, out var exists);
+        if (exists)
+        {
+            return val!;
+        }
+
+        var value = getValue();
+        val = value;
+        return value;
+    }
 
     /// <summary>Invokes all event handlers for an event.</summary>
     /// <param name="eventHandler">The event.</param>
@@ -192,6 +135,20 @@ internal static class CommonExtensions
     /// <returns>Returns a shuffled list.</returns>
     public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) => source.Shuffle(new Random());
 
+    public static void SyncBackup(this Inventory inventory, Chest chest)
+    {
+        if (!inventory.TryGetBackup(chest, out var backup))
+        {
+            return;
+        }
+
+        backup.CopyFieldsFrom(chest);
+        backup.fridge.Value = chest.fridge.Value;
+        backup.playerChoiceColor.Value = chest.playerChoiceColor.Value;
+        backup.SpecialChestType = chest.SpecialChestType;
+        backup.Tint = chest.Tint;
+    }
+
     public static void ToGlobalInventory(this Chest chest, string id)
     {
         var globalInventory = Game1.player.team.GetOrCreateGlobalInventory(id);
@@ -208,6 +165,60 @@ internal static class CommonExtensions
         chest.Items.OverwriteWith(globalInventory);
         _ = Game1.player.team.globalInventories.Remove(id);
         _ = Game1.player.team.globalInventoryMutexes.Remove(id);
+    }
+
+    public static bool TryAddBackup(this Inventory inventory, Chest chest, string prefix)
+    {
+        if (!chest.TryGetBackup(prefix, out var backup) ||
+            inventory.OfType<Chest>().Any(existing =>
+                existing.GlobalInventoryId.Equals(backup.GlobalInventoryId, StringComparison.OrdinalIgnoreCase)))
+        {
+            return false;
+        }
+
+        inventory.Add(backup);
+        return true;
+    }
+
+    public static bool TryGetBackup(this Inventory inventory, Chest chest, [NotNullWhen(true)] out Chest? backup)
+    {
+        backup = inventory.OfType<Chest>().FirstOrDefault(existing =>
+            existing.GlobalInventoryId.Equals(chest.GlobalInventoryId, StringComparison.OrdinalIgnoreCase));
+
+        return backup is not null;
+    }
+
+    public static bool TryGetBackup(this Chest chest, string prefix, [NotNullWhen(true)] out Chest? backup)
+    {
+        if (string.IsNullOrWhiteSpace(chest.GlobalInventoryId))
+        {
+            chest.ToGlobalInventory(CommonHelper.GetUniqueId(prefix));
+        }
+
+        backup = new Chest(chest.playerChest.Value, chest.ItemId)
+        {
+            GlobalInventoryId = chest.GlobalInventoryId,
+            fridge = { Value = chest.fridge.Value },
+            playerChoiceColor = { Value = chest.playerChoiceColor.Value },
+            SpecialChestType = chest.SpecialChestType,
+            Tint = chest.Tint
+        };
+
+        backup.CopyFieldsFrom(chest);
+        return true;
+    }
+
+    public static bool TryUpdate<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, Func<TValue> getValue)
+        where TKey : notnull
+    {
+        ref var val = ref CollectionsMarshal.GetValueRefOrNullRef(dict, key);
+        if (Unsafe.IsNullRef(ref val))
+        {
+            return false;
+        }
+
+        val = getValue();
+        return true;
     }
 
     private static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, Random rng)

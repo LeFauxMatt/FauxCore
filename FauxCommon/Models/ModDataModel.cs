@@ -1,27 +1,27 @@
 using LeFauxMods.Common.Interface;
-using StardewValley.Mods;
 
 namespace LeFauxMods.Common.Models;
 
 /// <inheritdoc />
-/// <param name="modData">The mod data dictionary.</param>
-internal sealed class ModDataModel(ModDataDictionary modData) : IDictionaryModel
+/// <param name="entity">The entity having mod data.</param>
+internal sealed class ModDataModel(IHaveModData entity) : IDictionaryModel
 {
     /// <inheritdoc />
-    public bool ContainsKey(string key) => modData.ContainsKey(key);
+    public bool ContainsKey(string key) => entity.modData.ContainsKey(key);
 
     /// <inheritdoc />
     public void SetValue(string key, string value)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
-            _ = modData.Remove(key);
+            _ = entity.modData.Remove(key);
             return;
         }
 
-        modData[key] = value;
+        entity.modData[key] = value;
     }
 
     /// <inheritdoc />
-    public bool TryGetValue(string key, [NotNullWhen(true)] out string? value) => modData.TryGetValue(key, out value);
+    public bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
+        entity.modData.TryGetValue(key, out value);
 }

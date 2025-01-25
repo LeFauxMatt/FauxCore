@@ -318,8 +318,7 @@
 	
 	
 	
-	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;?xml version="1.0" encoding="utf-16"?&gt;&#xD;
-&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
+	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;&#xD;
   &lt;TypePattern DisplayName="StyleCop Classes, Interfaces, &amp;amp; Structs" RemoveRegions="All"&gt;&#xD;
     &lt;TypePattern.Match&gt;&#xD;
       &lt;Or&gt;&#xD;
@@ -333,9 +332,10 @@
         &lt;Kind Is="Constant" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Fields"&gt;&#xD;
@@ -343,9 +343,10 @@
         &lt;Kind Is="Field" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Constructors"&gt;&#xD;
@@ -353,7 +354,7 @@
         &lt;Kind Is="Constructor" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -375,7 +376,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -385,7 +386,7 @@
         &lt;Kind Is="Destructor" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -404,7 +405,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -414,9 +415,10 @@
         &lt;Kind Is="Delegate" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Events"&gt;&#xD;
@@ -424,9 +426,10 @@
         &lt;Kind Is="Event" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Enums"&gt;&#xD;
@@ -434,9 +437,10 @@
         &lt;Kind Is="Enum" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Interfaces"&gt;&#xD;
@@ -444,9 +448,10 @@
         &lt;Kind Is="Interface" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Properties"&gt;&#xD;
@@ -454,9 +459,10 @@
         &lt;Kind Is="Property" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Indexers"&gt;&#xD;
@@ -464,9 +470,10 @@
         &lt;Kind Is="Indexer" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Update/FixedUpdate/LateUpdate"&gt;&#xD;
@@ -481,7 +488,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -493,9 +500,10 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="OnValidate"&gt;&#xD;
@@ -508,7 +516,7 @@
         &lt;/And&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
@@ -518,9 +526,10 @@
         &lt;Kind Is="Struct" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
     &lt;Entry DisplayName="Classes"&gt;&#xD;
@@ -528,9 +537,10 @@
         &lt;Kind Is="Class" /&gt;&#xD;
       &lt;/Entry.Match&gt;&#xD;
       &lt;Entry.SortBy&gt;&#xD;
-        &lt;Access Order="Public Internal ProtectedInternal Protected Private" /&gt;&#xD;
+        &lt;Access Is="0" /&gt;&#xD;
         &lt;Static /&gt;&#xD;
         &lt;Readonly /&gt;&#xD;
+        &lt;Name /&gt;&#xD;
       &lt;/Entry.SortBy&gt;&#xD;
     &lt;/Entry&gt;&#xD;
   &lt;/TypePattern&gt;&#xD;

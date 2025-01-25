@@ -8,9 +8,9 @@ namespace LeFauxMods.Common.Services;
 /// <summary>Manages console commands.</summary>
 internal sealed class CommandHelper
 {
-    private readonly string mainCommand;
-    private readonly Func<string> getUnknown;
     private readonly Dictionary<string, Command> commands = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Func<string> getUnknown;
+    private readonly string mainCommand;
 
     public CommandHelper(
         IModHelper helper,
