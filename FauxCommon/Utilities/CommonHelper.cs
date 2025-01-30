@@ -9,7 +9,7 @@ internal static class CommonHelper
     {
         var id = prefix + RandomString();
         while (Game1.player.team.globalInventories.ContainsKey(id)
-            || Game1.player.team.globalInventoryMutexes.ContainsKey(id))
+               || Game1.player.team.globalInventoryMutexes.ContainsKey(id))
         {
             id = prefix + RandomString();
         }

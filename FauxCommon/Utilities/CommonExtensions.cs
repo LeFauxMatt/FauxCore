@@ -1,3 +1,4 @@
+using Microsoft.Xna.Framework;
 using StardewValley.Inventories;
 using StardewValley.Mods;
 using StardewValley.Objects;
@@ -7,6 +8,36 @@ namespace LeFauxMods.Common.Utilities;
 /// <summary>Common extension methods.</summary>
 internal static class CommonExtensions
 {
+    /// <summary>Generate a box of coordinates centered at a specified point with a given radius.</summary>
+    /// <param name="center">The center point of the box.</param>
+    /// <param name="radius">The radius of the box.</param>
+    /// <returns>An enumerable collection of Vector2 coordinates representing the points in the box.</returns>
+    public static IEnumerable<Vector2> Box(this Vector2 center, int radius)
+    {
+        for (var x = center.X - radius; x <= center.X + radius; ++x)
+        {
+            for (var y = center.Y - radius; y <= center.Y + radius; ++y)
+            {
+                yield return new Vector2(x, y);
+            }
+        }
+    }
+
+    /// <summary>Perform an action on tiles within range of a center position.</summary>
+    /// <param name="center">The center point of the box.</param>
+    /// <param name="radius">The radius of the box.</param>
+    /// <param name="action">The action to perform.</param>
+    public static void ForEachTileInRange(this Vector2 center, int radius, Func<Vector2, bool> action)
+    {
+        foreach (var pos in center.Box(radius))
+        {
+            if (!action(pos))
+            {
+                return;
+            }
+        }
+    }
+
     public static bool TryAddBackup(this Inventory inventory, Chest chest, string prefix)
     {
         if (!chest.TryGetBackup(prefix, out var backup) ||
