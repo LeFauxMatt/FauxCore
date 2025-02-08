@@ -47,6 +47,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\LogAmount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ModDataModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\PriorityAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)services\BaseConfigMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CommandHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ConfigHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\EventManager.cs" />

@@ -22,8 +22,8 @@ internal sealed class DictionaryModel : IDictionaryModel
         this.getData = getter;
     }
 
-    /// <summary>Initializes a new instance of the <see cref="DictionaryModel" /> class.</summary>
-    private Dictionary<string, string>? Data => this.getData();
+    /// <inheritdoc />
+    public IDictionary<string, string>? Data => this.getData();
 
     /// <inheritdoc />
     public bool ContainsKey(string key) => this.Data?.ContainsKey(key) == true;

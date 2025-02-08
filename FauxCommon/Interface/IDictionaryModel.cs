@@ -3,6 +3,9 @@ namespace LeFauxMods.Common.Interface;
 /// <summary>Represents modeled data stored as a dictionary of string key value pairs.</summary>
 internal interface IDictionaryModel
 {
+    /// <summary>Gets the underlying data.</summary>
+    public IDictionary<string, string>? Data { get; }
+
     /// <summary>Checks if the dictionary contains the specified key.</summary>
     /// <param name="key">The key to check for existence in the dictionary.</param>
     /// <returns>true if the dictionary contains the specified key; otherwise, false.</returns>

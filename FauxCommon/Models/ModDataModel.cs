@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using LeFauxMods.Common.Interface;
 using StardewValley.Mods;
 
@@ -7,6 +8,9 @@ namespace LeFauxMods.Common.Models;
 /// <param name="modData">The mod data dictionary.</param>
 internal sealed class ModDataModel(ModDataDictionary modData) : IDictionaryModel
 {
+    public IDictionary<string, string>? Data =>
+        modData.Pairs.ToImmutableDictionary(static kvp => kvp.Key, static kvp => kvp.Value);
+
     /// <inheritdoc />
     public bool ContainsKey(string key) => modData.ContainsKey(key);
 
