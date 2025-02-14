@@ -7,6 +7,9 @@ namespace LeFauxMods.Common.Integrations.GenericModConfigMenu;
 /// <param name="helper">Dependency for events, input, and content.</param>
 internal abstract class ComplexOption(IModHelper helper)
 {
+    private bool lastPressed;
+    private int lastTick;
+
     /// <summary>Gets the name of the menu option.</summary>
     public virtual string Name { get; } = string.Empty;
 
@@ -72,7 +75,13 @@ internal abstract class ComplexOption(IModHelper helper)
 
         var mouseLeft = this.Helper.Input.GetState(SButton.MouseLeft);
         var controllerA = this.Helper.Input.GetState(SButton.ControllerA);
-        this.Pressed = mouseLeft is SButtonState.Pressed || controllerA is SButtonState.Pressed;
+
+        this.Pressed = !this.lastPressed &&
+                       Game1.ticks == this.lastTick + 1 &&
+                       (mouseLeft is SButtonState.Pressed || controllerA is SButtonState.Pressed);
+
+        this.lastPressed = this.Pressed;
+        this.lastTick = Game1.ticks;
 
         this.DrawOption(spriteBatch, pos);
     }

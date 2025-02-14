@@ -4,7 +4,7 @@ namespace LeFauxMods.Common.Integrations.IconicFramework;
 
 #pragma warning disable
 
-/// <summary>Mod API for Iconic Framework.</summary>
+/// <inheritdoc />
 public interface IIconicFrameworkApi : IIconicFrameworkApiObsolete
 {
     /// <summary>Adds an icon.</summary>
@@ -52,14 +52,6 @@ public interface IIconicFrameworkApi : IIconicFrameworkApiObsolete
         Action onClick,
         Action? onRightClick = null);
 
-    /// <summary>Removes an icon.</summary>
-    /// <param name="id">A unique identifier for the icon.</param>
-    public void RemoveToolbarIcon(string id);
-
-    /// <summary>Removes an icon using the default identifier.</summary>
-    /// <param name="id">A unique identifier for the icon.</param>
-    public void RemoveToolbarIcon();
-
     /// <summary>Subscribes to an event handler.</summary>
     /// <param name="handler">The event handler to subscribe.</param>
     public void Subscribe(Action<IIconPressedEventArgs> handler);
@@ -94,4 +86,10 @@ public interface IIconicFrameworkApiObsolete
     [Obsolete(
         "Use AddToolbarIcon(string id, string texturePath, Rectangle? sourceRect, Func<string>? getTitle, Func<string>? getDescription) instead.")]
     public void AddToolbarIcon(string id, string texturePath, Rectangle? sourceRect, string? hoverText);
+
+    [Obsolete("This no longer has any affect.")]
+    public void RemoveToolbarIcon(string id);
+
+    [Obsolete("This no longer has any affect.")]
+    public void RemoveToolbarIcon();
 }
