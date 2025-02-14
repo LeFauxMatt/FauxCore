@@ -31,8 +31,10 @@ internal abstract class DictionaryDataModel
 
     /// <summary>Checks if a value exists for the specified id.</summary>
     /// <param name="id">The id of the item.</param>
+    /// <param name="prefix">An optional override to the prefix key.</param>
     /// <returns><c>true</c> if the dictionary contains a value; otherwise, <c>false</c>.</returns>
-    public bool HasValue(string id) => this.dictionaryModel.ContainsKey(this.Prefix + id);
+    public bool HasValue(string id, string? prefix = null) =>
+        this.dictionaryModel.ContainsKey((prefix ?? this.Prefix) + id);
 
     /// <summary>
     ///     Converts an array to a comma-separated string.
@@ -168,9 +170,12 @@ internal abstract class DictionaryDataModel
     /// <summary>Retrieves a value from the dictionary based on the provided id.</summary>
     /// <param name="id">The id of the item.</param>
     /// <param name="defaultValue">The value to return if the key is not found.</param>
+    /// <param name="prefix">An optional override to the prefix key.</param>
     /// <returns>The value from the dictionary, or empty if the value is not found.</returns>
-    protected string Get(string id, string? defaultValue = null) =>
-        !this.dictionaryModel.TryGetValue(this.Prefix + id, out var value) ? defaultValue ?? string.Empty : value;
+    protected string Get(string id, string? defaultValue = null, string? prefix = null) =>
+        !this.dictionaryModel.TryGetValue((prefix ?? this.Prefix) + id, out var value)
+            ? defaultValue ?? string.Empty
+            : value;
 
     /// <summary>
     ///     Retrieves and caches a typed value from the dictionary.
@@ -179,15 +184,17 @@ internal abstract class DictionaryDataModel
     /// <param name="id">The ID to look up.</param>
     /// <param name="parser">Function to convert string to TValue.</param>
     /// <param name="defaultValue">Value to return if key not found.</param>
+    /// <param name="prefix">An optional override to the prefix key.</param>
     /// <exception cref="InvalidOperationException">
     ///     Thrown when the cached value exists but is of the wrong type for the
     ///     requested TValue.
     /// </exception>
     /// <returns>The parsed value, cached value, or default.</returns>
     [return: NotNullIfNotNull(nameof(defaultValue))]
-    protected TValue? Get<TValue>(string id, Func<string, TValue> parser, TValue? defaultValue = default)
+    protected TValue? Get<TValue>(string id, Func<string, TValue> parser, TValue? defaultValue = default,
+        string? prefix = null)
     {
-        var key = this.Prefix + id;
+        var key = (prefix ?? this.Prefix) + id;
         if (!this.dictionaryModel.TryGetValue(key, out var value))
         {
             return defaultValue;
@@ -216,7 +223,9 @@ internal abstract class DictionaryDataModel
     /// </summary>
     /// <param name="id">The ID to store under.</param>
     /// <param name="value">The value to store.</param>
-    protected void Set(string id, string value) => this.dictionaryModel.SetValue(this.Prefix + id, value);
+    /// <param name="prefix">An optional override to the prefix key.</param>
+    protected void Set(string id, string value, string? prefix = null) =>
+        this.dictionaryModel.SetValue((prefix ?? this.Prefix) + id, value);
 
     /// <summary>
     ///     Sets and caches a typed value in the dictionary.
@@ -225,9 +234,10 @@ internal abstract class DictionaryDataModel
     /// <param name="id">The ID to store under.</param>
     /// <param name="value">The value to store.</param>
     /// <param name="parser">Function to convert value to string.</param>
-    protected void Set<TValue>(string id, TValue value, Func<TValue, string> parser)
+    /// <param name="prefix">An optional override to the prefix key.</param>
+    protected void Set<TValue>(string id, TValue value, Func<TValue, string> parser, string? prefix = null)
     {
-        var key = this.Prefix + id;
+        var key = (prefix ?? this.Prefix) + id;
         var stringValue = parser(value);
         this.cachedValues[id] = new CachedValue<TValue>(stringValue, value);
         this.dictionaryModel.SetValue(key, stringValue);
