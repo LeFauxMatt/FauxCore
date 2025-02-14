@@ -29,8 +29,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\IconicFramework\IconicFrameworkIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\IconicFramework\IIconicFrameworkApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ModIntegration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Integrations\RadialMenu\IRadialMenuApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Integrations\RadialMenu\RadialMenuIntegration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Integrations\StarControl\IStarControlApi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Integrations\StarControl\StarControlIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUi\IStardewUiApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\StardewUi\StardewUiIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interface\IConfigWithLogAmount.cs" />
