@@ -18,7 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\CustomBush\ICustomBushApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\ExpandedStorageIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\IExpandedStorageApi.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Integrations\ExpandedStorage\StorageData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\FauxCoreIntegration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FauxCore\IFauxCoreApi.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Integrations\FindAnything\FindAnythingIntegration.cs" />
