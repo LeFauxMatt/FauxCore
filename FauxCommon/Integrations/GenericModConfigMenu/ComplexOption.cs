@@ -33,6 +33,9 @@ internal abstract class ComplexOption(IModHelper helper)
     /// <summary>Gets a value indicating whether a pressed event occurs in the current draw loop.</summary>
     protected bool Pressed { get; private set; }
 
+    /// <summary>Gets a value indicating whether a held event occurs in the current draw loop.</summary>
+    protected bool Held { get; private set; }
+
     /// <summary>Executes a set of actions after the option is set.</summary>
     public virtual void AfterReset()
     {
@@ -79,6 +82,8 @@ internal abstract class ComplexOption(IModHelper helper)
         this.Pressed = !this.lastPressed &&
                        Game1.ticks == this.lastTick + 1 &&
                        (mouseLeft is SButtonState.Pressed || controllerA is SButtonState.Pressed);
+
+        this.Held = mouseLeft is SButtonState.Held || controllerA is SButtonState.Held;
 
         this.lastPressed = this.Pressed;
         this.lastTick = Game1.ticks;
