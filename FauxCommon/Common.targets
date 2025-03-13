@@ -6,7 +6,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<LangVersion>latest</LangVersion>
 		<BaseManifest>new</BaseManifest>
-		<MinimumGameVersion>1.6.14</MinimumGameVersion>
+		<MinimumGameVersion>1.6.15</MinimumGameVersion>
 		<MinimumApiVersion_Behavior>Update</MinimumApiVersion_Behavior>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<EnableModZip Condition="'$(Configuration)' == 'Debug'">False</EnableModZip>
@@ -18,6 +18,10 @@
 		<GameModsPath>$(SolutionDir)\mods</GameModsPath>
 		<StartArguments>--mods-path "$(GameModsPath)"</StartArguments>
 	</PropertyGroup>
+
+	<Target Name="CreateModGroup" BeforeTargets="BeforeBuild">
+		<Exec Command="Pwsh.exe -ExecutionPolicy Unrestricted -File $(SolutionDir)FauxCore\FauxCommon\CreateModGroup.ps1" />
+	</Target>
 
 	<ItemGroup>
 		<PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />

@@ -27,9 +27,9 @@ internal sealed class ConfigHelper<TConfig>(IModHelper helper)
             {
                 this.config ??= helper.Data.ReadJsonFile<TConfig>("config.json");
             }
-            catch
+            catch (Exception ex)
             {
-                // ignored
+                Log.Debug("There was an issue loading config.json\nError: {0}", ex.Message);
             }
 
             // Try to restore a backup config file
@@ -37,15 +37,15 @@ internal sealed class ConfigHelper<TConfig>(IModHelper helper)
             {
                 this.config ??= helper.Data.ReadGlobalData<TConfig>("config") ?? throw new InvalidOperationException();
             }
-            catch
+            catch (Exception ex)
             {
-                // ignored
+                Log.Debug("There was an issue loading config.json\nError: {0}", ex.Message);
             }
 
             // Generate a new config file
             this.config ??= new TConfig();
             ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.config));
-            Log.Info("Config Initialized\n" + this.config.GetSummary());
+            Log.Info("Config Initialized\n{0}", this.config.GetSummary());
             return this.config;
         }
     }
@@ -77,6 +77,6 @@ internal sealed class ConfigHelper<TConfig>(IModHelper helper)
         helper.WriteConfig(this.Config);
         helper.Data.WriteGlobalData("config", this.Config);
         ModEvents.Publish(new ConfigChangedEventArgs<TConfig>(this.Config));
-        Log.Info("Config Saved\n" + this.Config.GetSummary());
+        Log.Info("Config Saved\n{0}", this.Config.GetSummary());
     }
 }

@@ -58,5 +58,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Common.targets" />
+    <None Include="$(MSBuildThisFileDirectory)CreateModGroup.ps1" />
   </ItemGroup>
 </Project>
