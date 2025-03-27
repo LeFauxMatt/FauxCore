@@ -19,7 +19,7 @@
 		<StartArguments>--mods-path "$(GameModsPath)"</StartArguments>
 	</PropertyGroup>
 
-	<Target Name="CreateModGroup" BeforeTargets="BeforeBuild">
+	<Target Name="CreateModGroup" BeforeTargets="BeforeBuild" Condition="'$(Configuration)' == 'Debug'">
 		<Exec Command="Pwsh.exe -ExecutionPolicy Unrestricted -File $(SolutionDir)FauxCore\FauxCommon\CreateModGroup.ps1" />
 	</Target>
 
